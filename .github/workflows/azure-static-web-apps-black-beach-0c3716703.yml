@@ -37,7 +37,7 @@ jobs:
           action: "upload"
           app_location: "/" 
           api_location: "" 
-          output_location: "dist"
+          output_location: "build"  # Changed from "dist" to "build"
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
