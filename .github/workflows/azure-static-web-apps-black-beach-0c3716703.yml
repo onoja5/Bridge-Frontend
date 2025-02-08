@@ -22,12 +22,15 @@ jobs:
         with:
           submodules: true
           lfs: false
-          
+
       - name: Install Dependencies
         run: npm install
-
+      
       - name: Build Project
         run: npm run build
+
+      - name: Debug Output Directory
+        run: ls -l dist  # Debugging to confirm dist/ exists
 
       - name: Build And Deploy
         id: builddeploy
@@ -37,7 +40,8 @@ jobs:
           action: "upload"
           app_location: "/" 
           api_location: "" 
-          output_location: "build"  # Changed from "dist" to "build"
+          output_location: "dist"  # ✅ Fix: Changed from 'build' to 'dist'
+          github_id_token: ${{ steps.idtoken.outputs.result }}
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
