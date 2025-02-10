@@ -84,7 +84,7 @@ export default function Home() {
     {
       title: "Project-Based Internships",
       description: "Connect educators and employers to integrate real projects into course curriculum.",
-      image: "https://images.unsplash.com/photo-1560976812-c6f9f44aa2a7?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+      image: "https://plus.unsplash.com/premium_photo-1676581945301-2aaebe5c7c05?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       path: "/project-internships"
     }
   ];
@@ -109,7 +109,7 @@ export default function Home() {
       description: "BridgeAI is a work-based learning platform connecting educators and employers to integrate real projects into course curriculum, leading to exciting and relevant resume-building experiences.",
       icon: Briefcase,
       link: "/project-internships",
-      image: "https://images.unsplash.com/photo-1560976812-c6f9f44aa2a7?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+      image: "https://plus.unsplash.com/premium_photo-1679974798378-adbd2bf42815?q=80&w=1925&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
     }
   ];
 
