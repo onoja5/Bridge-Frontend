@@ -84,7 +84,7 @@ export default function ForEducators() {
       {/* Benefits Section */}
       <div className="py-24 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-center mb-16">Why Choose Aignite?</h2>
+          <h2 className="text-3xl font-bold text-center mb-16">Why Choose BridgeAI?</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {benefits.map((benefit, index) => (
               <div key={index} className="bg-white p-8 rounded-lg shadow-lg">
@@ -132,7 +132,7 @@ export default function ForEducators() {
             Ready to Transform Your Teaching?
           </h2>
           <p className="text-xl text-blue-100 max-w-3xl mx-auto mb-8">
-            Join leading educators who are already using Aignite to enhance their curriculum 
+            Join leading educators who are already using BridgeAI to enhance their curriculum 
             and improve student outcomes.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

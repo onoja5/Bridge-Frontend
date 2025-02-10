@@ -73,7 +73,7 @@ export default function About() {
             <div>
               <h2 className="text-3xl font-bold mb-6">Our Story</h2>
               <p className="text-xl text-gray-600 mb-6">
-                Founded in 2020, Aignite was born from a simple observation: there was a significant gap between what students learned in school and what employers needed in the workplace.
+                Founded in 2020, Bridge AI was born from a simple observation: there was a significant gap between what students learned in school and what employers needed in the workplace.
               </p>
               <p className="text-xl text-gray-600 mb-6">
                 We set out to bridge this gap by creating a platform that would connect students with real-world learning opportunities, helping them gain practical experience while still in school.

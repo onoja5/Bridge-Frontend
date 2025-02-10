@@ -15,11 +15,136 @@ import ExploreOpportunities from './pages/ExploreOpportunities';
 import CollegesUniversities from './pages/CollegesUniversities';
 import BusinessNonprofits from './pages/BusinessNonprofits';
 import StudentsLearners from './pages/StudentsLearners';
-import WorkforceDevelopment from './pages/WorkforceDevelopment';
-import WorkBasedLearning from './pages/WorkBasedLearning';
-import ProjectInternships from './pages/ProjectInternships';
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
+
+// New page components for program routes
+const WorkforceDevelopment = () => (
+  <div className="min-h-screen flex items-center justify-center">
+    <div className="text-center">
+      <h1 className="text-3xl font-bold mb-4">Workforce Development Programs</h1>
+      <p className="text-gray-600">Coming soon! Our workforce development programs are being developed.</p>
+    </div>
+  </div>
+);
+
+const WorkBasedLearning = () => (
+  <div className="min-h-screen flex items-center justify-center">
+    <div className="text-center">
+      <h1 className="text-3xl font-bold mb-4">Work-Based Learning Programs</h1>
+      <p className="text-gray-600">Coming soon! Our work-based learning programs are being developed.</p>
+    </div>
+  </div>
+);
+
+const ProjectInternships = () => (
+  <div className="min-h-screen flex items-center justify-center">
+    <div className="text-center">
+      <h1 className="text-3xl font-bold mb-4">Project-Based Internships</h1>
+      <p className="text-gray-600">Coming soon! Our project-based internships are being developed.</p>
+    </div>
+  </div>
+);
+
+// New page components for missing routes
+const Careers = () => (
+  <div className="min-h-screen flex items-center justify-center">
+    <div className="text-center">
+      <h1 className="text-3xl font-bold mb-4">Careers</h1>
+      <p className="text-gray-600">Coming soon! We're working on this page.</p>
+    </div>
+  </div>
+);
+
+const News = () => (
+  <div className="min-h-screen flex items-center justify-center">
+    <div className="text-center">
+      <h1 className="text-3xl font-bold mb-4">News</h1>
+      <p className="text-gray-600">Coming soon! We're working on this page.</p>
+    </div>
+  </div>
+);
+
+const Partners = () => (
+  <div className="min-h-screen flex items-center justify-center">
+    <div className="text-center">
+      <h1 className="text-3xl font-bold mb-4">Partners</h1>
+      <p className="text-gray-600">Coming soon! We're working on this page.</p>
+    </div>
+  </div>
+);
+
+const Status = () => (
+  <div className="min-h-screen flex items-center justify-center">
+    <div className="text-center">
+      <h1 className="text-3xl font-bold mb-4">System Status</h1>
+      <p className="text-gray-600">All systems operational</p>
+    </div>
+  </div>
+);
+
+const Updates = () => (
+  <div className="min-h-screen flex items-center justify-center">
+    <div className="text-center">
+      <h1 className="text-3xl font-bold mb-4">Product Updates</h1>
+      <p className="text-gray-600">Coming soon! We're working on this page.</p>
+    </div>
+  </div>
+);
+
+const Help = () => (
+  <div className="min-h-screen flex items-center justify-center">
+    <div className="text-center">
+      <h1 className="text-3xl font-bold mb-4">Help Center</h1>
+      <p className="text-gray-600">Coming soon! We're working on this page.</p>
+    </div>
+  </div>
+);
+
+const Privacy = () => (
+  <div className="min-h-screen flex items-center justify-center">
+    <div className="text-center">
+      <h1 className="text-3xl font-bold mb-4">Privacy Policy</h1>
+      <p className="text-gray-600">Coming soon! We're working on this page.</p>
+    </div>
+  </div>
+);
+
+const Terms = () => (
+  <div className="min-h-screen flex items-center justify-center">
+    <div className="text-center">
+      <h1 className="text-3xl font-bold mb-4">Terms of Service</h1>
+      <p className="text-gray-600">Coming soon! We're working on this page.</p>
+    </div>
+  </div>
+);
+
+const ForgotPassword = () => (
+  <div className="min-h-screen flex items-center justify-center">
+    <div className="text-center">
+      <h1 className="text-3xl font-bold mb-4">Reset Password</h1>
+      <p className="text-gray-600">Coming soon! Password reset functionality is under development.</p>
+    </div>
+  </div>
+);
+
+const Demo = () => (
+  <div className="min-h-screen flex items-center justify-center">
+    <div className="text-center">
+      <h1 className="text-3xl font-bold mb-4">Schedule a Demo</h1>
+      <p className="text-gray-600">Coming soon! Demo scheduling will be available shortly.</p>
+    </div>
+  </div>
+);
+
+const PostProject = () => (
+  <div className="min-h-screen flex items-center justify-center">
+    <div className="text-center">
+      <h1 className="text-3xl font-bold mb-4">Post a Project</h1>
+      <p className="text-gray-600">Coming soon! Project posting functionality is under development.</p>
+    </div>
+  </div>
+);
 
 function App() {
   useEffect(() => {
@@ -70,6 +195,19 @@ function App() {
             <Route path="/project-internships" element={<ProjectInternships />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
+            
+            {/* New Routes */}
+            <Route path="/careers" element={<Careers />} />
+            <Route path="/news" element={<News />} />
+            <Route path="/partners" element={<Partners />} />
+            <Route path="/status" element={<Status />} />
+            <Route path="/updates" element={<Updates />} />
+            <Route path="/help" element={<Help />} />
+            <Route path="/privacy" element={<Privacy />} />
+            <Route path="/terms" element={<Terms />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/demo" element={<Demo />} />
+            <Route path="/post-project" element={<PostProject />} />
           </Routes>
         </main>
         <Footer />

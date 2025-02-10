@@ -1,8 +1,8 @@
-{/* Previous imports remain unchanged */}
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { ArrowRight, Users, Target, Briefcase, Star, CheckCircle } from 'lucide-react';
 
 export default function ForStudents() {
-  // Previous state and other code remains unchanged
-
   const opportunities = [
     {
       title: "Technology Projects",
@@ -24,9 +24,7 @@ export default function ForStudents() {
     }
   ];
 
-  // In the Opportunities Section
   return (
-    // Previous JSX remains unchanged until the opportunities section
     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
       {opportunities.map((opportunity, index) => (
         <div key={index} className="group">
@@ -48,6 +46,5 @@ export default function ForStudents() {
         </div>
       ))}
     </div>
-    // Rest of the JSX remains unchanged
   );
 }

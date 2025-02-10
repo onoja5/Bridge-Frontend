@@ -27,7 +27,7 @@ export default function CollegesUniversities() {
       role: "Dean of Engineering",
       university: "Stanford University",
       image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=crop&w=128&h=128&q=80",
-      quote: "Aignite has transformed how we connect our students with industry projects. The results have been outstanding."
+      quote: "BridgeAI has transformed how we connect our students with industry projects. The results have been outstanding."
     },
     {
       name: "Prof. Michael Chen",
@@ -92,7 +92,7 @@ export default function CollegesUniversities() {
       {/* Benefits Section */}
       <div className="py-24 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-center mb-16">Why Partner with Aignite?</h2>
+          <h2 className="text-3xl font-bold text-center mb-16">Why Partner with BridgeAI?</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {benefits.map((benefit, index) => (
               <div key={index} className="bg-white p-8 rounded-lg shadow-lg">
@@ -181,7 +181,7 @@ export default function CollegesUniversities() {
             Ready to Transform Your Institution?
           </h2>
           <p className="text-xl text-blue-100 max-w-3xl mx-auto mb-8">
-            Join leading institutions who are already benefiting from Aignite's platform.
+            Join leading institutions who are already benefiting from BridgeAI's platform.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link

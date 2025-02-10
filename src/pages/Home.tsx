@@ -55,16 +55,16 @@ export default function Home() {
 
   const faqs = [
     {
-      question: "What is the Aignite experiential learning platform?",
-      answer: "Aignite is a comprehensive online platform that connects students, educators, and employers through real-world project experiences. Our platform facilitates meaningful collaborations between educational institutions and industry partners, enabling students to work on actual business challenges while earning academic credit. This creates a win-win situation where students gain practical experience and employers benefit from fresh perspectives and innovative solutions."
+      question: "What is the Bridge AI experiential learning platform?",
+      answer: "Bridge AI is a comprehensive online platform that connects students, educators, and employers through real-world project experiences. Our platform facilitates meaningful collaborations between educational institutions and industry partners, enabling students to work on actual business challenges while earning academic credit. This creates a win-win situation where students gain practical experience and employers benefit from fresh perspectives and innovative solutions."
     },
     {
       question: "What are the benefits of using an experiential learning platform?",
       answer: "Experiential learning platforms offer numerous benefits: students gain real-world experience and build their professional networks; educators can enhance their curriculum with practical projects; and employers can access fresh talent and perspectives. The platform streamlines the entire process of project-based learning, from matching to assessment, making it easier for all parties to participate in meaningful educational experiences."
     },
     {
-      question: "What makes Aignite the #1 experiential learning platform?",
-      answer: "Aignite stands out through its extensive network of 680+ partners, sophisticated matching algorithm, and comprehensive support system. Our platform has facilitated over 13.3M+ hours of applied learning, connecting students with real industry projects that align with their academic goals. We provide end-to-end project management tools, assessment frameworks, and dedicated support to ensure successful outcomes for all participants."
+      question: "What makes Bridge AI the #1 experiential learning platform?",
+      answer: "Bridge AI stands out through its extensive network of 680+ partners, sophisticated matching algorithm, and comprehensive support system. Our platform has facilitated over 13.3M+ hours of applied learning, connecting students with real industry projects that align with their academic goals. We provide end-to-end project management tools, assessment frameworks, and dedicated support to ensure successful outcomes for all participants."
     }
   ];
 
@@ -86,6 +86,30 @@ export default function Home() {
       description: "Connect educators and employers to integrate real projects into course curriculum.",
       image: "https://images.unsplash.com/photo-1560976812-c6f9f44aa2a7?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
       path: "/project-internships"
+    }
+  ];
+
+  const programs = [
+    {
+      title: "Cultivate and discover new talent",
+      description: "Attract new employees and find existing talent ready for a new opportunity with AI-powered talent intelligence. Elevate top talent in the public sector",
+      icon: Users,
+      link: "/workforce-development",
+      image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      title: "Drive extraordinary results",
+      description: "From talent acquisition to management, our AI platform provides you a single view of talent across your entire workforce to inform every talent decision. Build your dream workforce",
+      icon: BookOpen,
+      link: "/work-based-learning",
+      image: "https://images.unsplash.com/photo-1606761568499-6d2451b23c66?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      title: "Project-based Internships",
+      description: "BridgeAI is a work-based learning platform connecting educators and employers to integrate real projects into course curriculum, leading to exciting and relevant resume-building experiences.",
+      icon: Briefcase,
+      link: "/project-internships",
+      image: "https://images.unsplash.com/photo-1560976812-c6f9f44aa2a7?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
     }
   ];
 
@@ -155,31 +179,34 @@ export default function Home() {
       <div 
         className="relative h-screen flex items-center"
         style={{
-          backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80")',
+          backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url("https://images.unsplash.com/photo-1665686377065-08ba896d16fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80")',
           backgroundSize: 'cover',
-          backgroundPosition: 'center'
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat'
         }}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-white">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6">
-            Connect Students with Real-World Opportunities
-          </h1>
-          <p className="text-xl md:text-2xl mb-8 max-w-2xl">
-            Bridge the gap between education and industry with meaningful project-based learning experiences.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4">
-            <Link
-              to="/explore"
-              className="bg-blue-600 text-white px-8 py-3 rounded-md text-lg font-semibold hover:bg-blue-700 transition duration-300 inline-flex items-center"
-            >
-              Explore Opportunities <ArrowRight className="ml-2" />
-            </Link>
-            <Link
-              to="/signup"
-              className="bg-white text-blue-600 px-8 py-3 rounded-md text-lg font-semibold hover:bg-gray-100 transition duration-300"
-            >
-              Sign Up Now
-            </Link>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+          <div className="max-w-2xl">
+            <h1 className="text-4xl md:text-7xl font-bold mb-6 text-white leading-tight">
+              Your personalized career blueprint starts here!
+            </h1>
+            <p className="text-xl md:text-2xl mb-8 text-gray-200 leading-relaxed">
+              Bridge the gap between education and industry with meaningful project-based learning experiences.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Link
+                to="/explore"
+                className="bg-blue-600 text-white px-8 py-4 rounded-md text-lg font-semibold hover:bg-blue-700 transition duration-300 inline-flex items-center justify-center sm:justify-start shadow-lg hover:shadow-xl"
+              >
+                Explore Opportunities <ArrowRight className="ml-2" />
+              </Link>
+              <Link
+                to="/signup"
+                className="bg-white text-blue-600 px-8 py-4 rounded-md text-lg font-semibold hover:bg-gray-100 transition duration-300 shadow-lg hover:shadow-xl text-center sm:text-left"
+              >
+                Sign Up Now
+              </Link>
+            </div>
           </div>
         </div>
       </div>
@@ -393,80 +420,49 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Why Aignite Section */}
+      {/* Programs Section */}
       <div className="py-24 bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="text-white">
-              <h2 className="text-3xl font-bold mb-8">Why Aignite</h2>
-              <div className="space-y-6">
-                <div className="border-b border-blue-700 pb-6">
-                  <button
-                    onClick={() => setActiveDropdown(activeDropdown === 'intelligence' ? null : 'intelligence')}
-                    className="w-full flex justify-between items-center text-left"
-                  >
-                    <h3 className="text-xl font-semibold">Best-in-class intelligence and talent insights</h3>
-                    <ChevronDown className={`w-6 h-6 transform transition-transform duration-300 ${
-                      activeDropdown === 'intelligence' ? 'rotate-180' : ''
-                    }`} />
-                  </button>
-                  <div className={`mt-4 transition-all duration-300 ${
-                    activeDropdown === 'intelligence' ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0 overflow-hidden'
-                  }`}>
-                    <p className="text-blue-100">
-                      Powered by deep-learning AI, we surface insights when and where you need them most →
-                    </p>
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-white mb-4">
+              Experiential learning resources and case studies
+            </h2>
+            <div className="w-24 h-1 bg-blue-400 mx-auto"></div>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {programs.map((program, index) => (
+              <div 
+                key={index} 
+                className="bg-white/10 backdrop-blur-lg rounded-xl shadow-xl hover:transform hover:-translate-y-2 transition-all duration-300 overflow-hidden"
+              >
+                <div className="relative h-48 overflow-hidden">
+                  <img
+                    src={program.image}
+                    alt={program.title}
+                    className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-300"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                  <div className="absolute bottom-4 left-4">
+                    <div className="bg-blue-500/20 p-2 rounded-full w-fit">
+                      <program.icon className="h-6 w-6 text-blue-300" />
+                    </div>
                   </div>
                 </div>
-
-                <div className="border-b border-blue-700 pb-6">
-                  <button
-                    onClick={() => setActiveDropdown(activeDropdown === 'technology' ? null : 'technology')}
-                    className="w-full flex justify-between items-center text-left"
+                <div className="p-6">
+                  <h3 className="text-xl font-bold text-white mb-4">{program.title}</h3>
+                  <p className="text-blue-100 mb-6 leading-relaxed">
+                    {program.description}
+                  </p>
+                  <Link
+                    to={program.link}
+                    className="inline-flex items-center text-blue-300 hover:text-blue-200 transition-colors duration-300"
                   >
-                    <h3 className="text-xl font-semibold">Unparalleled AI technology</h3>
-                    <ChevronDown className={`w-6 h-6 transform transition-transform duration-300 ${
-                      activeDropdown === 'technology' ? 'rotate-180' : ''
-                    }`} />
-                  </button>
-                  <div className={`mt-4 transition-all duration-300 ${
-                    activeDropdown === 'technology' ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0 overflow-hidden'
-                  }`}>
-                    <p className="text-blue-100">
-                      We harness the data of 1B+ career trajectories and 1M+ skills worldwide to give a truly global view of talent and skills insights. Learn more about responsible AI in HR →
-                    </p>
-                  </div>
-                </div>
-
-                <div className="border-b border-blue-700 pb-6">
-                  <button
-                    onClick={() => setActiveDropdown(activeDropdown === 'products' ? null : 'products')}
-                    className="w-full flex justify-between items-center text-left"
-                  >
-                    <h3 className="text-xl font-semibold">Products designed for greatness</h3>
-                    <ChevronDown className={`w-6 h-6 transform transition-transform duration-300 ${
-                      activeDropdown === 'products' ? 'rotate-180' : ''
-                    }`} />
-                  </button>
-                  <div className={`mt-4 transition-all duration-300 ${
-                    activeDropdown === 'products' ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0 overflow-hidden'
-                  }`}>
-                    <p className="text-blue-100">
-                      Our Talent Intelligence Platform is easy to use, insightful, and delivers fast results →
-                    </p>
-                  </div>
+                    Learn more <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
                 </div>
               </div>
-            </div>
-
-            <div className="relative group">
-              <div className="absolute inset-0 bg-blue-600 rounded-lg transform rotate-3 group-hover:rotate-6 transition-transform duration-300"></div>
-              <img
-                src="https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80"
-                alt="Team collaboration"
-                className="relative rounded-lg shadow-xl w-full h-[500px] object-cover transform group-hover:-rotate-3 transition-transform duration-300"
-              />
-            </div>
+            ))}
           </div>
         </div>
       </div>
@@ -477,7 +473,7 @@ export default function Home() {
           <h2 className="text-3xl font-bold text-center mb-12">What People Say</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {testimonials.map((testimonial, index) => (
-              <div key={index} className="bg-white p-6 rounded-lg shadow-lg">
+              <div key={index} className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
                 <div className="flex items-center mb-4">
                   <img
                     src={testimonial.image}

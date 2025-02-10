@@ -25,14 +25,14 @@ export default function ForEmployers() {
     {
       company: "TechCorp Solutions",
       logo: "https://images.unsplash.com/photo-1560179707-f14e90ef3623?ixlib=rb-1.2.1&auto=format&fit=crop&w=128&h=128&q=80",
-      quote: "Working with Aignite students has brought fresh perspectives to our projects and helped us identify top talent for our team.",
+      quote: "Working with BridgeAI students has brought fresh perspectives to our projects and helped us identify top talent for our team.",
       author: "Sarah Johnson",
       role: "Head of Innovation"
     },
     {
       company: "Global Finance Inc.",
       logo: "https://images.unsplash.com/photo-1554774853-719586f82d77?ixlib=rb-1.2.1&auto=format&fit=crop&w=128&h=128&q=80",
-      quote: "The quality of work and professionalism from Aignite students has consistently exceeded our expectations.",
+      quote: "The quality of work and professionalism from BridgeAI students has consistently exceeded our expectations.",
       author: "Michael Chen",
       role: "VP of Operations"
     }
@@ -92,7 +92,7 @@ export default function ForEmployers() {
       {/* Benefits Section */}
       <div className="py-24 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-center mb-16">Why Partner with Aignite?</h2>
+          <h2 className="text-3xl font-bold text-center mb-16">Why Partner with BridgeAI?</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {benefits.map((benefit, index) => (
               <div key={index} className="bg-white p-8 rounded-lg shadow-lg">
@@ -181,7 +181,7 @@ export default function ForEmployers() {
             Ready to Transform Your Talent Pipeline?
           </h2>
           <p className="text-xl text-blue-100 max-w-3xl mx-auto mb-8">
-            Join leading companies who are already benefiting from Aignite's talent network.
+            Join leading companies who are already benefiting from BridgeAI's talent network.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
