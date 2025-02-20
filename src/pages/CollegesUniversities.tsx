@@ -53,10 +53,10 @@ export default function CollegesUniversities() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
-                to="/demo"
+                to="/contact"
                 className="bg-white text-blue-900 px-8 py-3 rounded-md text-lg font-semibold hover:bg-blue-50 transition duration-300"
               >
-                Book a Demo <ArrowRight className="inline-block ml-2" />
+                Book a Call <ArrowRight className="inline-block ml-2" />
               </Link>
               <Link
                 to="/contact"
@@ -185,10 +185,10 @@ export default function CollegesUniversities() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
-              to="/demo"
+              to="/contact"
               className="bg-white text-blue-900 px-8 py-3 rounded-md text-lg font-semibold hover:bg-blue-50 transition duration-300"
             >
-              Schedule a Demo
+              Schedule a Call
             </Link>
             <Link
               to="/contact"

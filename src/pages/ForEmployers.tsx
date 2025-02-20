@@ -194,7 +194,7 @@ export default function ForEmployers() {
               to="/contact"
               className="border-2 border-white text-white px-8 py-3 rounded-md text-lg font-semibold hover:bg-white/10 transition duration-300"
             >
-              Schedule a Demo
+              Schedule a Call
             </Link>
           </div>
         </div>

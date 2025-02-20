@@ -71,7 +71,7 @@ export default function WorkBasedLearning() {
                 to="/contact"
                 className="border-2 border-white text-white px-8 py-3 rounded-md text-lg font-semibold hover:bg-white/10 transition duration-300"
               >
-                Learn More
+                Book a Call
               </Link>
             </div>
           </div>
@@ -190,10 +190,10 @@ export default function WorkBasedLearning() {
               Apply Now
             </Link>
             <Link
-              to="/programs"
+              to="/contact"
               className="border-2 border-white text-white px-8 py-3 rounded-md text-lg font-semibold hover:bg-white/10 transition duration-300"
             >
-              View Programs
+              Schedule a Call
             </Link>
           </div>
         </div>
