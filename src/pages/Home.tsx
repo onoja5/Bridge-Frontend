@@ -188,7 +188,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
           <div className="max-w-2xl">
             <h1 className="text-4xl md:text-7xl font-bold mb-6 text-white leading-tight">
-              Your personalized career blueprint starts here!
+            Step into your dream career
             </h1>
             <p className="text-xl md:text-2xl mb-8 text-gray-200 leading-relaxed">
               Bridge the gap between education and industry with meaningful project-based learning experiences.
