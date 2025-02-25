@@ -313,7 +313,7 @@ export default function AuthForm({ mode, onToggleMode }: AuthFormProps) {
       <div className="hidden lg:block relative w-0 flex-1">
         <img
           className="absolute inset-0 h-full w-full object-cover"
-          src="https://images.unsplash.com/photo-1505904267569-f02eaeb45a4c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1908&q=80"
+          src="https://www.betterteam.com/images/betterteam-director-ejecutivo-ceo-vs-director-de-finanzas-cfo-5739x3374-2022106.jpeg?crop=2:1,smart&width=730&dpr=2&format=pjpg&auto=webp&quality=85"
           alt="Promotional"
         />
       </div>

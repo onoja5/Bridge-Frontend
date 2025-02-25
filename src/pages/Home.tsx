@@ -191,20 +191,20 @@ export default function Home() {
             Step into your dream career
             </h1>
             <p className="text-xl md:text-2xl mb-8 text-gray-200 leading-relaxed">
-              Bridge the gap between education and industry with meaningful project-based learning experiences.
+             Bridge the gap to your future - Get an AI-powered personalized Career Blueprint.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Link
-                to="/explore"
+                to="/signup"
                 className="bg-blue-600 text-white px-8 py-4 rounded-md text-lg font-semibold hover:bg-blue-700 transition duration-300 inline-flex items-center justify-center sm:justify-start shadow-lg hover:shadow-xl"
               >
-                Explore Opportunities <ArrowRight className="ml-2" />
+                Get Personalized Blueprint <ArrowRight className="ml-2" />
               </Link>
               <Link
                 to="/signup"
                 className="bg-white text-blue-600 px-8 py-4 rounded-md text-lg font-semibold hover:bg-gray-100 transition duration-300 shadow-lg hover:shadow-xl text-center sm:text-left"
               >
-                Sign Up Now
+                Explore Opportunities
               </Link>
             </div>
           </div>
