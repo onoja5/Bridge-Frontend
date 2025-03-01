@@ -55,7 +55,7 @@ export default function Solutions() {
               Solutions for Everyone
             </h1>
             <p className="text-xl text-blue-100 max-w-3xl mx-auto mb-8">
-              Whether you're a student, educator, or employer, Aignite has the tools and resources you need to succeed.
+              Whether you're a student, educator, or employer, Bridge AI has the tools and resources you need to succeed.
             </p>
           </div>
         </div>
