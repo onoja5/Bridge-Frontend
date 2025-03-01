@@ -37,7 +37,7 @@ export default function Home() {
       name: "Sarah Johnson",
       role: "Computer Science Student",
       image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=crop&w=128&h=128&q=80",
-      quote: "Aignite helped me land my dream internship at a tech startup. The real-world experience was invaluable!"
+      quote: "Bridge AI helped me land my dream internship at a tech startup. The real-world experience was invaluable!"
     },
     {
       name: "Prof. Michael Chen",
@@ -49,7 +49,7 @@ export default function Home() {
       name: "David Smith",
       role: "Tech Company CEO",
       image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=128&h=128&q=80",
-      quote: "We've found amazing talent through Aignite. It's our go-to platform for student collaboration."
+      quote: "We've found amazing talent through Bridge AI. It's our go-to platform for student collaboration."
     }
   ];
 
@@ -281,7 +281,7 @@ export default function Home() {
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-white mb-4">Bridging education to employment</h2>
             <p className="text-xl text-blue-100 max-w-3xl mx-auto">
-              Aignite is a work-based learning platform helping educators, organizations, and learners collaborate on real industry projects to bridge the gap between education and employment.
+            Bridge AI is a work-based learning platform helping educators, organizations, and learners collaborate on real industry projects to bridge the gap between education and employment.
             </p>
           </div>
 
@@ -467,7 +467,7 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Testimonials Section */}
+      {/* Testimonials Section 
       <div className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-center mb-12">What People Say</h2>
@@ -496,6 +496,7 @@ export default function Home() {
           </div>
         </div>
       </div>
+      */}
 
       {/* FAQ Section */}
       <div className="py-24 bg-gradient-to-br from-blue-50 via-white to-blue-50">
