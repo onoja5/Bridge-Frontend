@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Mail, Lock, User, Phone, Eye, EyeOff, Calendar } from 'lucide-react';
-import DatePicker from 'react-datepicker';
-import "react-datepicker/dist/react-datepicker.css";
-import { format } from 'date-fns';
+import { Mail, Lock, User, Eye, EyeOff } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
+import { auth, googleProvider, facebookProvider } from '../firebase';
+import { signInWithPopup } from 'firebase/auth';
+import { FcGoogle } from 'react-icons/fc';
+import { FaFacebook } from 'react-icons/fa';
 import type { CreateAccountDto, LoginUserDTO, UserRole } from '../types/auth';
 
 interface AuthFormProps {
@@ -14,25 +15,37 @@ interface AuthFormProps {
 
 const ROLES: UserRole[] = ['STUDENT', 'EDUCATOR', 'EMPLOYER'];
 
-export default function AuthForm({ mode, onToggleMode }: AuthFormProps) {
+const AuthForm = ({ mode, onToggleMode }: AuthFormProps) => {
   const navigate = useNavigate();
   const { login, signup } = useAuth();
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState<{ message: string; field?: string } | null>(null);
-  const [birthDate, setBirthDate] = useState<Date | null>(null);
   
   const [formData, setFormData] = useState<CreateAccountDto & LoginUserDTO>({
     firstName: '',
     lastName: '',
     email: '',
-    phoneNumber: '',
     password: '',
     role: 'STUDENT',
-    date_of_birth: new Date().toISOString(),
   });
 
   const [validationErrors, setValidationErrors] = useState<Record<string, string>>({});
+
+  const handleSocialLogin = async (provider: any) => {
+    try {
+      setLoading(true);
+      await signInWithPopup(auth, provider);
+      navigate(import.meta.env.VITE_DEFAULT_REDIRECT || '/dashboard');
+    } catch (err: any) {
+      setError({
+        message: err.message || 'Social login failed',
+        field: 'social'
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const validateField = (name: string, value: string): boolean => {
     const errors: Record<string, string> = {};
@@ -48,11 +61,6 @@ export default function AuthForm({ mode, onToggleMode }: AuthFormProps) {
           errors.password = 'Password must be at least 8 characters long';
         }
         break;
-      case 'phoneNumber':
-        if (!/^\+\d{10,15}$/.test(value)) {
-          errors.phoneNumber = 'Please enter a valid phone number (e.g., +1234567890)';
-        }
-        break;
     }
 
     setValidationErrors(prev => ({ ...prev, ...errors }));
@@ -64,16 +72,6 @@ export default function AuthForm({ mode, onToggleMode }: AuthFormProps) {
     setFormData(prev => ({ ...prev, [name]: value }));
     if (typeof value === 'string') {
       validateField(name, value);
-    }
-  };
-
-  const handleDateChange = (date: Date | null) => {
-    setBirthDate(date);
-    if (date) {
-      setFormData(prev => ({
-        ...prev,
-        date_of_birth: format(date, "yyyy-MM-dd'T'HH:mm:ss.SSSxxx")
-      }));
     }
   };
 
@@ -182,49 +180,6 @@ export default function AuthForm({ mode, onToggleMode }: AuthFormProps) {
                     ))}
                   </select>
                 </div>
-
-                <div>
-                  <label htmlFor="date_of_birth" className="block text-sm font-medium text-gray-700">
-                    Date of Birth
-                  </label>
-                  <div className="mt-1 relative">
-                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center">
-                      <Calendar className="h-5 w-5 text-gray-400" />
-                    </div>
-                    <DatePicker
-                      selected={birthDate}
-                      onChange={handleDateChange}
-                      dateFormat="yyyy-MM-dd"
-                      className="appearance-none block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                      placeholderText="Select date of birth"
-                      required
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label htmlFor="phoneNumber" className="block text-sm font-medium text-gray-700">
-                    Phone Number
-                  </label>
-                  <div className="mt-1 relative">
-                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center">
-                      <Phone className="h-5 w-5 text-gray-400" />
-                    </div>
-                    <input
-                      id="phoneNumber"
-                      name="phoneNumber"
-                      type="tel"
-                      required
-                      value={formData.phoneNumber}
-                      onChange={handleChange}
-                      placeholder="+1234567890"
-                      className="appearance-none block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                    />
-                  </div>
-                  {validationErrors.phoneNumber && (
-                    <p className="mt-1 text-sm text-red-600">{validationErrors.phoneNumber}</p>
-                  )}
-                </div>
               </>
             )}
 
@@ -297,6 +252,41 @@ export default function AuthForm({ mode, onToggleMode }: AuthFormProps) {
             </div>
           </form>
 
+          <div className="mt-8">
+            <div className="relative">
+              <div className="absolute inset-0 flex items-center">
+                <div className="w-full border-t border-gray-300"></div>
+              </div>
+              <div className="relative flex justify-center text-sm">
+                <span className="px-2 bg-white text-gray-500">
+                  Or {mode === 'login' ? 'log in' : 'sign up'} with
+                </span>
+              </div>
+            </div>
+
+            <div className="mt-6 grid grid-cols-2 gap-3">
+              <button
+                type="button"
+                onClick={() => handleSocialLogin(googleProvider)}
+                disabled={loading}
+                className="w-full inline-flex justify-center items-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50"
+              >
+                <FcGoogle className="h-5 w-5" />
+                <span className="ml-2">Google</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => handleSocialLogin(facebookProvider)}
+                disabled={loading}
+                className="w-full inline-flex justify-center items-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50"
+              >
+                <FaFacebook className="h-5 w-5 text-blue-600" />
+                <span className="ml-2">Facebook</span>
+              </button>
+            </div>
+          </div>
+
           <p className="mt-8 text-center text-sm text-gray-600">
             {mode === 'login' ? "Don't have an account? " : "Already have an account? "}
             <button
@@ -309,14 +299,25 @@ export default function AuthForm({ mode, onToggleMode }: AuthFormProps) {
         </div>
       </div>
 
-      {/* Promotional Column */}
+      {/* Promotional Column with Background Image */}
       <div className="hidden lg:block relative w-0 flex-1">
         <img
           className="absolute inset-0 h-full w-full object-cover"
           src="https://www.betterteam.com/images/betterteam-director-ejecutivo-ceo-vs-director-de-finanzas-cfo-5739x3374-2022106.jpeg?crop=2:1,smart&width=730&dpr=2&format=pjpg&auto=webp&quality=85"
-          alt="Promotional"
+          alt="Career opportunities"
         />
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-900 to-transparent opacity-75"></div>
+        <div className="absolute inset-0 flex items-center justify-center p-12 text-white">
+          <div className="max-w-2xl">
+            <h2 className="text-4xl font-bold mb-4">Start Your Career Journey</h2>
+            <p className="text-xl">
+              Connect with industry leaders and educational institutions to find the perfect experiential learning opportunity.
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   );
-}
+};
+
+export default AuthForm;
