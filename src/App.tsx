@@ -6,8 +6,11 @@ import Home from './pages/Home';
 import HowItWorks from './pages/HowItWorks';
 import Solutions from './pages/Solutions';
 import About from './pages/About';
+import Careers from './pages/Careers';
 import Blog from './pages/Blog';
 import Contact from './pages/Contact';
+import Privacy from './pages/Privacy';
+import Terms from './pages/Terms';
 import ForStudents from './pages/ForStudents';
 import ForEmployers from './pages/ForEmployers';
 import ForEducators from './pages/ForEducators';
@@ -47,14 +50,6 @@ const ProjectInternships = () => (
 );
 
 // New page components for missing routes
-const Careers = () => (
-  <div className="min-h-screen flex items-center justify-center">
-    <div className="text-center">
-      <h1 className="text-3xl font-bold mb-4">Careers</h1>
-      <p className="text-gray-600">Coming soon! We're working on this page.</p>
-    </div>
-  </div>
-);
 
 const News = () => (
   <div className="min-h-screen flex items-center justify-center">
@@ -96,24 +91,6 @@ const Help = () => (
   <div className="min-h-screen flex items-center justify-center">
     <div className="text-center">
       <h1 className="text-3xl font-bold mb-4">Help Center</h1>
-      <p className="text-gray-600">Coming soon! We're working on this page.</p>
-    </div>
-  </div>
-);
-
-const Privacy = () => (
-  <div className="min-h-screen flex items-center justify-center">
-    <div className="text-center">
-      <h1 className="text-3xl font-bold mb-4">Privacy Policy</h1>
-      <p className="text-gray-600">Coming soon! We're working on this page.</p>
-    </div>
-  </div>
-);
-
-const Terms = () => (
-  <div className="min-h-screen flex items-center justify-center">
-    <div className="text-center">
-      <h1 className="text-3xl font-bold mb-4">Terms of Service</h1>
       <p className="text-gray-600">Coming soon! We're working on this page.</p>
     </div>
   </div>
@@ -181,8 +158,11 @@ function App() {
             <Route path="/how-it-works" element={<HowItWorks />} />
             <Route path="/solutions" element={<Solutions />} />
             <Route path="/about" element={<About />} />
+            <Route path="/careers" element={<Careers />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/privacy" element={<Privacy />} />
+            <Route path="/terms" element={<Terms />} />
             <Route path="/for-students" element={<ForStudents />} />
             <Route path="/for-employers" element={<ForEmployers />} />
             <Route path="/for-educators" element={<ForEducators />} />
