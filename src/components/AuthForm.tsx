@@ -2,10 +2,9 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Mail, Lock, User, Eye, EyeOff } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
-import { auth, googleProvider, facebookProvider } from '../firebase';
+import { auth, googleProvider } from '../firebase';
 import { signInWithPopup } from 'firebase/auth';
 import { FcGoogle } from 'react-icons/fc';
-import { FaFacebook } from 'react-icons/fa';
 import type { CreateAccountDto, LoginUserDTO, UserRole } from '../types/auth';
 
 interface AuthFormProps {
@@ -264,7 +263,7 @@ const AuthForm = ({ mode, onToggleMode }: AuthFormProps) => {
               </div>
             </div>
 
-            <div className="mt-6 grid grid-cols-2 gap-3">
+            <div className="mt-6 grid grid-cols-1 gap-3">
               <button
                 type="button"
                 onClick={() => handleSocialLogin(googleProvider)}
@@ -273,16 +272,6 @@ const AuthForm = ({ mode, onToggleMode }: AuthFormProps) => {
               >
                 <FcGoogle className="h-5 w-5" />
                 <span className="ml-2">Google</span>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => handleSocialLogin(facebookProvider)}
-                disabled={loading}
-                className="w-full inline-flex justify-center items-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50"
-              >
-                <FaFacebook className="h-5 w-5 text-blue-600" />
-                <span className="ml-2">Facebook</span>
               </button>
             </div>
           </div>
