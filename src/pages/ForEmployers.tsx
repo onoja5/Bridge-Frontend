@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, Users, Target, Briefcase, CheckCircle, Star, Building } from 'lucide-react';
+import { ArrowRight, Users, Target, Briefcase, CheckCircle, Star, Building, Info, TrendingUp, ClipboardList, UserCheck } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 export default function ForEmployers() {
@@ -66,6 +66,36 @@ export default function ForEmployers() {
               </Link>
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* About This Project Section */}
+      <div className="py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-3xl font-bold mb-8 flex justify-center items-center">
+            <Info className="h-8 w-8 text-blue-600 mr-2" />
+            About This Project
+          </h2>
+          <p className="text-lg text-gray-700 mb-8">
+            Our AI-driven platform empowers the workforce of tomorrow by bridging the gap between formal education and the evolving demands of the workplace. Students and graduates get AI-driven personalized career roadmaps, project-based learning, personalized skill development, and mentorship from seasoned professionals. For employers, the platform serves as a reliable pipeline for fresh, skilled, and job-ready talent, fostering a mutually beneficial ecosystem for professional and business growth.
+          </p>
+          <div className="flex justify-center gap-8 mb-8">
+            <div className="flex flex-col items-center">
+              <TrendingUp className="h-12 w-12 text-blue-600 mb-2" />
+              <p className="text-gray-700">AI-Driven Insights</p>
+            </div>
+            <div className="flex flex-col items-center">
+              <ClipboardList className="h-12 w-12 text-blue-600 mb-2" />
+              <p className="text-gray-700">Project-Based Learning</p>
+            </div>
+            <div className="flex flex-col items-center">
+              <UserCheck className="h-12 w-12 text-blue-600 mb-2" />
+              <p className="text-gray-700">Professional Mentorship</p>
+            </div>
+          </div>
+          <p className="text-lg text-gray-700">
+            Join us in redefining career development—one personalized blueprint at a time. Let’s build the bridge from education to employment.
+          </p>
         </div>
       </div>
 
@@ -144,7 +174,7 @@ export default function ForEmployers() {
       </div>
 
       {/* Success Stories Section */}
-      <div className="py-24 bg-gray-50">
+      {/* <div className="py-24 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-center mb-16">Success Stories</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -172,7 +202,7 @@ export default function ForEmployers() {
             ))}
           </div>
         </div>
-      </div>
+      </div> */}
 
       {/* CTA Section */}
       <div className="bg-blue-900 py-24">

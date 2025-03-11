@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, BookOpen, CheckCircle, Users, School, GraduationCap } from 'lucide-react';
+import { ArrowRight, BookOpen, CheckCircle, Users, School, GraduationCap, Info } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 export default function ForEducators() {
@@ -58,6 +58,36 @@ export default function ForEducators() {
               </Link>
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* About This Project Section */}
+      <div className="py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-3xl font-bold mb-8 flex justify-center items-center">
+            <Info className="h-8 w-8 text-blue-600 mr-2" />
+            About This Project
+          </h2>
+          <p className="text-lg text-gray-700 mb-8">
+            Our AI-driven platform empowers educators by bridging the gap between formal education and the evolving demands of the workplace. Integrate real-world projects into your curriculum, provide students with practical experience, and build relationships with leading companies and organizations.
+          </p>
+          <div className="flex justify-center gap-8 mb-8">
+            <div className="flex flex-col items-center">
+              <School className="h-12 w-12 text-blue-600 mb-2" />
+              <p className="text-gray-700">Enhanced Curriculum</p>
+            </div>
+            <div className="flex flex-col items-center">
+              <Users className="h-12 w-12 text-blue-600 mb-2" />
+              <p className="text-gray-700">Industry Connections</p>
+            </div>
+            <div className="flex flex-col items-center">
+              <GraduationCap className="h-12 w-12 text-blue-600 mb-2" />
+              <p className="text-gray-700">Student Success</p>
+            </div>
+          </div>
+          <p className="text-lg text-gray-700">
+            Join us in transforming education—one real-world project at a time. Let’s build the bridge from education to employment.
+          </p>
         </div>
       </div>
 

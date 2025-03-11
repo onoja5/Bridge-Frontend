@@ -537,6 +537,121 @@ export default function Home() {
           </div>
         </div>
       </div>
+
+      {/* Why Bridge AI Section */}
+      <div className="py-24 bg-gray-900 text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div>
+              <h2 className="text-4xl font-bold mb-4">Why Bridge AI</h2>
+              <p className="text-lg mb-8">
+                Bridge AI enhances talent and business efficiency using AI-powered solutions. Discover how our platform can transform your organization.
+              </p>
+              <div className="space-y-4">
+                <div className="bg-gray-800 p-4 rounded-lg shadow-lg">
+                  <button
+                    onClick={() => setActiveDropdown(activeDropdown === 'insights' ? null : 'insights')}
+                    className="w-full flex items-center justify-between text-left"
+                  >
+                    <h3 className="text-lg font-semibold">Advanced AI-powered insights for better talent management</h3>
+                    <ChevronDown
+                      className={`w-6 h-6 transform transition-transform duration-300 ${
+                        activeDropdown === 'insights' ? 'rotate-180' : ''
+                      }`}
+                    />
+                  </button>
+                  <div
+                    className={`mt-4 transition-all duration-300 ease-in-out ${
+                      activeDropdown === 'insights' ? 'max-h-96 opacity-100' : 'max-h-0 overflow-hidden opacity-0'
+                    }`}
+                  >
+                    <p className="text-gray-300">
+                      Leverage AI-driven insights to make informed decisions about talent acquisition, management, and development.
+                    </p>
+                  </div>
+                </div>
+                <div className="bg-gray-800 p-4 rounded-lg shadow-lg">
+                  <button
+                    onClick={() => setActiveDropdown(activeDropdown === 'automation' ? null : 'automation')}
+                    className="w-full flex items-center justify-between text-left"
+                  >
+                    <h3 className="text-lg font-semibold">Smart automation to streamline decision-making</h3>
+                    <ChevronDown
+                      className={`w-6 h-6 transform transition-transform duration-300 ${
+                        activeDropdown === 'automation' ? 'rotate-180' : ''
+                      }`}
+                    />
+                  </button>
+                  <div
+                    className={`mt-4 transition-all duration-300 ease-in-out ${
+                      activeDropdown === 'automation' ? 'max-h-96 opacity-100' : 'max-h-0 overflow-hidden opacity-0'
+                    }`}
+                  >
+                    <p className="text-gray-300">
+                      Automate routine tasks and focus on strategic initiatives with our smart automation tools.
+                    </p>
+                  </div>
+                </div>
+                <div className="bg-gray-800 p-4 rounded-lg shadow-lg">
+                  <button
+                    onClick={() => setActiveDropdown(activeDropdown === 'scalable' ? null : 'scalable')}
+                    className="w-full flex items-center justify-between text-left"
+                  >
+                    <h3 className="text-lg font-semibold">Scalable solutions for growing businesses</h3>
+                    <ChevronDown
+                      className={`w-6 h-6 transform transition-transform duration-300 ${
+                        activeDropdown === 'scalable' ? 'rotate-180' : ''
+                      }`}
+                    />
+                  </button>
+                  <div
+                    className={`mt-4 transition-all duration-300 ease-in-out ${
+                      activeDropdown === 'scalable' ? 'max-h-96 opacity-100' : 'max-h-0 overflow-hidden opacity-0'
+                    }`}
+                  >
+                    <p className="text-gray-300">
+                      Scale your business with confidence using our flexible and adaptable AI solutions.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <img
+                src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                alt="Professionals collaborating"
+                className="rounded-lg shadow-lg"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Ready to Transform Your Talent Pipeline Section */}
+      <div className="bg-blue-900 py-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-4xl font-bold text-white mb-6">
+            Ready to Transform Your Talent Pipeline?
+          </h2>
+          <p className="text-xl text-blue-100 max-w-3xl mx-auto mb-8">
+            Join leading companies who are already benefiting from BridgeAI's talent network.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link
+              to="/post-project"
+              className="bg-white text-blue-900 px-8 py-3 rounded-md text-lg font-semibold hover:bg-blue-50 transition duration-300"
+            >
+              Post Your First Project
+            </Link>
+            <Link
+              to="/contact"
+              className="border-2 border-white text-white px-8 py-3 rounded-md text-lg font-semibold hover:bg-white/10 transition duration-300"
+            >
+              Schedule a Call
+            </Link>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

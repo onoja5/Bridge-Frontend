@@ -66,6 +66,16 @@ export default function About() {
         </div>
       </div>
 
+      {/* Executive Summary Section */}
+      <div className="py-24 bg-gradient-to-r from-gray-200 to-gray-300">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl font-bold text-center mb-16">The Bridge Between Learning & Earning</h2>
+          <p className="text-xl text-gray-600 mb-6 text-center">
+            An AI-driven platform that empowers the workforce of tomorrow by bridging the gap between formal education and the evolving demands of the workplace. Students/Graduates get AI-driven personalized career roadmaps, project-based learning, personalized skill development, and mentorship from seasoned professionals. For employers, the platform serves as a reliable pipeline for fresh, skilled, and job-ready talent, fostering a mutually beneficial ecosystem for professional and business growth.
+          </p>
+        </div>
+      </div>
+
       {/* Story Section */}
       <div className="py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -108,6 +118,19 @@ export default function About() {
               </div>
             ))}
           </div>
+        </div>
+      </div>
+
+      {/* Business Objectives Section */}
+      <div className="py-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl font-bold text-center mb-16">Business Objectives</h2>
+          <ul className="list-disc list-inside text-xl text-gray-600 space-y-4">
+            <li>Enable seamless transition from education to employment for learners.</li>
+            <li>Provide AI-powered tools for personalized skills development and job matching.</li>
+            <li>Foster partnerships with educational institutions and industry leaders to create a dynamic learning ecosystem.</li>
+            <li>Continuously adapt learning models to meet evolving market demands.</li>
+          </ul>
         </div>
       </div>
 
