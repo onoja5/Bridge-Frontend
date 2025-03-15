@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, Briefcase, Target, Users, Star, CheckCircle } from 'lucide-react';
+import { ArrowRight, Briefcase, Target, Users, CheckCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 export default function ProjectInternships() {
@@ -28,23 +28,6 @@ export default function ProjectInternships() {
     "Project portfolio building",
     "Performance feedback",
     "Networking opportunities"
-  ];
-
-  const testimonials = [
-    {
-      name: "Michael Lee",
-      role: "Former Intern",
-      company: "Now at: Google",
-      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=crop&w=128&h=128&q=80",
-      quote: "My project internship gave me real-world experience that helped me land my dream job."
-    },
-    {
-      name: "Sarah Martinez",
-      role: "Project Intern",
-      company: "Tech Startup",
-      image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=crop&w=128&h=128&q=80",
-      quote: "The hands-on experience and mentorship have been invaluable for my professional growth."
-    }
   ];
 
   return (
@@ -143,7 +126,7 @@ export default function ProjectInternships() {
       </div>
 
       {/* Testimonials Section */}
-      <div className="py-24 bg-gray-50">
+      {/* <div className="py-24 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-center mb-16">Success Stories</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -171,7 +154,7 @@ export default function ProjectInternships() {
             ))}
           </div>
         </div>
-      </div>
+      </div> */}
 
       {/* CTA Section */}
       <div className="bg-blue-900 py-24">

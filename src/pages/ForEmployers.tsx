@@ -173,36 +173,29 @@ export default function ForEmployers() {
         </div>
       </div>
 
-      {/* Success Stories Section */}
-      {/* <div className="py-24 bg-gray-50">
+      {/* Hear from Real Users Section */}
+      <div className="py-24 bg-gradient-to-r from-blue-900 to-blue-800 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-center mb-16">Success Stories</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {successStories.map((story, index) => (
-              <div key={index} className="bg-white p-6 rounded-lg shadow-lg">
-                <div className="flex items-center mb-4">
-                  <img
-                    src={story.logo}
-                    alt={story.company}
-                    className="w-12 h-12 rounded-full mr-4"
-                  />
-                  <div>
-                    <h4 className="font-semibold">{story.company}</h4>
-                    <p className="text-gray-600 text-sm">{story.author}</p>
-                    <p className="text-gray-500 text-sm">{story.role}</p>
-                  </div>
-                </div>
-                <div className="flex mb-4">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="h-5 w-5 text-yellow-400 fill-current" />
-                  ))}
-                </div>
-                <p className="text-gray-600">{story.quote}</p>
-              </div>
-            ))}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            <div>
+              <h2 className="text-3xl font-bold mb-4">Hear from Real BridgeAI Users</h2>
+              <p className="text-lg mb-8">
+                "One of my biggest concerns has to do with our online classes being able to provide students with real-life, hands-on learning experiences. So, when I looked at BridgeAI, it was very exciting for me, because it’s a way for our classes and students to connect with thousands of businesses, nonprofits, and government agencies."
+              </p>
+              <p className="font-semibold">Jeff Holm</p>
+              <p className="text-sm text-gray-300">Vice Provost for Strategic Programming & Special Initiatives</p>
+              <p className="text-sm text-gray-300">University of North Dakota</p>
+            </div>
+            <div>
+              <img
+                src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                alt="BridgeAI Users"
+                className="rounded-lg shadow-lg"
+              />
+            </div>
           </div>
         </div>
-      </div> */}
+      </div>
 
       {/* CTA Section */}
       <div className="bg-blue-900 py-24">

@@ -32,18 +32,14 @@ export default function WorkBasedLearning() {
 
   const testimonials = [
     {
-      name: "James Thompson",
-      role: "Engineering Student",
-      university: "MIT",
-      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=crop&w=128&h=128&q=80",
-      quote: "The work-based learning program helped me apply classroom knowledge to real-world situations."
+      name: "John Doe",
+      feedback: "This program has been a game-changer for my career!",
+      rating: 5
     },
     {
-      name: "Emma Chen",
-      role: "Business Student",
-      university: "Stanford",
-      image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=crop&w=128&h=128&q=80",
-      quote: "I gained invaluable experience working on real projects with industry professionals."
+      name: "Jane Smith",
+      feedback: "I gained so much practical experience through this program.",
+      rating: 4
     }
   ];
 
@@ -142,31 +138,23 @@ export default function WorkBasedLearning() {
         </div>
       </div>
 
-      {/* Testimonials Section */}
+      {/* Student Experiences Section */}
       <div className="py-24 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-center mb-16">Student Experiences</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {testimonials.map((testimonial, index) => (
-              <div key={index} className="bg-white p-6 rounded-lg shadow-lg">
+              <div key={index} className="bg-white p-8 rounded-lg shadow-lg">
                 <div className="flex items-center mb-4">
-                  <img
-                    src={testimonial.image}
-                    alt={testimonial.name}
-                    className="w-12 h-12 rounded-full mr-4"
-                  />
-                  <div>
-                    <h4 className="font-semibold">{testimonial.name}</h4>
-                    <p className="text-gray-600 text-sm">{testimonial.role}</p>
-                    <p className="text-gray-500 text-sm">{testimonial.university}</p>
-                  </div>
+                  <Star className="h-6 w-6 text-yellow-500 flex-shrink-0" />
+                  <h3 className="text-xl font-bold ml-3">{testimonial.name}</h3>
                 </div>
-                <div className="flex mb-4">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="h-5 w-5 text-yellow-400 fill-current" />
+                <p className="text-gray-600 mb-4">{testimonial.feedback}</p>
+                <div className="flex">
+                  {Array.from({ length: testimonial.rating }).map((_, i) => (
+                    <Star key={i} className="h-5 w-5 text-yellow-500" />
                   ))}
                 </div>
-                <p className="text-gray-600">{testimonial.quote}</p>
               </div>
             ))}
           </div>
