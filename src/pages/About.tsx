@@ -59,37 +59,26 @@ export default function About() {
               Our Mission
             </h1>
             <p className="text-xl text-blue-100 max-w-3xl mx-auto">
-              To bridge the gap between education and industry by creating meaningful connections 
-              that empower the next generation of professionals.
+            We are on a mission to empower tomorrow's workforce by revolutionizing how students and young professionals navigate their careers. BridgeAI bridges the gap between formal education and the evolving workplace, using AI-driven insights to provide personalized career roadmaps, mentorship, and skill-building opportunities tailored to individual aspirations.
             </p>
           </div>
         </div>
       </div>
 
-      {/* Executive Summary Section */}
-      <div className="py-24 bg-gradient-to-r from-gray-200 to-gray-300">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-center mb-16">The Bridge Between Learning & Earning</h2>
-          <p className="text-xl text-gray-600 mb-6 text-center">
-            An AI-driven platform that empowers the workforce of tomorrow by bridging the gap between formal education and the evolving demands of the workplace. Students/Graduates get AI-driven personalized career roadmaps, project-based learning, personalized skill development, and mentorship from seasoned professionals. For employers, the platform serves as a reliable pipeline for fresh, skilled, and job-ready talent, fostering a mutually beneficial ecosystem for professional and business growth.
-          </p>
-        </div>
-      </div>
-
-      {/* Story Section */}
+      {/* Our Commitment Section */}
       <div className="py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-3xl font-bold mb-6">Our Story</h2>
-              <p className="text-xl text-gray-600 mb-6">
-                Founded in 2020, Bridge AI was born from a simple observation: there was a significant gap between what students learned in school and what employers needed in the workplace.
+              <h2 className="text-3xl font-bold mb-6 text-center md:text-left">Our Commitment to Your Success</h2>
+              <p className="text-xl text-gray-600 mb-6 text-center md:text-left">
+                We believe that every learner deserves a clear and guided path to success. By leveraging cutting-edge AI, we help users make informed career decisions, gain hands-on learning experiences, and connect with industry experts who provide real-world guidance.
               </p>
-              <p className="text-xl text-gray-600 mb-6">
-                We set out to bridge this gap by creating a platform that would connect students with real-world learning opportunities, helping them gain practical experience while still in school.
+              <p className="text-xl text-gray-600 mb-6 text-center md:text-left">
+                At the heart of BridgeAI is a commitment to empower the workforce of the future. We collaborate with educators, employers, and mentors to nurture talent, sharpen skills, and prepare the next generation for the future of work.
               </p>
-              <p className="text-xl text-gray-600">
-                Today, we're proud to have facilitated over 13.3M+ hours of applied learning, connecting students with 680+ industry partners and making a real difference in education.
+              <p className="text-xl text-gray-600 text-center md:text-left">
+                Join us in redefining career development—one personalized blueprint at a time. Let’s build the bridge from education to employment.
               </p>
             </div>
             <div>
@@ -135,7 +124,7 @@ export default function About() {
       </div>
 
       {/* Team Section */}
-      <div className="py-24">
+      {/* <div className="py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-center mb-16">Our Team</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -152,7 +141,7 @@ export default function About() {
             ))}
           </div>
         </div>
-      </div>
+      </div> */}
 
       {/* CTA Section */}
       <div className="bg-blue-900 py-24">
