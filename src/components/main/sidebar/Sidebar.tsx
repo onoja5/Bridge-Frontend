@@ -1,4 +1,4 @@
-import BrandLogo from '@/components/ui/BrandLogo';
+import BrandLogo from '@/components/ui/Logo';
 import { Dispatch, SetStateAction } from 'react';
 import { NavLink } from 'react-router-dom';
 import { SidebarData } from './SidebarData';

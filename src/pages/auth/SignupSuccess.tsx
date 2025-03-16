@@ -1,5 +1,5 @@
 import { ActionSuccess } from '@/assets/svgs/ExportSvgs';
-import BrandLogo from '@/components/ui/BrandLogo';
+import BrandLogo from '@/components/ui/Logo';
 import Button from '@/components/ui/Button';
 
 export default function SignupSuccess() {
