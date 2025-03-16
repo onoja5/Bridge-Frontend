@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction } from 'react';
 import { NavLink } from 'react-router-dom';
+import BrandLogo from '../ui/BrandLogo';
 import { SidebarData } from './sidebarData';
-import BrandLogo from '../ui/brandLogo';
 
 const Sidebar = ({}: {
   toggleSideBar: boolean;
@@ -16,17 +16,17 @@ const Sidebar = ({}: {
       </section>
       <section className='mx-auto flex w-full flex-col'>
         <ul className='flex flex-col gap-2'>
-          {SidebarData.map(({ id, url, title, icon }) => (
+          {SidebarData.map(({ name, path, icon }, idx) => (
             <NavLink
-              key={id}
-              to={url}
+              key={idx}
+              to={path}
               className={({ isActive }) =>
                 isActive ? 'sidebarActive' : 'sidebarNotActive'
               }
             >
               <hgroup className='flex items-center gap-2'>
                 <h4>{icon} </h4>
-                <h4>{title}</h4>
+                <h4>{name}</h4>
               </hgroup>
             </NavLink>
           ))}

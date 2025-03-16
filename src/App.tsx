@@ -33,57 +33,22 @@ function App() {
   }, []);
 
   return (
-    // <Router>
-    //   <div className="min-h-screen flex flex-col page-transition">
-    //     <Navbar />
-    //     <main className="flex-grow pt-16">
-    //       <Routes>
-    //         <Route path="/" element={<Home />} />
-    //         <Route path="/how-it-works" element={<HowItWorks />} />
-    //         <Route path="/solutions" element={<Solutions />} />
-    //         <Route path="/about" element={<About />} />
-    //         <Route path="/careers" element={<Careers />} />
-    //         <Route path="/workforce-development" element={<WorkforceDevelopment />} />
-    //         <Route path="/work-based-learning" element={<WorkBasedLearning />} />
-    //         <Route path="/project-internships" element={<ProjectInternships />} />
-    //         <Route path="/blog" element={<Blog />} />
-    //         <Route path="/contact" element={<Contact />} />
-    //         <Route path="/privacy" element={<Privacy />} />
-    //         <Route path="/terms" element={<Terms />} />
-    //         <Route path="/for-students" element={<ForStudents />} />
-    //         <Route path="/for-employers" element={<ForEmployers />} />
-    //         <Route path="/for-educators" element={<ForEducators />} />
-    //         <Route path="/explore" element={<ExploreOpportunities />} />
-    //         <Route path="/colleges" element={<CollegesUniversities />} />
-    //         <Route path="/businesses" element={<BusinessNonprofits />} />
-    //         <Route path="/learners" element={<StudentsLearners />} />
-    //         <Route path="/login" element={<Login />} />
-    //         <Route path="/signup" element={<SignUp />} />
-
-    //         {/* New Routes */}
-    //         <Route path="/news" element={<News />} />
-    //         <Route path="/partners" element={<Partners />} />
-    //         <Route path="/status" element={<Status />} />
-    //         <Route path="/updates" element={<Updates />} />
-    //         <Route path="/help" element={<Help />} />
-    //         <Route path="/forgot-password" element={<ForgotPassword />} />
-    //         <Route path="/demo" element={<Demo />} />
-    //         <Route path="/post-project" element={<PostProject />} />
-    //         <Route path="/webinars" element={<Webinars />} />
-    //       </Routes>
-    //     </main>
-    //     <Footer />
-    //   </div>
-    // </Router>
-
     <main className='App'>
       {/* <Toaster position="top-center" /> */}
-
       <Router>
-        <Navbar />
         <Routes>
           {generalRoutes.map((route, idx: number) => (
-            <Route key={idx} path={route.path} element={route.element} />
+            <Route
+              key={idx}
+              path={route.path}
+              element={
+                <>
+                  <Navbar />
+                  {route.element}
+                  <Footer />
+                </>
+              }
+            />
           ))}
           {dashboardRoutes.map(({ path, element, name }) => (
             <Route
@@ -92,10 +57,8 @@ function App() {
               element={<DashboardLayout>{element}</DashboardLayout>}
             />
           ))}
-
           <Route path='*' element={<NotFound />} />
         </Routes>
-        <Footer />
       </Router>
     </main>
   );
