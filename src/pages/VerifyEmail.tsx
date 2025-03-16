@@ -1,6 +1,7 @@
 // src/pages/VerifyEmail.tsx
 import { useLocation, useNavigate } from 'react-router-dom';
 import { verifyUserCode, resendOTP } from '../services/VerificationService';
+import { useState } from 'react';
 
 export default function VerifyEmail() {
   const navigate = useNavigate();
@@ -24,17 +25,17 @@ export default function VerifyEmail() {
   };
 
   return (
-    <div className="verification-container">
+    <div className='verification-container'>
       <h2>Verify Your Email</h2>
-      <input 
-        type="text" 
-        placeholder="Enter 6-digit code"
+      <input
+        type='text'
+        placeholder='Enter 6-digit code'
         value={code}
         onChange={(e) => setCode(e.target.value)}
       />
       <button onClick={handleVerify}>Verify</button>
       <button onClick={handleResend}>Resend Code</button>
-      {error && <div className="error-message">{error}</div>}
+      {error && <div className='error-message'>{error}</div>}
     </div>
   );
 }

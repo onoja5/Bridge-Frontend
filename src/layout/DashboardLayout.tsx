@@ -1,6 +1,8 @@
 /* eslint @typescript-eslint/no-explicit-any: "off" */
 
-import Sidebar from '@/components/sidebar/Sidebar';
+import DashboardNavbar from '@/components/main/dashboardNavbar/DashboardNavbar';
+import Sidebar from '@/components/main/sidebar/Sidebar';
+import { useAuthContext } from '@/contexts/AuthContext';
 import { ReactNode, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 
@@ -9,10 +11,11 @@ interface Layout {
 }
 const DashboardLayout: React.FC<Layout> = ({ children }) => {
   const [toggleSideBar, setToggleSideBar] = useState(false);
+  const { isAuthenticated } = useAuthContext();
 
-  // if (!isLoggedIn) {
-  //   return <Navigate to='/signin' replace />;
-  // }
+  if (!isAuthenticated) {
+    return <Navigate to='/login' replace />;
+  }
 
   return (
     <main className='flex justify-between'>
@@ -25,7 +28,7 @@ const DashboardLayout: React.FC<Layout> = ({ children }) => {
         />
       </section>
       <aside className='flex-1 overflow-y-hidden transition-all duration-300 bg-Grey1'>
-        {/* <NavBar /> */}
+        <DashboardNavbar />
         <div className='container py-10'>{children}</div>
       </aside>
     </main>

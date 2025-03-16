@@ -1,7 +1,7 @@
+import BrandLogo from '@/components/ui/BrandLogo';
 import { Dispatch, SetStateAction } from 'react';
 import { NavLink } from 'react-router-dom';
-import BrandLogo from '../ui/BrandLogo';
-import { SidebarData } from './sidebarData';
+import { SidebarData } from './SidebarData';
 
 const Sidebar = ({}: {
   toggleSideBar: boolean;

@@ -1,11 +1,10 @@
-// src/services/VerificationService.ts
-import api from './axiosInstance';
+import baseAPI from './api';
 
-export const verifyUserCode = (userId: string, code: string) => 
-  api.post('/users/verification/verify-signup-or-login-code', {
+export const verifyUserCode = (userId: string, code: string) =>
+  baseAPI.post('/users/verification/verify-signup-or-login-code', {
     userId,
-    uniqueVerificationCode: code
+    uniqueVerificationCode: code,
   });
 
 export const resendOTP = (userId: string) =>
-  api.get(`/users/resend-otp-code/${userId}`);
+  baseAPI.get(`/users/resend-otp-code/${userId}`);

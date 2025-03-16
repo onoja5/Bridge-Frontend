@@ -6,6 +6,7 @@ import DashboardLayout from './layout/DashboardLayout';
 import NotFound from './pages/404/NotFound';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import { Toaster } from './components/ui/toaster';
 
 function App() {
   useEffect(() => {
@@ -34,7 +35,7 @@ function App() {
 
   return (
     <main className='App'>
-      {/* <Toaster position="top-center" /> */}
+      <Toaster />
       <Router>
         <Routes>
           {generalRoutes.map((route, idx: number) => (

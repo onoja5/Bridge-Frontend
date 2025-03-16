@@ -232,7 +232,7 @@ body {
   display: grid;
   place-items: center;
   gap: 0.4em;
-  border-radius: 90px;
+  border-radius: 10px;
   letter-spacing: 0.112px;
 }
 
@@ -246,6 +246,11 @@ body {
   color: var(--white);
 }
 
+.danger-btn {
+  background: var(--negative);
+  color: var(--white);
+}
+
 .sec-btn {
   background: var(--alternative);
   color: var(--primary);
@@ -254,6 +259,10 @@ body {
 .outline-btn {
   border: solid 1px #cbd5e1;
   color: var(--primary);
+}
+
+.errors {
+  border: solid var(--negative) 1px !important;
 }
 
 /* ====Btns==== */

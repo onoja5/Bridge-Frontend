@@ -1,6 +1,10 @@
 // generalRoutes.js
 
 import About from '@/pages/About';
+import Login from '@/pages/auth/Login';
+import SignUp from '@/pages/auth/SignUp';
+import SignupSuccess from '@/pages/auth/SignupSuccess';
+import VerifyEmail from '@/pages/auth/VerifyEmai';
 import Blog from '@/pages/Blog';
 import BusinessNonprofits from '@/pages/BusinessNonprofits';
 import Careers from '@/pages/Careers';
@@ -15,13 +19,11 @@ import ForStudents from '@/pages/ForStudents';
 import Help from '@/pages/Help';
 import Home from '@/pages/Home';
 import HowItWorks from '@/pages/HowItWorks';
-import Login from '@/pages/Login';
 import News from '@/pages/News';
 import Partners from '@/pages/Partners';
 import PostProject from '@/pages/PostProject';
 import Privacy from '@/pages/Privacy';
 import ProjectInternships from '@/pages/ProjectInternships';
-import SignUp from '@/pages/SignUp';
 import Solutions from '@/pages/Solutions';
 import Status from '@/pages/Status';
 import StudentsLearners from '@/pages/StudentsLearners';
@@ -68,6 +70,8 @@ const generalRoutes: Route[] = [
   { path: '/demo', element: <Demo /> },
   { path: '/post-project', element: <PostProject /> },
   { path: '/webinars', element: <Webinars /> },
+  { path: '/signup-success', element: <SignupSuccess /> },
+  { path: '/verify-email', element: <VerifyEmail /> },
 ];
 
 export default generalRoutes;
