@@ -1,5 +1,5 @@
 import * as API from '@/services/auth';
-import { auth } from '@/firebase';
+import { auth } from '@/firebase/firebase';
 import { FcGoogle } from 'react-icons/fc';
 import { useGlobalHooks } from '@/hooks/globalHooks';
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';

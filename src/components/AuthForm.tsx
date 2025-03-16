@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Mail, Lock, User, Eye, EyeOff } from 'lucide-react';
-import { auth, googleProvider } from '../firebase';
+import { auth, googleProvider } from '../firebase/firebase';
 import { signInWithPopup } from 'firebase/auth';
 import { FcGoogle } from 'react-icons/fc';
 import type { CreateAccountDto, LoginUserDTO, UserRole } from '../types/auth';
