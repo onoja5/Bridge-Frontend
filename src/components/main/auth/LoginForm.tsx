@@ -12,8 +12,8 @@ import { useCookies } from '@/hooks/cookiesHook';
 
 const LoginForm = () => {
   const { setCookies } = useCookies();
-  const navigate = useNavigate();
   const { setUserData, setIsAuthenticated } = useAuthContext();
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const { loading, setLoading } = useGlobalHooks();
   const [formData, setFormData] = useState<LoginUserDTO>({
@@ -36,7 +36,6 @@ const LoginForm = () => {
     API.authService
       .login(formData)
       .then((res) => {
-        console.log('signup>>', res);
         setIsAuthenticated(true);
 
         const firstName = res?.data?.user?.firstName;

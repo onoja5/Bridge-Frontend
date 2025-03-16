@@ -18,8 +18,6 @@ const VerifyEmailForm = ({ routePath }: { routePath?: string }) => {
   const naviagte = useNavigate();
   const { userData, setUserData } = useAuthContext();
 
-  console.log(userData);
-
   const { loading, setLoading, errors } = useGlobalHooks();
   const [timeLeft, setTimeLeft] = useState(60);
 
@@ -109,7 +107,11 @@ const VerifyEmailForm = ({ routePath }: { routePath?: string }) => {
 
         setLoading(() => ({ ['verify']: false }));
       } else {
-        handleSuccess(rsp?.message || 'Email verification succesfull');
+        handleSuccess(
+          rsp?.message || 'Email verification succesfull',
+          naviagte,
+          '/login',
+        );
       }
     } catch (error) {
       console.log(error);

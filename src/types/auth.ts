@@ -21,11 +21,12 @@ export interface LoginUserDTO {
 
 export interface ThirdPartyAuthDTO {
   thirdPartyUserId: string;
-  provider: 'GOOGLE' | 'MICROSOFT';
+  provider: string;
   email: string;
   firstName: string;
   lastName: string;
   role: UserRole;
+  profileImageUrl: string;
 }
 
 export interface AuthUserDataDTO {
