@@ -19,7 +19,7 @@ const GoogleAuth = () => {
 
   const handleGoogleAuth = async () => {
     const result = await signInWithPopup(auth, provider);
-    console.log('google>>', result);
+
     const authData = {
       thirdPartyUserId: result.user.providerData[0].uid as string,
       provider: 'GOOGLE',
@@ -35,7 +35,7 @@ const GoogleAuth = () => {
     };
     try {
       const res = await API.authService.thirdPartyAuth(authData);
-      console.log(res);
+
       setLoading(() => ({ ['google']: false }));
       if (!res?.success) {
         handleError(res?.message || 'An unexpected error occurred.');
