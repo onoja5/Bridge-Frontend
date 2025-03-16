@@ -30,7 +30,7 @@ export default function SignUp() {
           <GoogleAuth />
         </section>
         <article className='mx-auto w-full max-w-xl'>
-          <p className='  text-center text-sm text-gray-600'>
+          <p className='text-center text-sm text-gray-600'>
             Already have an account?{' '}
             <Link
               to='/login'

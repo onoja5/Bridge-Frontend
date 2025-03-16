@@ -7,7 +7,7 @@ import * as API from '@/services/auth';
 import { handleSuccess, handleError } from '@/utils/helper';
 import { useGlobalHooks } from '@/hooks/globalHooks';
 import { useAuthContext } from '@/contexts/AuthContext';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useCookies } from '@/hooks/cookiesHook';
 
 const LoginForm = () => {
@@ -125,6 +125,15 @@ const LoginForm = () => {
             )}
           </button>
         </div>
+      </article>
+
+      <article className='text-end'>
+        <Link
+          to='/forgot-password-request'
+          className='text-primary font-semibold'
+        >
+          Forgot Password?
+        </Link>
       </article>
 
       <Button

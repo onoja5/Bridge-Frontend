@@ -1,7 +1,10 @@
 // generalRoutes.js
 
 import About from '@/pages/About';
+import ChangePassword from '@/pages/auth/ChangePassword';
+import ForgotPasswordRequest from '@/pages/auth/ForgotPasswordRequest';
 import Login from '@/pages/auth/Login';
+import PasswordChangeSuccess from '@/pages/auth/PasswordChangeSuccess';
 import SignUp from '@/pages/auth/SignUp';
 import SignupSuccess from '@/pages/auth/SignupSuccess';
 import VerifyEmail from '@/pages/auth/VerifyEmai';
@@ -72,6 +75,9 @@ const generalRoutes: Route[] = [
   { path: '/webinars', element: <Webinars /> },
   { path: '/signup-success', element: <SignupSuccess /> },
   { path: '/verify-email', element: <VerifyEmail /> },
+  { path: '/forgot-password-request', element: <ForgotPasswordRequest /> },
+  { path: '/change-password', element: <ChangePassword /> },
+  { path: '/change-password-success', element: <PasswordChangeSuccess /> },
 ];
 
 export default generalRoutes;

@@ -72,8 +72,6 @@ const SignUpForm = () => {
     API.authService
       .signup(formData)
       .then((res) => {
-        console.log('signup>>', res);
-
         const { firstName, lastName, email, _id } = res?.data?.user;
         setUserData({ firstName, lastName, email, _id });
 

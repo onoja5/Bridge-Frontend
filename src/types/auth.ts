@@ -1,5 +1,9 @@
 export type UserRole = 'EMPLOYER' | 'EDUCATOR' | 'STUDENT';
 
+export interface ResetPassword {
+  newPassword: string;
+  uniqueVerificationCode: string;
+}
 export interface VerifyOTPBodyData {
   userId: string;
   uniqueVerificationCode: string;

@@ -7,6 +7,7 @@ import type {
   SignupRspData,
   VerifyOTPBodyData,
   ApiRsp,
+  ResetPassword,
 } from '../types/auth';
 import baseAPI from './api';
 
@@ -56,6 +57,21 @@ export const authService = {
     const response = await baseAPI.patch<ApiResponse>(
       `/users/user/${userId}`,
       data,
+    );
+    return response.data;
+  },
+
+  async resetPasswordReq(email: string): Promise<ApiRsp> {
+    const response = await baseAPI.post<ApiRsp>(
+      `/users/verification/initiate-forgot-password-flow/${email}`,
+    );
+    return response.data;
+  },
+
+  async changePassword(formData: ResetPassword): Promise<ApiRsp> {
+    const response = await baseAPI.post<ApiRsp>(
+      `/users/verification/change-password`,
+      formData,
     );
     return response.data;
   },
