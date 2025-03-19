@@ -1,0 +1,268 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.container {
+  @apply mx-auto w-[95%] lg:w-[93%];
+}
+
+:root {
+  font-family: 'Inter', sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  font-size: 16px;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+
+  --primary: #2563eb;
+  --alternative: #ddeaff;
+  --white: #fff;
+  --black: #000000;
+  --Grey1: #f3f3f3;
+  --Line: #d1d5db;
+  --positive: #20af0b;
+  --negative: #ff3b2d;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+/* Animation Keyframes */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+/* Custom Animation Classes */
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out forwards;
+}
+
+.animate-slide-in {
+  animation: slideIn 0.6s ease-out forwards;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.5s ease-out forwards;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Stagger children animations */
+.stagger-children > * {
+  opacity: 0;
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+.stagger-children > *:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.stagger-children > *:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.stagger-children > *:nth-child(3) {
+  animation-delay: 0.3s;
+}
+.stagger-children > *:nth-child(4) {
+  animation-delay: 0.4s;
+}
+.stagger-children > *:nth-child(5) {
+  animation-delay: 0.5s;
+}
+.stagger-children > *:nth-child(6) {
+  animation-delay: 0.6s;
+}
+
+/* Hover Animations */
+.hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.hover-scale {
+  transition: transform 0.3s ease;
+}
+
+.hover-scale:hover {
+  transform: scale(1.02);
+}
+
+/* Smooth Page Transitions */
+.page-transition {
+  opacity: 0;
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+/* Button Animations */
+.button-pulse {
+  position: relative;
+  overflow: hidden;
+}
+
+.button-pulse::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s ease-out, height 0.6s ease-out;
+}
+
+.button-pulse:hover::after {
+  width: 300px;
+  height: 300px;
+}
+
+/* Scroll Reveal Animation */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.reveal-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===Dashboard sidebar start=== */
+
+.sidebarActive {
+  border-radius: 10px;
+  background: var(--alternative);
+  color: var(--primary);
+  width: fit-content;
+  padding: 0.6em;
+  margin: 0.5em 0;
+  transition: all 0.7s;
+}
+
+.sidebarActive h4,
+.sidebarActive a {
+  font-size: 1rem;
+  color: var(--primary);
+  font-weight: 500;
+}
+
+.sidebarNotActive {
+  color: var(--black);
+  width: fit-content;
+  padding: 0.6em;
+  margin: 0.5em 0;
+  transition: all 0.7s;
+}
+
+.sidebarNotActive h4 {
+  font-size: 0.85rem;
+  color: var(--black);
+}
+
+/* .sidebarNotActive svg {
+  fill: var(--black);
+} */
+
+.sidebarNotActive,
+.sidebarActive {
+  cursor: pointer;
+}
+/* ===Dashboard sidebar end=== */
+
+/* ====Btns==== */
+
+.btn {
+  height: 48px;
+  padding: 12px 20px;
+  font-size: 1rem;
+  font-weight: 700;
+  display: grid;
+  place-items: center;
+  gap: 0.4em;
+  border-radius: 10px;
+  letter-spacing: 0.112px;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pry-btn {
+  background: var(--primary);
+  color: var(--white);
+}
+
+.danger-btn {
+  background: var(--negative);
+  color: var(--white);
+}
+
+.sec-btn {
+  background: var(--alternative);
+  color: var(--primary);
+}
+
+.outline-btn {
+  border: solid 1px #cbd5e1;
+  color: var(--primary);
+}
+
+.errors {
+  border: solid var(--negative) 1px !important;
+}
+
+/* ====Btns==== */

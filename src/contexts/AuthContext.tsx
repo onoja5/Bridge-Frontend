@@ -1,78 +1,55 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
-import type { AuthUserDataDTO, LoginUserDTO, CreateAccountDto, ApiResponse, AuthResponse } from '../types/auth';
-import api from '../services/api';
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  Dispatch,
+  SetStateAction,
+} from 'react';
+import type { AuthUserDataDTO } from '../types/auth';
 
 interface AuthContextType {
-  user: AuthUserDataDTO | null;
-  setUser: (user: AuthUserDataDTO | null) => void;
+  userData: AuthUserDataDTO | null;
+  setUserData: Dispatch<SetStateAction<AuthUserDataDTO>>;
+  setIsAuthenticated: Dispatch<SetStateAction<boolean>>;
   isAuthenticated: boolean;
-  login: (credentials: LoginUserDTO) => Promise<void>;
-  signup: (data: CreateAccountDto) => Promise<void>;
-  logout: () => void;
 }
 
-const AuthContext = createContext<AuthContextType>({
-  user: null,
-  setUser: () => {},
-  isAuthenticated: false,
-  login: async () => {},
-  signup: async () => {},
-  logout: () => {},
-});
+const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [user, setUser] = useState<AuthUserDataDTO | null>(null);
+export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
+  const [isAuthenticated, setIsAuthenticated] = useState(() => {
+    const isLoggedIn =
+      typeof window !== 'undefined'
+        ? localStorage.getItem('isLoggedIn')
+        : false;
+    return isLoggedIn ? JSON.parse(isLoggedIn) : false;
+  });
+
+  const [userData, setUserData] = useState<AuthUserDataDTO>(() => {
+    // Load user data from localStorage if available
+    const storedUserData =
+      typeof window !== 'undefined' ? localStorage.getItem('userData') : null;
+    return storedUserData
+      ? JSON.parse(storedUserData)
+      : ({} as AuthUserDataDTO);
+  });
 
   useEffect(() => {
-    const token = localStorage.getItem('authToken');
-    const storedUser = localStorage.getItem('user');
-    
-    if (token && storedUser) {
-      try {
-        setUser(JSON.parse(storedUser));
-      } catch (error) {
-        console.error('Failed to parse stored user data:', error);
-        logout();
-      }
-    }
-  }, []);
-
-  const login = async (credentials: LoginUserDTO) => {
-    const response = await api.post<ApiResponse<AuthResponse>>('/auth/Userlogin', credentials);
-    if (response.data.success && response.data.data) {
-      localStorage.setItem('authToken', response.data.data.token);
-      localStorage.setItem('user', JSON.stringify(response.data.data.user));
-      setUser(response.data.data.user);
-    }
-  };
-
-  const signup = async (data: CreateAccountDto) => {
-    const response = await api.post<ApiResponse<AuthResponse>>('/auth/users/UserSignup', {
-      ...data,
-      role: data.role.toUpperCase(),
-    });
-    if (response.data.success) {
-      // Redirect to email verification page
-      window.location.href = '/verify-email';
-    }
-  };
-
-  const logout = () => {
-    localStorage.removeItem('authToken');
-    localStorage.removeItem('user');
-    setUser(null);
-    window.location.href = '/login';
-  };
+    // Save user data to localStorage whenever it changes
+    localStorage.setItem('userData', JSON.stringify(userData));
+    localStorage.setItem('isLoggedIn', JSON.stringify(isAuthenticated));
+  }, [userData, isAuthenticated]);
 
   return (
     <AuthContext.Provider
       value={{
-        user,
-        setUser,
-        isAuthenticated: !!user,
-        login,
-        signup,
-        logout,
+        userData,
+        setUserData,
+        isAuthenticated,
+        setIsAuthenticated,
       }}
     >
       {children}
@@ -80,4 +57,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   );
 };
 
-export const useAuth = () => useContext(AuthContext);
+export const useAuthContext = (): AuthContextType => {
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error('useAuthContext must be used within a AuthProvider');
+  }
+  return context;
+};
