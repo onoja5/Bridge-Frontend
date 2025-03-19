@@ -22,7 +22,7 @@ const Logout = () => {
         onClick={() => openModal('logout')}
       >
         <LogoutIcon />
-        <span className=''> Logout</span>
+        <span className='text-sm font-semibold'> Logout</span>
       </Button>
       <Dialog
         open={openModals['logout']}

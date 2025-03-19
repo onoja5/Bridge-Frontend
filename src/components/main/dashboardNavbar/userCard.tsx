@@ -8,14 +8,14 @@ const UserCard = ({ data }: { data: AuthUserDataDTO }) => {
     <PopupProvider>
       <section className='flex flex-col gap-4 rounded-xl p-4 text-center shadow-xl'>
         <figure className='mx-auto h-[60px] w-[60px] overflow-hidden'>
-          <img src={data?.profileImageUrl ?? noAvatar} alt='' />
+          <img className='rounded-full' src={data?.profileImageUrl ?? noAvatar} alt='' />
         </figure>
 
         <div>
-          <h4>
+          <h4 className='text-sm font-medium'>
             {data?.firstName} {data?.lastName}{' '}
           </h4>
-          <small className='text-Grey6'>{data?.email}</small>
+          <small className='text-gray-500 text-xs'>{data?.email}</small>
         </div>
 
         <Logout />
