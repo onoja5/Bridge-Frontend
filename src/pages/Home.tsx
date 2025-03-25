@@ -70,24 +70,70 @@ export default function Home() {
 
   const opportunities = [
     {
-      title: "Workforce Development Programs",
-      description: "Partner with workforce development providers to create equitable career-advancing opportunities.",
+      title: "🎓 Students & Graduates",
+      description: `Find your path, gain skills, and land opportunities
+
+🌟 Discover your path – Find the right career based on your interests and strengths
+
+📚 Upskill with ease – Close skill gaps with personalized learning recommendations
+
+🤝 Gain real-world experience – Access mentors, internships, and hands-on projects
+
+🎯 Land the perfect job – Use AI-powered job matching to connect with the right employers`,
       image: "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
       path: "/workforce-development"
     },
     {
-      title: "Work-Based Learning Programs",
-      description: "Authentic learning experiences structured to empower students through employer-designed projects.",
+      title: "💼 Professionals & Career Changers",
+      description: `Upskill, transition, and accelerate your career.
+
+📈 Identify growth opportunities and future-proof your career.
+
+📚 Access specialized learning paths & industry certifications.
+
+🛠️ Gain hands-on experience through job simulations & projects.
+
+🤝 Connect with mentors & hiring managers for career guidance.`,
       image: "https://images.unsplash.com/photo-1606761568499-6d2451b23c66?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-      path: "/work-based-learning"
+      path: "/career-changers"
     },
     {
-      title: "Project-Based Internships",
-      description: "Connect educators and employers to integrate real projects into course curriculum.",
-      image: "https://images.unsplash.com/photo-1560976812-c6f9f44aa2a7?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-      path: "/project-internships"
+      title: "🧑‍🏫 Mentors & Industry Experts",
+      description: `Shape the next generation of talent.
+
+📖 Share knowledge & industry insights with emerging professionals.
+
+🤝 Offer guidance through 1:1 mentorship & career coaching.
+
+🛠️ Contribute to real-world projects & skill-building initiatives.
+
+🌟 Build your reputation as a thought leader in your field.`,
+      image: "https://images.unsplash.com/photo-1531482615713-2afd69097998?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+      path: "/mentors"
     }
   ];
+
+  const renderDescription = (description: string) => {
+    const lines = description.split("\n");
+    return (
+      <div className="space-y-4">
+        {lines.map((line, index) => {
+          if (line.startsWith("-")) {
+            return (
+              <ul key={index} className="list-disc pl-6">
+                <li>{line.slice(1).trim()}</li>
+              </ul>
+            );
+          }
+          return (
+            <p key={index} className="text-gray-600">
+              {line}
+            </p>
+          );
+        })}
+      </div>
+    );
+  };
 
   const programs = [
     {
@@ -102,14 +148,14 @@ export default function Home() {
       description: "From talent acquisition to management, our AI platform provides you a single view of talent across your entire workforce to inform every talent decision. Build your dream workforce",
       icon: BookOpen,
       link: "/work-based-learning",
-      image: "https://images.unsplash.com/photo-1606761568499-6d2451b23c66?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+      image: "https://images.unsplash.com/photo-1531482615713-2afd69097998?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
     },
     {
       title: "Project-based Internships",
       description: "BridgeAI is a work-based learning platform connecting educators and employers to integrate real projects into course curriculum, leading to exciting and relevant resume-building experiences.",
       icon: Briefcase,
       link: "/project-internships",
-      image: "https://images.unsplash.com/photo-1560976812-c6f9f44aa2a7?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+      image: "https://images.pexels.com/photos/7794035/pexels-photo-7794035.jpeg"
     }
   ];
 
@@ -281,7 +327,7 @@ export default function Home() {
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-white mb-4">Bridging education to employment</h2>
             <p className="text-xl text-blue-100 max-w-3xl mx-auto">
-            Bridge AI is a work-based learning platform helping educators, organizations, and learners collaborate on real industry projects to bridge the gap between education and employment.
+              An AI-driven platform that empowers the workforce of tomorrow by bridging the gap between formal education and the evolving demands of the workplace. Students/Graduates get AI-driven personalized career roadmaps, project-based learning, personalized skill development, and mentorship from seasoned professionals. For employers, the platform serves as a reliable pipeline for fresh, skilled, and job-ready talent, fostering a mutually beneficial ecosystem for professional and business growth.
             </p>
           </div>
 
@@ -394,11 +440,11 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-center mb-4">Who We Serve</h2>
           <p className="text-xl text-gray-600 text-center max-w-4xl mx-auto mb-12">
-            We are revolutionizing the world of work by connecting people with limitless opportunities. From talent acquisition and management to powerful talent insights, our all-in-one AI-driven platform streamlines every step of the journey.
+            BridgeAI is designed to empower individuals and organizations by bridging the gap between education and the workforce. Whether you’re a student, professional, mentor, or employer, our AI-driven platform provides personalized solutions to help you achieve your career and talent development goals.
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
             {opportunities.map((opportunity, index) => (
-              <div key={index} className="group">
+              <div key={index} className="group bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow duration-300">
                 <div className="mb-6 overflow-hidden rounded-lg">
                   <img 
                     src={opportunity.image}
@@ -407,15 +453,41 @@ export default function Home() {
                   />
                 </div>
                 <h3 className="text-xl font-bold mb-2">{opportunity.title}</h3>
-                <p className="text-gray-600 mb-4">{opportunity.description}</p>
+                {renderDescription(opportunity.description)}
                 <Link
                   to={opportunity.path}
-                  className="text-blue-600 font-semibold hover:text-blue-700 flex items-center"
+                  className="text-blue-600 font-semibold hover:text-blue-700 flex items-center justify-center mt-4"
                 >
                   Learn More <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </div>
             ))}
+
+            {/* Employers & Hiring Partners */}
+            <div className="group bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow duration-300">
+              <div className="mb-6 overflow-hidden rounded-lg">
+                <img 
+                  src="https://images.unsplash.com/photo-1593642634367-d91a135587b5?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                  alt="Employers & Hiring Partners"
+                  className="w-full h-48 object-cover transform group-hover:scale-105 transition-transform duration-300"
+                />
+              </div>
+              <h3 className="text-xl font-bold mb-2">🏢 Employers & Hiring Partners</h3>
+              <div className="space-y-4 text-gray-600 text-center">
+                <ul className="list-none space-y-2">
+                  <li>📖 Identify and recruit top candidates using AI-powered talent matching.</li>
+                  <li>🤝 Access a pipeline of skilled graduates & professionals.</li>
+                  <li>🛠️ Offer internships, apprenticeships & industry projects.</li>
+                  <li>🌟 Leverage AI-driven insights for workforce development.</li>
+                </ul>
+              </div>
+              <Link
+                to="/employers"
+                className="text-blue-600 font-semibold hover:text-blue-700 flex items-center justify-center mt-4"
+              >
+                Learn More <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+            </div>
           </div>
         </div>
       </div>
@@ -618,7 +690,7 @@ export default function Home() {
             </div>
             <div>
               <img
-                src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                src="https://images.pexels.com/photos/6694541/pexels-photo-6694541.jpeg?auto=compress&cs=tinysrgb&w=800&q=80"
                 alt="Professionals collaborating"
                 className="rounded-lg shadow-lg"
               />

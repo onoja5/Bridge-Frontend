@@ -1,26 +1,80 @@
 import React from 'react';
-import { ArrowRight, CheckCircle, Users, Briefcase, GraduationCap } from 'lucide-react';
+import { ArrowRight, CheckCircle, Users, Briefcase, GraduationCap, Star } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 export default function HowItWorks() {
   const steps = [
     {
-      title: "Create Your Profile",
-      description: "Set up your profile and specify your interests, skills, and goals. Our AI-powered system will match you with relevant opportunities.",
-      icon: Users,
-      image: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80"
+      title: "Sign Up & Build Your Profile",
+      description: "Get started by signing up with Google, LinkedIn, or email. Complete your profile by sharing:",
+      bullets: [
+        "Your academic background & career interests",
+        "Existing skills & experience",
+        "Career aspirations & learning preferences"
+      ],
+      emoji: "🚀",
+      image: "https://images.pexels.com/photos/5257892/pexels-photo-5257892.jpeg?auto=compress&cs=tinysrgb&w=800&q=80",
+      bgClass: "bg-gradient-to-r from-blue-50 to-white"
     },
     {
-      title: "Browse Opportunities",
-      description: "Explore a wide range of projects, internships, and learning experiences from our network of 680+ partners.",
-      icon: Briefcase,
-      image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80"
+      title: "Get Your Personalized Career Blueprint",
+      description: "BridgeAI’s intelligent system generates a custom career roadmap tailored to your goals.",
+      bullets: [
+        "AI-driven career path recommendations",
+        "Skill gap analysis to identify areas for growth",
+        "Industry trends & insights to future-proof your career"
+      ],
+      emoji: "🔍",
+      image: "https://images.pexels.com/photos/9488847/pexels-photo-9488847.jpeg?auto=compress&cs=tinysrgb&w=800&q=80",
+      bgClass: "bg-gray-50"
     },
     {
-      title: "Start Learning",
-      description: "Engage in real-world projects, gain practical experience, and build your professional portfolio while earning academic credit.",
-      icon: GraduationCap,
-      image: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80"
+      title: "Learn & Upskill with Targeted Resources",
+      description: "Gain job-ready skills through a curated mix of:",
+      bullets: [
+        "Online courses, bootcamps & certifications",
+        "Project-based learning for hands-on experience",
+        "AI-powered job simulations to test real-world skills"
+      ],
+      emoji: "📚",
+      image: "https://images.pexels.com/photos/1181431/pexels-photo-1181431.jpeg?auto=compress&cs=tinysrgb&w=800&q=80",
+      bgClass: "bg-gradient-to-r from-blue-50 to-white"
+    },
+    {
+      title: "Connect with Mentors & Industry Experts",
+      description: "Advance your career with guidance from experienced professionals.",
+      bullets: [
+        "Get matched with mentors in your field",
+        "Access 1:1 coaching, career webinars & expert Q&As",
+        "Receive resume reviews & interview prep support"
+      ],
+      emoji: "🤝",
+      image: "https://images.pexels.com/photos/5717570/pexels-photo-5717570.jpeg?auto=compress&cs=tinysrgb&w=800&q=80",
+      bgClass: "bg-gray-50"
+    },
+    {
+      title: "Unlock Career Opportunities",
+      description: "Turn your learning into real-world success with access to:",
+      bullets: [
+        "Internships & apprenticeships with top companies",
+        "Live industry projects to showcase your skills",
+        "AI-powered job matching based on your evolving skills & interests"
+      ],
+      emoji: "💼",
+      image: "https://images.pexels.com/photos/5940828/pexels-photo-5940828.jpeg?auto=compress&cs=tinysrgb&w=800&q=80",
+      bgClass: "bg-gradient-to-r from-blue-50 to-white"
+    },
+    {
+      title: "Track Your Progress & Stay Ahead",
+      description: "Monitor your skill growth and adapt your career plan as your goals evolve.",
+      bullets: [
+        "Monitor your skill growth & completed courses",
+        "Get personalized recommendations for continued upskilling",
+        "Adapt your career plan as your goals evolve"
+      ],
+      emoji: "📊",
+      image: "https://images.pexels.com/photos/4559683/pexels-photo-4559683.jpeg?auto=compress&cs=tinysrgb&w=800&q=80",
+      bgClass: "bg-gray-50"
     }
   ];
 
@@ -34,8 +88,7 @@ export default function HowItWorks() {
               How Bridge AI Works
             </h1>
             <p className="text-xl text-blue-100 max-w-3xl mx-auto mb-8">
-              Our platform makes it easy to connect students with real-world learning opportunities. 
-              Here's how we bring education and industry together.
+              BridgeAI is your personalized career companion, designed to bridge the gap between education and the evolving job market. Using AI-driven insights, we help students and professionals discover, develop, and deploy their skills for real-world opportunities.
             </p>
             <Link
               to="/signup"
@@ -48,99 +101,69 @@ export default function HowItWorks() {
       </div>
 
       {/* Steps Section */}
-      <div className="py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 gap-16">
-            {steps.map((step, index) => (
-              <div key={index} className={`flex flex-col md:flex-row gap-12 items-center ${
-                index % 2 === 1 ? 'md:flex-row-reverse' : ''
-              }`}>
-                <div className="flex-1">
-                  <div className="bg-blue-100 p-3 rounded-full w-fit mb-6">
-                    <step.icon className="h-8 w-8 text-blue-600" />
-                  </div>
-                  <h2 className="text-3xl font-bold mb-4">{step.title}</h2>
-                  <p className="text-xl text-gray-600 mb-6">{step.description}</p>
-                  <div className="space-y-4">
-                    <div className="flex items-center gap-3">
-                      <CheckCircle className="h-6 w-6 text-green-500" />
-                      <span className="text-gray-700">Easy to get started</span>
+      {steps.map((step, index) => (
+        <div key={index} className={`${step.bgClass} py-16`}>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid md:grid-cols-2 gap-8 items-center shadow-lg hover:shadow-xl transition duration-300">
+              <div className="flex justify-center">
+                <img
+                  src={step.image}
+                  alt={step.title}
+                  className="rounded-lg shadow-lg hover:scale-105 transition-transform duration-300"
+                />
+              </div>
+              <div>
+                <h2 className="text-3xl font-bold mb-4">{step.title}</h2>
+                <p className="text-lg text-gray-700 mb-6">{step.description}</p>
+                <div className="space-y-4">
+                  {step.bullets.map((bullet, idx) => (
+                    <div key={idx} className="flex items-start gap-3">
+                      <CheckCircle className="h-6 w-6 text-blue-500" />
+                      <span className="text-base text-gray-700">{bullet}</span>
                     </div>
-                    <div className="flex items-center gap-3">
-                      <CheckCircle className="h-6 w-6 text-green-500" />
-                      <span className="text-gray-700">Guided process</span>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <CheckCircle className="h-6 w-6 text-green-500" />
-                      <span className="text-gray-700">24/7 support</span>
-                    </div>
-                  </div>
-                </div>
-                <div className="flex-1">
-                  <img
-                    src={step.image}
-                    alt={step.title}
-                    className="rounded-lg shadow-xl w-full"
-                  />
+                  ))}
                 </div>
               </div>
-            ))}
+            </div>
           </div>
         </div>
-      </div>
+      ))}
 
-      {/* User Journey Section */}
-      <div className="py-24 bg-gray-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-bold text-center mb-12">User Journey for Students & Professionals</h2>
-          <div className="space-y-16">
-            {[
-              {
-                title: "Sign Up & Profile Setup",
-                description: "Register using email or social login (Google, LinkedIn, Facebook). Complete profile with key details (academic background, experience, career interests)."
-              },
-              {
-                title: "Career Blueprint & Personalized Roadmap",
-                description: "Complete a survey to share details like background, skills, career goals, interests, and aspirations. AI generates a custom career blueprint with:",
-                bullets: [
-                  "Recommended career paths aligned with market demand.",
-                  "Skill gap analysis and personalized learning recommendations.",
-                  "Possible mentors or role models.",
-                  "Projected industry trends to guide long-term planning."
-                ]
-              },
-              {
-                title: "Learning & Upskilling",
-                description: "Enroll in recommended courses, certifications, and bootcamps. Engage in project-based learning with real-world applications. Participate in AI-powered job simulations to gain hands-on experience."
-              },
-              {
-                title: "Mentorship & Career Guidance",
-                description: "Get matched with mentors based on career aspirations and industry. Attend 1:1 mentorship sessions, career webinars, and expert panels. Receive resume reviews, interview prep, and career advice."
-              },
-              {
-                title: "Career Opportunities & Industry Experience",
-                description: "Apply for internships, apprenticeships, and full-time roles. Gain experience through industry projects and case studies. AI-powered job recommendations based on evolving skills and interests."
-              },
-              {
-                title: "Progress Tracking & Continuous Growth",
-                description: "AI monitors progress in skills, courses, and career milestones. Adaptive career roadmap refinements based on learning journey. Continuous upskilling recommendations for career advancement."
-              }
-            ].map((journey, index) => (
-              <div key={index}>
-                <h3 className="text-3xl font-semibold mb-4">{journey.title}</h3>
-                <p className="text-xl text-gray-700 mb-6">{journey.description}</p>
-                {journey.bullets && (
-                  <div className="space-y-4">
-                    {journey.bullets.map((bullet, idx) => (
-                      <div key={idx} className="flex items-center gap-3">
-                        <CheckCircle className="h-6 w-6 text-green-500" />
-                        <span className="text-gray-700">{bullet}</span>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ))}
+      {/* Why BridgeAI Section */}
+      <div className="bg-gradient-to-r from-blue-900 to-blue-800 py-24 text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-8">
+          <div>
+            <h2 className="text-4xl font-bold mb-6">Why BridgeAI?</h2>
+            <p className="text-lg mb-6">
+              BridgeAI offers a unique blend of AI-powered career planning, hands-on learning, and mentorship to help you achieve your goals.
+            </p>
+            <div className="space-y-4">
+              {[
+                "AI-powered career planning tailored to you",
+                "Hands-on learning through real-world projects",
+                "Mentorship & networking with industry professionals",
+                "Job-ready training to secure high-impact opportunities"
+              ].map((benefit, idx) => (
+                <div key={idx} className="flex items-start gap-3">
+                  <Star className="h-6 w-6 text-yellow-500" />
+                  <span className="text-base">{benefit}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="grid grid-cols-2 gap-4">
+            <div className="bg-white/10 backdrop-blur-lg p-6 rounded-lg shadow-lg">
+              <p className="text-lg">1. AI-Powered Career Personalization</p>
+            </div>
+            <div className="bg-white/10 backdrop-blur-lg p-6 rounded-lg shadow-lg">
+              <p className="text-lg">2. VIP Access to Mentors</p>
+            </div>
+            <div className="bg-white/10 backdrop-blur-lg p-6 rounded-lg shadow-lg">
+              <p className="text-lg">3. Job Matching Engine</p>
+            </div>
+            <div className="bg-white/10 backdrop-blur-lg p-6 rounded-lg shadow-lg">
+              <p className="text-lg">4. Resume-Building Automation</p>
+            </div>
           </div>
         </div>
       </div>
