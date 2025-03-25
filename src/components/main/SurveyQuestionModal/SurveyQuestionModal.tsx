@@ -27,6 +27,7 @@ const SurveyQuestionModal: React.FC<SurveyQuestionModalProps> = ({
 }) => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState<Record<number, string | string[]>>({});
+  const [othersInput, setOthersInput] = useState<Record<number, string>>({});
 
   if (!isOpen) return null;
 
@@ -58,7 +59,7 @@ const SurveyQuestionModal: React.FC<SurveyQuestionModalProps> = ({
         }
       }}
     >
-      <div className="modal-content bg-white p-6 rounded-lg w-[60%] h-[60%] flex flex-col justify-center relative">
+      <div className="modal-content bg-white p-6 rounded-lg w-[60%] h-auto flex flex-col justify-center relative">
         {/* Phase Title */}
         <div className="mb-4">
           <span className="text-sm font-medium text-blue-600">{phaseTitle}</span>
@@ -100,7 +101,7 @@ const SurveyQuestionModal: React.FC<SurveyQuestionModalProps> = ({
         )}
 
         {currentQuestion.type === 'multi-select' && (
-          <div className="grid grid-cols-2 gap-2">
+          <div className="grid grid-cols-2 gap-2 mt-4">
             {currentQuestion.options?.map((option, index) => (
               <label
                 key={index}
@@ -133,6 +134,24 @@ const SurveyQuestionModal: React.FC<SurveyQuestionModalProps> = ({
                 <span className="text-sm">{option}</span>
               </label>
             ))}
+
+            {/* Render "Others" input field if "Others" is selected */}
+            {(answers[currentQuestion.id] as string[] || []).includes('Others') && (
+              <div className="col-span-2 mt-2">
+                <input
+                  type="text"
+                  placeholder="Please specify"
+                  value={othersInput[currentQuestion.id] || ''}
+                  onChange={(e) => {
+                    setOthersInput((prev) => ({
+                      ...prev,
+                      [currentQuestion.id]: e.target.value,
+                    }));
+                  }}
+                  className="w-full border-b-[1.5px] border-[#2563EB] p-2 mt-2 text-sm outline-none"
+                />
+              </div>
+            )}
           </div>
         )}
 
