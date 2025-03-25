@@ -266,3 +266,33 @@ body {
 }
 
 /* ====Btns==== */
+
+/* Custom checkbox styling */
+.custom-checkbox input:checked + span {
+  background-color: #2563eb; /* Background color when checked */
+  border-color: #2563eb; /* Border color when checked */
+}
+
+.custom-checkbox input:checked + span svg {
+  display: block; /* Show the tick mark when checked */
+}
+
+.custom-checkbox input:checked + span svg path {
+  fill: white; /* White tick mark */
+}
+
+/* Custom dropdown styling */
+.custom-dropdown option {
+  background-color: white; /* Default background */
+  color: black; /* Default text color */
+}
+
+.custom-dropdown option:hover {
+  background-color: #2563eb; /* Hover background color */
+  color: white; /* Hover text color */
+}
+
+.custom-dropdown option:checked {
+  background-color: #2563eb; /* Selected background color */
+  color: white; /* Selected text color */
+}

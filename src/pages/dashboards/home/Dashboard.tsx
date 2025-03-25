@@ -1,18 +1,57 @@
+import React, { useState } from 'react';
 import Mentor1 from '@/assets/images/mentor 1.svg'
 import Mentor2 from '@/assets/images/mentor 2.svg'
 import Mentor3 from '@/assets/images/mentor 3.svg'
 import { DowntrendIcon, LightbulbIcon, MentorBadgeIcon, UptrendIcon } from '@/assets/svgs/ExportSvgs';
+import SurveyModal from '@/components/main/SurveyModal/SurveyModal';
 
 const Dashboard = () => {
+  const [isSurveyModalOpen, setSurveyModalOpen] = useState(false);
+
+  const handleOpenSurveyModal = () => {
+    setSurveyModalOpen(true); // Opens the modal
+  };
+
+  const handleCloseSurveyModal = () => {
+    setSurveyModalOpen(false); // Closes the modal
+  };
+
+  const surveyPhases = [
+    {
+      id: 'phase1',
+      title: 'Phase 1: Introduction',
+      description: 'Let us know more about you!',
+      questions: [
+        { id: 'q1', type: 'text', question: 'What is your name?' },
+        { id: 'q2', type: 'dropdown', question: 'What is your field of interest?', options: ['Design', 'Engineering', 'Data Science'] },
+      ],
+    },
+  ];
+
+  const handleSurveySubmit = (responses: Record<string, any>) => {
+    console.log('Survey Responses:', responses);
+    setSurveyModalOpen(false); // Close the modal after submission
+  };
+
   return (
     <main>
       {/* Dashboard Header Section */}
-      <div className='bg-[url(@/assets/images/DashboardHeader.png)] md:bg-cover md:bg-center bg-[url(@/assets/images/Mobile Dashboard Header.png)] bg-cover bg-center w-full h-[230px] rounded-lg flex flex-col items-start justify-center text-white p-6'>
-        <h2 className='text-lg md:text-lg font-normal'>Welcome back!</h2>
-        <h3 className='text-xl md:text-2xl font-bold mt-1'>Your personalized career blueprint starts here!</h3>
-        <p className='text-xs md:text-sm w-full md:w-[70%] mt-2'>Let's take a quick survey to get to know you better, access your skills and give you tailored roadmap to take you to a hundred</p>
-        <button className='mt-4 px-4 md:px-6 py-2 md:py-3 bg-white text-blue-600 rounded-md text-xs md:text-xs font-medium'>Take a survey</button>
+      <div className='bg-[url(@/assets/images/DashboardHeader.png)] bg-cover bg-center w-full h-[230px] rounded-lg flex flex-col items-start justify-center text-white p-6'>
+        <h2 className='text-lg font-normal'>Welcome back!</h2>
+        <h3 className='text-2xl font-bold mt-1'>Your personalized career blueprint starts here!</h3>
+        <p className='text-sm w-[70%] mt-2'>Let's take a quick survey to get to know you better, access your skills and give you a tailored roadmap to take you to a hundred.</p>
+        <button onClick={handleOpenSurveyModal} className='mt-4 px-6 py-3 bg-white text-blue-600 rounded-md text-xs font-medium'>
+          Take a survey
+        </button>
       </div>
+
+      {/* Survey Modal */}
+      <SurveyModal
+        phases={surveyPhases}
+        onSubmit={handleSurveySubmit}
+        onClose={handleCloseSurveyModal}
+        isOpen={isSurveyModalOpen}
+      />
 
       {/* Mid Section (Recommended Career Paths, Suggested Mentors, Skill Gap Analysis) */}
       <div className='grid grid-cols-1 md:grid-cols-3 gap-6 mt-8'>

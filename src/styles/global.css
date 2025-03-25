@@ -1,0 +1,15 @@
+/* Custom dropdown styling */
+.custom-dropdown option {
+  background-color: white; /* Default background */
+  color: black; /* Default text color */
+}
+
+.custom-dropdown option:hover {
+  background-color: #2563eb; /* Hover background color */
+  color: white; /* Hover text color */
+}
+
+.custom-dropdown option:checked {
+  background-color: #2563eb; /* Selected background color */
+  color: white; /* Selected text color */
+}
