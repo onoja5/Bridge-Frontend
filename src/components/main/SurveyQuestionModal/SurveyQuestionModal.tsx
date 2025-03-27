@@ -13,6 +13,11 @@ interface SurveyQuestionModalProps {
   onClose: () => void;
   questions: Question[];
   phaseTitle: string;
+  currentQuestion: number;
+  onNextQuestion: () => void;
+  onPreviousQuestion: () => void;
+  onAnswerChange: (id: number, value: string | string[]) => void;
+  answers: Record<number, string | string[]>;
   onSubmit: (answers: Record<number, string | string[]>) => void;
   isLastPhase: boolean;
 }
@@ -22,33 +27,20 @@ const SurveyQuestionModal: React.FC<SurveyQuestionModalProps> = ({
   onClose,
   questions,
   phaseTitle,
+  currentQuestion,
+  onNextQuestion,
+  onPreviousQuestion,
+  onAnswerChange,
+  answers,
   onSubmit,
   isLastPhase,
 }) => {
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [answers, setAnswers] = useState<Record<number, string | string[]>>({});
+  const question = questions[currentQuestion];
+
+  // State to track "Others" input for multi-select questions
   const [othersInput, setOthersInput] = useState<Record<number, string>>({});
 
   if (!isOpen) return null;
-
-  const currentQuestion = questions[currentQuestionIndex];
-
-  const handleAnswerChange = (value: string | string[]) => {
-    setAnswers((prev) => ({
-      ...prev,
-      [currentQuestion.id]: value,
-    }));
-  };
-
-  const handleNext = () => {
-    if (currentQuestionIndex < questions.length - 1) {
-      // Move to the next question
-      setCurrentQuestionIndex((prev) => prev + 1);
-    } else {
-      // If it's the last question of the phase
-      onSubmit(answers); // Submit the answers for the phase
-    }
-  };
 
   return (
     <div
@@ -65,34 +57,34 @@ const SurveyQuestionModal: React.FC<SurveyQuestionModalProps> = ({
           <span className="text-sm font-medium text-blue-600">{phaseTitle}</span>
           <span className="text-sm text-gray-400"> • </span>
           <span className="text-sm text-gray-600">
-            {currentQuestionIndex + 1}/{questions.length} questions
+            {currentQuestion + 1}/{questions.length} questions
           </span>
         </div>
 
         {/* Question */}
-        <h2 className="text-lg font-semibold mb-4">{currentQuestion.question}</h2>
+        <h2 className="text-lg font-semibold mb-4">{question.question}</h2>
 
         {/* Question Format */}
-        {currentQuestion.type === 'text' && (
+        {question.type === 'text' && (
           <input
             type="text"
             placeholder="Enter Text"
             className="w-full border-0 border-b-2 border-[#2563EB] outline-none px-2 py-4 text-sm"
-            value={answers[currentQuestion.id] as string || ''}
-            onChange={(e) => handleAnswerChange(e.target.value)}
+            value={answers[question.id] as string || ''}
+            onChange={(e) => onAnswerChange(question.id, e.target.value)}
           />
         )}
 
-        {currentQuestion.type === 'dropdown' && (
+        {question.type === 'dropdown' && (
           <select
             className="w-full border border-gray-300 rounded-md px-3 py-4 outline-none text-sm custom-dropdown"
-            value={answers[currentQuestion.id] as string || ''}
-            onChange={(e) => handleAnswerChange(e.target.value)}
+            value={answers[question.id] as string || ''}
+            onChange={(e) => onAnswerChange(question.id, e.target.value)}
           >
             <option value="" disabled>
               Select...
             </option>
-            {currentQuestion.options?.map((option, index) => (
+            {question.options?.map((option, index) => (
               <option key={index} value={option}>
                 {option}
               </option>
@@ -100,9 +92,9 @@ const SurveyQuestionModal: React.FC<SurveyQuestionModalProps> = ({
           </select>
         )}
 
-        {currentQuestion.type === 'multi-select' && (
+        {question.type === 'multi-select' && (
           <div className="grid grid-cols-2 gap-2 mt-4">
-            {currentQuestion.options?.map((option, index) => (
+            {question.options?.map((option, index) => (
               <label
                 key={index}
                 className="flex items-center gap-2 p-2 cursor-pointer custom-checkbox"
@@ -111,13 +103,13 @@ const SurveyQuestionModal: React.FC<SurveyQuestionModalProps> = ({
                   className="hidden"
                   type="checkbox"
                   value={option}
-                  checked={(answers[currentQuestion.id] as string[] || []).includes(option)}
+                  checked={(answers[question.id] as string[] || []).includes(option)}
                   onChange={(e) => {
-                    const selectedOptions = answers[currentQuestion.id] as string[] || [];
+                    const selectedOptions = answers[question.id] as string[] || [];
                     if (e.target.checked) {
-                      handleAnswerChange([...selectedOptions, option]);
+                      onAnswerChange(question.id, [...selectedOptions, option]);
                     } else {
-                      handleAnswerChange(selectedOptions.filter((o) => o !== option));
+                      onAnswerChange(question.id, selectedOptions.filter((o) => o !== option));
                     }
                   }}
                 />
@@ -136,16 +128,16 @@ const SurveyQuestionModal: React.FC<SurveyQuestionModalProps> = ({
             ))}
 
             {/* Render "Others" input field if "Others" is selected */}
-            {(answers[currentQuestion.id] as string[] || []).includes('Others') && (
+            {(answers[question.id] as string[] || []).includes('Others') && (
               <div className="col-span-2 mt-2">
                 <input
                   type="text"
                   placeholder="Please specify"
-                  value={othersInput[currentQuestion.id] || ''}
+                  value={othersInput[question.id] || ''}
                   onChange={(e) => {
-                    setOthersInput((prev) => ({
+                    setOthersInput((prev: Record<number, string>) => ({
                       ...prev,
-                      [currentQuestion.id]: e.target.value,
+                      [question.id]: e.target.value,
                     }));
                   }}
                   className="w-full border-b-[1.5px] border-[#2563EB] p-2 mt-2 text-sm outline-none"
@@ -157,21 +149,29 @@ const SurveyQuestionModal: React.FC<SurveyQuestionModalProps> = ({
 
         {/* Navigation Buttons */}
         <div className="flex gap-2 mt-10">
-          <button
-            onClick={() => setCurrentQuestionIndex((prev) => Math.max(prev - 1, 0))}
-            disabled={currentQuestionIndex === 0}
-            className="px-4 py-2 bg-gray-300 text-gray-700 rounded-md text-sm"
-          >
-            Prev
-          </button>
-          <button
-            onClick={handleNext}
-            className="px-4 py-2 bg-blue-600 text-white rounded-md text-sm"
-          >
-            {currentQuestionIndex === questions.length - 1
-              ? isLastPhase ? 'Submit Survey' : 'Next Phase'
-              : 'Next'}
-          </button>
+          {currentQuestion > 0 && (
+            <button
+              onClick={onPreviousQuestion}
+              className="px-4 py-2 bg-gray-300 text-gray-700 rounded-md text-sm"
+            >
+              Prev
+            </button>
+          )}
+          {currentQuestion < questions.length - 1 ? (
+            <button
+              onClick={onNextQuestion}
+              className="px-4 py-2 bg-blue-600 text-white rounded-md text-sm"
+            >
+              Next
+            </button>
+          ) : (
+            <button
+              onClick={() => onSubmit(answers)}
+              className="px-4 py-2 bg-blue-600 text-white rounded-md text-sm"
+            >
+              {isLastPhase ? 'Submit Survey' : 'Next Phase'}
+            </button>
+          )}
         </div>
       </div>
     </div>
