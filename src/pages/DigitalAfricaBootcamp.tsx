@@ -35,9 +35,12 @@ export default function DigitalAfricaBootcamp() {
       {/* Overview Section */}
       <div className="py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-center mb-16">Program Overview</h2>
+          <h2 className="text-3xl font-bold text-center mb-16">Digital Africa Bootcamp</h2>
           <p className="text-xl text-gray-600 mb-6 text-center">
-            The Digital Africa Bootcamp is designed to equip young Africans with the digital skills needed to excel in the global economy. Through hands-on training, mentorship, and real-world projects, participants will gain the expertise required to succeed in the digital age.
+            Target Audience: Final-year students, early-career professionals & career switchers
+          </p>
+          <p className="text-xl text-gray-600 mb-6 text-center">
+            Overview: A 6–12 week immersive program designed to equip participants with AI-driven career roadmaps, real-world projects, and technical skills needed to thrive in the digital economy.
           </p>
         </div>
       </div>
@@ -66,19 +69,24 @@ export default function DigitalAfricaBootcamp() {
       {/* Features Section */}
       <div className="py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-center mb-16">Program Features</h2>
+          <h2 className="text-3xl font-bold text-center mb-16">Key Components:</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div>
-              <ul className="list-disc list-inside text-xl text-gray-600 space-y-4">
-                <li>Hands-on training in digital skills</li>
-                <li>Access to industry-standard tools and resources</li>
-                <li>Networking opportunities with peers and professionals</li>
-                <li>Certification upon program completion</li>
-              </ul>
+              <div className="text-xl text-gray-600 space-y-4">
+                <p>✅ AI-powered career assessment & personalized roadmap</p>
+                <p>✅ Hands-on training in AI, cloud computing, data analytics & digital skills</p>
+                <p>✅ Industry projects with real-world applications</p>
+                <p>✅ Personalized mentorship from industry leaders</p>
+                <p>✅ Resume reviews, mock interviews & job placement support</p>
+                <p>✅ Certification upon completion</p>
+              </div>
+              <p className="text-xl text-gray-600 mt-6">
+                Corporate Talent Pipeline Program
+              </p>
             </div>
             <div>
               <img
-                src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80"
+                src="https://images.pexels.com/photos/5940828/pexels-photo-5940828.jpeg?auto=compress&cs=tinysrgb&w=800&q=80"
                 alt="Program features"
                 className="rounded-lg shadow-xl"
               />
