@@ -161,7 +161,7 @@ export default function Home() {
 
   const tabContent = {
     colleges: {
-      title: "For colleges & universities",
+      title: "For Students & Graduates",
       description: "Find experiential learning projects to integrate into your curriculum, helping students gain real-world experience and improve employability outcomes.",
       image: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
       benefits: [
@@ -180,7 +180,7 @@ export default function Home() {
       }
     },
     businesses: {
-      title: "For organizations & business leaders",
+      title: "For Professionals & Career Changers",
       description: "Grow your business with access to a forward-thinking student talent pool to get your projects done - all at no cost to you. All while helping shape the future of work.",
       image: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
       benefits: [
@@ -199,7 +199,7 @@ export default function Home() {
       }
     },
     students: {
-      title: "For learners",
+      title: "For Employers & Hiring Partners",
       description: "Gain employable skills and apply what you have learned by adding real value to organizations in a variety of industries. Put yourself on a fast track to a thriving career upon graduation.",
       image: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
       benefits: [
@@ -334,9 +334,9 @@ export default function Home() {
           {/* Tabs */}
           <div className="flex flex-wrap justify-center gap-4 mb-12">
             {Object.entries({
-              colleges: "Colleges & Universities",
-              businesses: "Businesses & Nonprofits",
-              students: "Students & Learners"
+              colleges: "Students & Graduates",
+              businesses: "Professionals & Career Changers",
+              students: "Employers & Hiring Partners"
             }).map(([key, label]) => (
               <button
                 key={key}

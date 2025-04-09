@@ -8,23 +8,23 @@ const WorkforceDevelopment = () => (
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center">
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
-            Workforce Development
+            AI Ignite Community
           </h1>
           <p className="text-xl text-blue-100 max-w-3xl mx-auto mb-8">
-            Empowering individuals with the skills and knowledge needed to thrive in today's job market.
+            A community-driven platform where professionals connect to learn, share, and lead in the age of AI.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
-              to="/explore"
+              to="/events"
               className="bg-white text-blue-900 px-8 py-3 rounded-md text-lg font-semibold hover:bg-blue-50 transition duration-300"
             >
-              Explore Programs
+              Explore Events
             </Link>
             <Link
-              to="/contact"
+              to="/join"
               className="border-2 border-white text-white px-8 py-3 rounded-md text-lg font-semibold hover:bg-white/10 transition duration-300"
             >
-              Contact Us
+              Join the Community
             </Link>
           </div>
         </div>
@@ -34,53 +34,31 @@ const WorkforceDevelopment = () => (
     {/* Overview Section */}
     <div className="py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl font-bold text-center mb-16">Program Overview</h2>
+        <h2 className="text-3xl font-bold text-center mb-16">Community Overview</h2>
         <p className="text-xl text-gray-600 mb-6 text-center">
-          Our Workforce Development program is designed to bridge the gap between education and employment. We provide hands-on training, mentorship, and career support to help individuals succeed in their chosen fields.
+          AI Ignite fosters discussions, innovation, and collaboration between AI technologists, entrepreneurs, and thought leaders. Join us to shape the future of AI together.
         </p>
       </div>
     </div>
 
-    {/* Benefits Section */}
+    {/* Key Components Section */}
     <div className="py-24 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl font-bold text-center mb-16">Program Benefits</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="bg-white p-8 rounded-lg shadow-lg">
-            <h3 className="text-xl font-bold mb-4">Industry-Aligned Skills</h3>
-            <p className="text-gray-600">Develop skills that match current industry needs and demands.</p>
-          </div>
-          <div className="bg-white p-8 rounded-lg shadow-lg">
-            <h3 className="text-xl font-bold mb-4">Career Advancement</h3>
-            <p className="text-gray-600">Create pathways for career growth and professional development.</p>
-          </div>
-          <div className="bg-white p-8 rounded-lg shadow-lg">
-            <h3 className="text-xl font-bold mb-4">Network Building</h3>
-            <p className="text-gray-600">Connect with industry professionals and potential employers.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    {/* Features Section */}
-    <div className="py-24">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl font-bold text-center mb-16">Program Features</h2>
+        <h2 className="text-3xl font-bold text-center mb-16">Key Components</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <div>
-            <ul className="list-disc list-inside text-xl text-gray-600 space-y-4">
-              <li>Customized learning paths</li>
-              <li>Real-world projects</li>
-              <li>Industry mentorship</li>
-              <li>Skills assessment</li>
-              <li>Progress tracking</li>
-              <li>Certification preparation</li>
-            </ul>
+            <div className="text-xl text-gray-600 space-y-4">
+              <p>✅ AI & Tech Networking Events</p>
+              <p>✅ Monthly knowledge-sharing sessions & hackathons</p>
+              <p>✅ Exclusive industry insights & trend analysis</p>
+              <p>✅ Business and tech mentorship for AI adoption</p>
+              <p>✅ Open-source collaboration & idea incubation</p>
+            </div>
           </div>
           <div>
             <img
-              src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80"
-              alt="Program features"
+              src="https://images.pexels.com/photos/7648221/pexels-photo-7648221.jpeg?auto=compress&cs=tinysrgb&w=800&q=80"
+              alt="AI Ignite Community"
               className="rounded-lg shadow-xl"
             />
           </div>
@@ -88,55 +66,14 @@ const WorkforceDevelopment = () => (
       </div>
     </div>
 
-    {/* Testimonials Section */}
-    {/*
-    <div className="py-24 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl font-bold text-center mb-16">Success Stories</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="bg-white p-6 rounded-lg shadow-lg">
-            <div className="flex items-center mb-4">
-              <img
-                src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=crop&w=128&h=128&q=80"
-                alt="David Wilson"
-                className="w-12 h-12 rounded-full mr-4"
-              />
-              <div>
-                <h4 className="font-semibold">David Wilson</h4>
-                <p className="text-gray-600 text-sm">Program Graduate</p>
-                <p className="text-gray-500 text-sm">Now at: Tech Solutions Inc</p>
-              </div>
-            </div>
-            <p className="text-gray-600">"The workforce development program gave me the skills and confidence to transition into tech."</p>
-          </div>
-          <div className="bg-white p-6 rounded-lg shadow-lg">
-            <div className="flex items-center mb-4">
-              <img
-                src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=crop&w=128&h=128&q=80"
-                alt="Maria Rodriguez"
-                className="w-12 h-12 rounded-full mr-4"
-              />
-              <div>
-                <h4 className="font-semibold">Maria Rodriguez</h4>
-                <p className="text-gray-600 text-sm">Career Changer</p>
-                <p className="text-gray-500 text-sm">Now at: Global Finance Corp</p>
-              </div>
-            </div>
-            <p className="text-gray-600">"This program was instrumental in helping me successfully switch careers."</p>
-          </div>
-        </div>
-      </div>
-    </div>
-    */}
-
     {/* CTA Section */}
     <div className="bg-blue-900 py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <h2 className="text-4xl font-bold text-white mb-6">
-          Ready to Advance Your Career?
+          Ready to Shape the Future of AI?
         </h2>
         <p className="text-xl text-blue-100 max-w-3xl mx-auto mb-8">
-          Join our workforce development program and take the first step towards your new career.
+          Join the AI Ignite Community and connect with like-minded professionals to lead in the age of AI.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link
@@ -149,7 +86,7 @@ const WorkforceDevelopment = () => (
             to="/contact"
             className="border-2 border-white text-white px-8 py-3 rounded-md text-lg font-semibold hover:bg-white/10 transition duration-300"
           >
-            Schedule a Call
+            Contact Us
           </Link>
         </div>
       </div>

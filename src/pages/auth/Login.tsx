@@ -13,7 +13,7 @@ export default function Login() {
           </h2>
           <p>
             Let&apos;s get back in business!, make sure to tell a friend about
-            BridgeAI today.
+            BridgeAI today
           </p>
         </header>
 

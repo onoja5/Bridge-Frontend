@@ -19,9 +19,10 @@ export default function Navbar() {
   ];
 
   const programs = [
-    { name: 'Workforce Development', path: '/workforce-development' },
-    { name: 'Work-Based Learning', path: '/work-based-learning' },
-    { name: 'Project Internships', path: '/project-internships' },
+    { name: 'AI Ignite Community', path: '/workforce-development' },
+    { name: 'Digital Apprenticeship Program', path: '/digital-apprenticeship-program' },
+    { name: 'Digital Africa Bootcamp', path: '/digital-africa-bootcamp' },
+    { name: 'Corporate Talent Pipeline', path: '/corporate-talent-pipeline' },
   ];
 
   const toggleDropdown = (dropdown: string) => {
@@ -94,7 +95,7 @@ export default function Navbar() {
             </div>
 
             {/* Explore Dropdown */}
-            <div className='relative' onClick={handleDropdownClick}>
+            {/* <div className='relative' onClick={handleDropdownClick}>
               <button
                 className='flex items-center text-gray-600 hover:text-blue-600'
                 onClick={() => toggleDropdown('explore')}
@@ -114,7 +115,7 @@ export default function Navbar() {
                   ))}
                 </div>
               )}
-            </div>
+            </div> */}
 
             {/* Programs Dropdown */}
             <div className='relative' onClick={handleDropdownClick}>
@@ -125,7 +126,7 @@ export default function Navbar() {
                 Programs <ChevronDown className='ml-1 h-4 w-4' />
               </button>
               {activeDropdown === 'programs' && (
-                <div className='absolute left-0 w-56 mt-2 bg-white rounded-md shadow-lg py-2'>
+                <div className='absolute left-0 w-72 mt-2 bg-white rounded-md shadow-lg py-2'>
                   {programs.map((item) => (
                     <Link
                       key={item.path}

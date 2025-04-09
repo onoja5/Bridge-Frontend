@@ -108,14 +108,6 @@ export default function Contact() {
                     <h3 className="text-xl font-bold mb-4">{office.city}</h3>
                     <div className="space-y-4">
                       <div className="flex items-start">
-                        <MapPin className="h-6 w-6 text-blue-600 mr-3 flex-shrink-0" />
-                        <span className="text-gray-600">{office.address}</span>
-                      </div>
-                      <div className="flex items-start">
-                        <Phone className="h-6 w-6 text-blue-600 mr-3 flex-shrink-0" />
-                        <span className="text-gray-600">{office.phone}</span>
-                      </div>
-                      <div className="flex items-start">
                         <Mail className="h-6 w-6 text-blue-600 mr-3 flex-shrink-0" />
                         <span className="text-gray-600">{office.email}</span>
                       </div>
@@ -127,19 +119,6 @@ export default function Contact() {
                   </div>
                 ))}
               </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Map Section */}
-      <div className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-center mb-12">Visit Us</h2>
-          <div className="h-96 bg-gray-200 rounded-lg overflow-hidden">
-            {/* Add map integration here */}
-            <div className="w-full h-full flex items-center justify-center text-gray-500">
-              Interactive map would be integrated here
             </div>
           </div>
         </div>
