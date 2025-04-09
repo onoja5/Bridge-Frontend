@@ -1,17 +1,18 @@
-import BrandLogo from '@/components/ui/Logo';
-import { Dispatch, SetStateAction } from 'react';
 import { NavLink } from 'react-router-dom';
 import { SidebarData } from './SidebarData';
 
-const Sidebar = ({}: {
-  toggleSideBar: boolean;
-  setToggleSideBar: Dispatch<SetStateAction<boolean>>;
-}) => {
+interface SidebarProps {
+  isCollapsed: boolean; // Prop to determine if the sidebar is collapsed
+}
+
+const Sidebar: React.FC<SidebarProps> = ({ isCollapsed }) => {
   return (
-    <main className='fixed pb-40 h-full'>
+    <main className='flex flex-col h-full p-5 gap-5 w-auto'>
       <section className='mt-3 mb-5 flex flex-col gap-3'>
-        <div className='flex items-center'>
-          <BrandLogo />
+        <div className='flex items-center justify-center'>
+          <h1 className={`text-xl font-bold text-blue-600 ${isCollapsed ? 'hidden' : ''}`}>
+            Bridge AI
+          </h1>
         </div>
       </section>
       <section className='mx-auto flex w-full flex-col'>
@@ -21,13 +22,13 @@ const Sidebar = ({}: {
               key={idx}
               to={path}
               className={({ isActive }) =>
-                isActive ? 'sidebarActive' : 'sidebarNotActive'
+                `flex items-center gap-2 p-2 rounded-md ${
+                  isActive ? 'bg-blue-100 text-blue-600' : 'text-gray-600'
+                }`
               }
             >
-              <hgroup className='flex items-center gap-2'>
-                <h4>{icon} </h4>
-                <h4>{name}</h4>
-              </hgroup>
+              <span className='text-xl'>{icon}</span>
+              {!isCollapsed && <span>{name}</span>} {/* Hide text if collapsed */}
             </NavLink>
           ))}
         </ul>

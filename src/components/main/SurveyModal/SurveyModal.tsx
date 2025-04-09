@@ -55,45 +55,39 @@ const SurveyModal: React.FC<SurveyModalProps> = ({ isOpen, onClose, onSubmit }) 
       phaseNumber: 'First Phase',
       phaseTitle: 'Personal & Educational Background',
       phaseDescription: 'Basic details to personalize the career blueprint.',
-      questionCount: 5,
+      questionCount: 4,
       illustration: FirstPhaseImg,
       questions: [
-        { id: 1, question: 'Select your age range', type: 'dropdown', options: ['15-18', '19-24', '25-30', '31+'] },
-        { id: 2, question: 'What is your highest level of education?', type: 'dropdown', options: ['O-level', 'Diploma', 'Bachelor’s', 'Masters and above'] },
-        { id: 3, question: 'What is your field of study or major?', type: 'text' },
-        { id: 4, question: 'What university or educational institution did you attend?', type: 'text' },
-        { id: 5, question: 'What is your current status', type: 'dropdown', options: ['Student', 'Recent Graduate', 'Employed', 'Self-Employed'] },
+        { id: 1, question: 'What is your current Status', type: 'dropdown', options: ['Student', 'Recent Graduate', 'Employed', 'Self-Employed', 'Career Transition'] },
+        { id: 2, question: 'What is your field of study or interest?', type: 'text' },
+        { id: 3, question: 'What is your highest level of education?', type: 'dropdown', options: ['O-level', 'Diploma', 'Bachelor’s', 'Masters and above'] },
+        { id: 4, question: 'What is your age range', type: 'dropdown', options: ['15-18', '19-24', '25-30', '31-40', '41+'] },
       ],
     },
     {
       phaseNumber: 'Second Phase',
       phaseTitle: 'Skills & Career Interests',
       phaseDescription: 'Let’s get to know what makes you “YOU”.',
-      questionCount: 6,
+      questionCount: 4,
       illustration: SecondPhaseImg,
       questions: [
-        { id: 6, question: 'Which industries interest you the most?', type: 'multi-select', options: ['Technology', 'Finance', 'Healthcare', 'Marketing', 'Education', 'Consulting', 'Entrepreneurship', 'Others'] },
-        { id: 7, question: 'What is your current job title?', type: 'text' },
-        { id: 8, question: 'What is your career experience like?', type: 'text' },
-        { id: 9, question: 'Which technical skills do you have?', type: 'multi-select', options: ['Programming', 'Data Analysis', 'Cloud Computing', 'UI/UX Design', 'Digital Marketing', 'Writing & Content Creation', 'Financial Analysis', 'Cybersecurity', 'AI & Machine Learning', 'Others'] },
-        { id: 10, question: 'Which soft skills do you excel in?', type: 'multi-select', options: ['Leadership', 'Communication', 'Problem-Solving', 'Creativity', 'Critical Thinking', 'Project Management', 'Teamwork & Collaboration', 'Adaptability', 'Emotional Intelligence', 'Others'] },
-        { id: 11, question: 'Do you have any work or internship experience? Yes/No', type: 'text' },
+        { id: 5, question: 'Which industries interest you the most?', type: 'multi-select', options: ['Technology', 'Finance', 'Healthcare', 'Marketing', 'Education', 'Consulting', 'Entrepreneurship', 'Others'] },
+        { id: 6, question: 'Which technical skills do you have?', type: 'multi-select', options: ['Programming', 'Data Analysis', 'Cloud Computing', 'UI/UX Design', 'Digital Marketing', 'Writing & Content Creation', 'Financial Analysis', 'Cybersecurity', 'AI & Machine Learning', 'Others'] },
+        { id: 7, question: 'Which soft skills do you excel in?', type: 'multi-select', options: ['Leadership', 'Communication', 'Problem-Solving', 'Creativity', 'Critical Thinking', 'Project Management', 'Teamwork & Collaboration', 'Adaptability', 'Emotional Intelligence', 'Others'] },
+        { id: 8, question: 'Do you have any work or internship experience? Yes/No', type: 'text' },
       ],
     },
     {
       phaseNumber: 'Last Phase',
       phaseTitle: 'Career Goals & Learning Preferences',
       phaseDescription: 'Final input to tailor career roadmap.',
-      questionCount: 7,
+      questionCount: 4,
       illustration: ThirdPhaseImg,
       questions: [
-        { id: 12, question: 'What type of work excites you the most?', type: 'text' },
-        { id: 13, question: 'What are your preferred work environments?', type: 'multi-select', options: ['Corporate', 'Startup', 'Remote/Freelance', 'Government', 'Non-Profit', 'Research & Academia', 'No Preference'] },
-        { id: 14, question: 'How do you prefer to learn?', type: 'multi-select', options: ['Online Courses', 'Hands-on Projects', 'Reading & Research', 'Mentorship & Coaching', 'Video Tutorials', 'Industry Events & Networking', 'Others'] },
-        { id: 15, question: 'What challenges do you face in achieving your career goals?', type: 'multi-select', options: ['Lack of Access to Opportunities', 'Lack of Skills', 'Need to Improve Technical Skills', 'No Industry Connections/Mentorship', 'Financial Constraints', 'Unclear Career Path', 'Lack of Hands-on Experience', 'Work-Life Balance Challenges', 'Others'] },
-        { id: 16, question: 'What future aspirations do you have?', type: 'text' },
-        { id: 17, question: 'What are your hobbies?', type: 'text' },
-        { id: 18, question: 'Share any other relevant information', type: 'text' },
+        { id: 9, question: 'How do you prefer to develop your skills and grow in your career?', type: 'multi-select', options: ['Online courses and certifications', 'Hands-on projects and internships', 'Mentorship and networking', 'Reading and research', 'Structured degree program', 'Attending workshops and conferences', 'Others'] },
+        { id: 10, question: 'What are your career goals?', type: 'multi-select', options: ['Securing my first job or internship', 'Advance in my career path', 'Transition into a new industry', 'Start my own business or become a freelancer', 'Specialize in a high-demand technical skill', 'Gain international work experience', 'Become a leader or manager in my field', 'Contribute to research and innovation in my industry', 'Make an impact through social or community-driven word', 'Others'] },
+        { id: 11, question: 'What challenges do you face in achieving your career goals?', type: 'multi-select', options: ['Lack of Access to Opportunities', 'Lack of Skills', 'Need to Improve Technical Skills', 'No Industry Connections/Mentorship', 'Financial Constraints', 'Unclear Career Path', 'Lack of Hands-on Experience', 'Work-Life Balance Challenges', 'Others'] },
+        { id: 12, question: 'Share any other relevant information', type: 'text' },
       ],
     },
   ];
@@ -183,6 +177,7 @@ const SurveyModal: React.FC<SurveyModalProps> = ({ isOpen, onClose, onSubmit }) 
     setIsLoading(true); // Show the loader
 
     try {
+      console.log('Fetching blueprint from:', url);
       const response = await fetch(url, {
         method: 'GET',
         headers: {
@@ -198,10 +193,21 @@ const SurveyModal: React.FC<SurveyModalProps> = ({ isOpen, onClose, onSubmit }) 
 
       const text = await response.text();
       const data = text ? JSON.parse(text) : {};
+      console.log('API Response:', data);
+
       if (data.success && data.data) {
         const blueprint = data.data.blueprint || data.data;
+
+        // Commenting out the validation logic for testing
+        // if (typeof blueprint === 'string' && blueprint.trim().length > 0) {
+        console.log('Blueprint fetched successfully:', blueprint);
         setBlueprint(blueprint); // Update the blueprint with the resolved value
+        // } else {
+        //   console.error('Blueprint data is incomplete or invalid');
+        //   setBlueprint(null); // Handle incomplete blueprint
+        // }
       } else {
+        console.error('Blueprint data is missing or invalid');
         setBlueprint(null); // Handle missing blueprint in the response
       }
     } catch (error) {
@@ -212,27 +218,38 @@ const SurveyModal: React.FC<SurveyModalProps> = ({ isOpen, onClose, onSubmit }) 
     }
   };
 
-  const mapAnswersToUserSchema = (answers: Record<number, string | string[]>, skills: string[]): Partial<AuthUserDataDTO> => {
+  const handleSaveBlueprint = (blueprint: string | Record<string, string>) => {
+    if (typeof blueprint === 'object') {
+      // Convert the object to a string representation (e.g., JSON or formatted text)
+      const formattedBlueprint = Object.entries(blueprint)
+        .map(([key, value]) => `${key}: ${value}`)
+        .join('\n');
+      console.log('Formatted Blueprint:', formattedBlueprint);
+      // Add any additional logic for saving the formatted blueprint here
+    } else {
+      console.log('Blueprint saved:', blueprint);
+      // Add any additional logic for saving the string blueprint here
+    }
+  };
+
+  const mapAnswersToUserSchema = (
+    answers: Record<number, string | string[]>, 
+    dreams: string // Updated to accept the input from the introductory modal
+  ): Partial<AuthUserDataDTO> => {
     return {
-      ageRange: answers[1] as string || '',
-      highestLevelOfEducation: answers[2] as string || '',
-      fieldOfStudy: Array.isArray(answers[3]) ? answers[3] : [answers[3] as string || ''],
-      universityOrInstitution: answers[4] as string || '',
-      currentStatus: answers[5] as string || '',
-      industriesOfInterest: answers[6] as string[] || [],
-      currentJobTitle: answers[7] as string || '',
-      careerExperience: answers[8] as string || '',
-      technicalSkills: (answers[9] as string[] || []).filter(skill => skill !== 'Others'),
-      softSkills: (answers[10] as string[] || []).map(skill => skill.toLowerCase()),
-      workExperience: answers[11] as string || '',
-      excitingWork: answers[12] as string || '',
-      preferredWorkEnvironments: answers[13] as string[] || [],
-      learningPreferences: answers[14] as string[] || [],
-      careerChallenges: answers[15] as string[] || [],
-      futureAspirations: answers[16] as string || '',
-      hobbies: Array.isArray(answers[17]) ? answers[17] : (answers[17]?.split(',').map(hobby => hobby.trim()) || []),
-      additionalInfo: answers[18] as string || '',
-      skills: skills.map(skill => skill.trim()),
+      currentStatus: answers[1] as string || '',
+      fieldOfStudy: Array.isArray(answers[2]) ? answers[3] : [answers[3] as string || ''],
+      highestLevelOfEducation: answers[3] as string || '',
+      ageRange: answers[4] as string || '',
+      industriesOfInterest: answers[5] as string[] || [],
+      technicalSkills: (answers[6] as string[] || []).filter(skill => skill !== 'Others'),
+      softSkills: (answers[7] as string[] || []).map(skill => skill.toLowerCase()),
+      workExperience: answers[8] as string || '',
+      Skill_developement_strategies: answers[9] as string[] || [],
+      Career_goal: answers[10] as string[] || [],
+      careerChallenges: answers[11] as string[] || [],
+      additionalInfo: answers[12] as string || '',
+      currentJobTitle: dreams || '', // Pass the introductory modal input here
     };
   };
 
@@ -253,8 +270,8 @@ const SurveyModal: React.FC<SurveyModalProps> = ({ isOpen, onClose, onSubmit }) 
 
     console.log('Final Updated Answers:', updatedAnswers);
 
-    // Map the answers to the user schema
-    const userDataToUpdate = mapAnswersToUserSchema(updatedAnswers, skills);
+    // Map the answers to the user schema, passing `inputValue` as the dreams parameter
+    const userDataToUpdate = mapAnswersToUserSchema(updatedAnswers, inputValue);
 
     console.log('Mapped User Data:', JSON.stringify(userDataToUpdate, null, 2));
 
@@ -330,6 +347,7 @@ const SurveyModal: React.FC<SurveyModalProps> = ({ isOpen, onClose, onSubmit }) 
           isOpen={isBlueprintModalOpen}
           onClose={() => setBlueprintModalOpen(false)}
           blueprint={blueprint}
+          onSave={handleSaveBlueprint} // Pass the onSave prop
           onRetakeTest={handleRetakeTest}
           onRegenerate={handleGenerateBlueprint}
         />
@@ -360,64 +378,48 @@ const SurveyModal: React.FC<SurveyModalProps> = ({ isOpen, onClose, onSubmit }) 
           >
             {/* Left Section */}
             <div className="flex-1 items-start">
-              <h2 className="text-2xl font-bold text-gray-800">Assess your skills</h2>
+              <h2 className="text-2xl font-bold text-gray-800">Envision Yourself</h2>
               <p className="text-sm text-gray-600 mt-2">
-                Let’s get to know what your interests and skills are.
+                Tell us about your dreams and aspirations
               </p>
               <div className="mt-4">
-                <label
-                  htmlFor="skill-input"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  {skills.length > 0 ? 'Enter only 3 core skills' : 'Enter your skills'}
-                </label>
                 <div className="flex items-center mt-2 border border-gray-300 rounded-md p-2">
                   <FeatherIcon className="text-gray-400 mr-2" />
                   <input
-                    id="skill-input"
+                    id="dream-input"
                     type="text"
-                    value={skills.join(', ')} // Display the skills as a comma-separated string
-                    onChange={(e) => setSkills(e.target.value.split(',').map((skill) => skill.trim()))}
-                    placeholder="UI/UX, Frontend Development..."
+                    value={inputValue} // Bind the input value to state
+                    onChange={(e) => setInputValue(e.target.value)} // Update state on input change
+                    placeholder="To become a CEO..."
                     className="flex-1 border-none outline-none text-sm"
                   />
-                  {/* <button
-                    onClick={handleAddSkill}
-                    disabled={skills.length >= 3 || !inputValue.trim()}
-                    className={`ml-2 rounded-full text-sm font-medium ${
-                      skills.length >= 3 || !inputValue.trim()
-                        ? 'bg-gray-100 cursor-not-allowed'
-                        : 'bg-slate-100'
-                    }`}
-                  >
-                    <AddIcon />
-                  </button> */}
                 </div>
-                <ul className="mt-4 flex flex-wrap gap-2">
-                  {skills.map((skill, index) => (
-                    <li
-                      key={index}
-                      className="bg-[#003BC3] text-white px-2 py-1 rounded-[3px] text-sm flex justify-between items-center gap-2"
-                    >
-                      {skill}
-                      <button
-                        onClick={() => handleRemoveSkill(skill)}
-                        className="text-red-500 hover:text-red-700"
-                      >
-                        <CloseCircleIcon />
-                      </button>
-                    </li>
-                  ))}
-                </ul>
               </div>
+              <ul className="mt-4 flex flex-wrap gap-2">
+                {skills.map((skill, index) => (
+                  <li
+                    key={index}
+                    className="bg-[#003BC3] text-white px-2 py-1 rounded-[3px] text-sm flex justify-between items-center gap-2"
+                  >
+                    {skill}
+                    <button
+                      onClick={() => handleRemoveSkill(skill)}
+                      className="text-red-500 hover:text-red-700"
+                    >
+                      <CloseCircleIcon />
+                    </button>
+                  </li>
+                ))}
+              </ul>
               <div className="flex mt-6">
                 <button
                   onClick={handleStartSurvey}
-                  disabled={skills.length === 0}
-                  className={`px-6 py-2 rounded-md text-sm font-medium ${skills.length === 0
+                  disabled={!inputValue.trim()} // Disable button if input is empty
+                  className={`px-6 py-2 rounded-md text-sm font-medium ${
+                    !inputValue.trim()
                       ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
                       : 'bg-blue-600 text-white'
-                    }`}
+                  }`}
                 >
                   Start Survey
                 </button>
@@ -426,7 +428,7 @@ const SurveyModal: React.FC<SurveyModalProps> = ({ isOpen, onClose, onSubmit }) 
 
             {/* Right Section */}
             <div className="hidden md:block">
-              <img src={AddSkillsImg} alt="Add Skills Illustration" className="w-[300px] h-auto" />
+              <img src={AddSkillsImg} alt="Add Skills Illustration" className="w-[300px] md:w-img-md h-auto" />
             </div>
           </motion.div>
         </div>
@@ -563,6 +565,7 @@ const SurveyModal: React.FC<SurveyModalProps> = ({ isOpen, onClose, onSubmit }) 
           isOpen={isBlueprintModalOpen}
           onClose={() => setBlueprintModalOpen(false)}
           blueprint={blueprint}
+          onSave={handleSaveBlueprint} // Pass the onSave prop
           onRetakeTest={handleRetakeTest}
           onRegenerate={handleGenerateBlueprint}
         />

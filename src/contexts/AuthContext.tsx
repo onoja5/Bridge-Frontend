@@ -10,7 +10,7 @@ import type { AuthUserDataDTO } from '../types/auth';
 
 interface AuthContextType {
   userData: AuthUserDataDTO | null;
-  setUserData: Dispatch<SetStateAction<AuthUserDataDTO>>;
+  setUserData: Dispatch<SetStateAction<AuthUserDataDTO | null>>;
   setIsAuthenticated: Dispatch<SetStateAction<boolean>>;
   isAuthenticated: boolean;
 }
@@ -21,20 +21,27 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(() => {
-    const isLoggedIn =
-      typeof window !== 'undefined'
-        ? localStorage.getItem('isLoggedIn')
-        : false;
-    return isLoggedIn ? JSON.parse(isLoggedIn) : false;
+    try {
+      const isLoggedIn =
+        typeof window !== 'undefined'
+          ? localStorage.getItem('isLoggedIn')
+          : false;
+      return isLoggedIn ? JSON.parse(isLoggedIn) : false;
+    } catch (error) {
+      console.error('Error accessing localStorage:', error);
+      return false;
+    }
   });
 
-  const [userData, setUserData] = useState<AuthUserDataDTO>(() => {
-    // Load user data from localStorage if available
-    const storedUserData =
-      typeof window !== 'undefined' ? localStorage.getItem('userData') : null;
-    return storedUserData
-      ? JSON.parse(storedUserData)
-      : ({} as AuthUserDataDTO);
+  const [userData, setUserData] = useState<AuthUserDataDTO | null>(() => {
+    try {
+      const storedUserData =
+        typeof window !== 'undefined' ? localStorage.getItem('userData') : null;
+      return storedUserData ? JSON.parse(storedUserData) : null;
+    } catch (error) {
+      console.error('Error accessing localStorage:', error);
+      return null;
+    }
   });
 
   useEffect(() => {

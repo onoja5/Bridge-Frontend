@@ -1,56 +1,56 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useToast } from "@/hooks/use-toast";
+import { formatBlueprintText } from '@/utils/formatblueprint';
 
 interface CareerBlueprintModalProps {
   isOpen: boolean;
   onClose: () => void;
-  blueprint: string | null;
+  blueprint: string | Record<string, string> | null; // Allow blueprint to be null or an object
+  onSave: (blueprint: string | Record<string, string>) => void;
   onRetakeTest: () => void;
   onRegenerate: () => void;
 }
-
-const formatBlueprintText = (text: string): string => {
-  return text
-    .replace(/##+/g, '') // Remove all occurrences of "##"
-    .replace(/\*\*/g, '') // Remove all occurrences of "**"
-    .replace(/---+/g, '') //Remove all occurrences of "---"
-    .trim(); // Remove leading and trailing whitespace
-};
 
 const CareerBlueprintModal: React.FC<CareerBlueprintModalProps> = ({
   isOpen,
   onClose,
   blueprint,
+  onSave,
   onRetakeTest,
   onRegenerate,
 }) => {
+  const { toast } = useToast(); // Use the toast function from the hook
+
   if (!isOpen) return null;
 
-  console.log('Blueprint Data:', blueprint);
+  console.log('Blueprint prop in CareerBlueprintModal:', blueprint);
+  console.log('Blueprint Data in CareerBlueprintModal:', blueprint);
+
+  const handleSaveBlueprint = () => {
+    if (blueprint) { // Ensure blueprint is not null
+      console.log('Calling onSave with blueprint:', blueprint);
+      toast({
+        title: "Blueprint Saved",
+        description: "Your blueprint has been successfully saved.",
+        variant: "default", // Use "default" or "destructive" based on the toast type
+      });
+      onSave(blueprint); // Call onSave only if blueprint is not null
+      onClose(); // Close the modal after saving
+    }
+  };
 
   const renderBlueprint = () => {
-    if (typeof blueprint === 'string') {
-      const formattedText = formatBlueprintText(blueprint);
-      return (
-        <div
-          className="text-sm text-gray-600 text-left whitespace-pre-wrap max-h-[400px] overflow-y-auto"
-          dangerouslySetInnerHTML={{ __html: formattedText }}
-        ></div>
-      );
-    } else if (typeof blueprint === 'object' && blueprint !== null) {
-      return (
-        <div className="text-sm text-gray-600 text-left whitespace-pre-wrap max-h-[400px] overflow-y-auto">
-          {Object.entries(blueprint).map(([key, value], index) => (
-            <div key={index} className="mb-4">
-              <h3 className="font-bold text-gray-800">{formatBlueprintText(key)}</h3>
-              <p>{typeof value === 'string' ? formatBlueprintText(value) : JSON.stringify(value)}</p>
-            </div>
-          ))}
-        </div>
-      );
-    } else {
-      return <p>Failed to generate blueprint. Please try again.</p>;
+    if (blueprint === null) {
+      return <p className="text-sm text-gray-600">Loading blueprint...</p>;
     }
+    const formattedText = formatBlueprintText(blueprint);
+    return (
+      <div
+        className="text-sm text-gray-600 text-left whitespace-pre-wrap max-h-[400px] overflow-y-auto"
+        dangerouslySetInnerHTML={{ __html: formattedText }}
+      ></div>
+    );
   };
 
   return (
@@ -72,10 +72,15 @@ const CareerBlueprintModal: React.FC<CareerBlueprintModalProps> = ({
         {renderBlueprint()}
         <div className="flex gap-4 mt-4">
           <button
-            onClick={onClose}
-            className="px-4 py-2 bg-blue-600 text-white rounded-md text-sm"
+            onClick={handleSaveBlueprint}
+            className={`px-4 py-2 rounded-md text-sm ${
+              blueprint
+                ? 'bg-blue-600 text-white'
+                : 'bg-gray-300 text-gray-700 cursor-not-allowed'
+            }`}
+            disabled={!blueprint}
           >
-            Close
+            Save Blueprint
           </button>
           {blueprint ? null : (
             <button
