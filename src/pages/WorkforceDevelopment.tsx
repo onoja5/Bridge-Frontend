@@ -11,33 +11,10 @@ const WorkforceDevelopment = () => (
             AI Ignite Community
           </h1>
           <p className="text-xl text-blue-100 max-w-3xl mx-auto mb-8">
-            A community-driven platform where professionals connect to learn, share, and lead in the age of AI.
+            Target Audience: AI & Tech professionals, business leaders, and AI enthusiasts
+            Overview: A community-driven platform where professionals connect to learn, share, and lead in the age of AI. This initiative fosters discussions, innovation, and collaboration between AI technologists, entrepreneurs, and thought leaders.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              to="/events"
-              className="bg-white text-blue-900 px-8 py-3 rounded-md text-lg font-semibold hover:bg-blue-50 transition duration-300"
-            >
-              Explore Events
-            </Link>
-            <Link
-              to="/join"
-              className="border-2 border-white text-white px-8 py-3 rounded-md text-lg font-semibold hover:bg-white/10 transition duration-300"
-            >
-              Join the Community
-            </Link>
-          </div>
         </div>
-      </div>
-    </div>
-
-    {/* Overview Section */}
-    <div className="py-24">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl font-bold text-center mb-16">Community Overview</h2>
-        <p className="text-xl text-gray-600 mb-6 text-center">
-          AI Ignite fosters discussions, innovation, and collaboration between AI technologists, entrepreneurs, and thought leaders. Join us to shape the future of AI together.
-        </p>
       </div>
     </div>
 
