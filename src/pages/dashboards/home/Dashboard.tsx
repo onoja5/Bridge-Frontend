@@ -1,12 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Mentor1 from '@/assets/images/mentor 1.svg'
 import Mentor2 from '@/assets/images/mentor 2.svg'
 import Mentor3 from '@/assets/images/mentor 3.svg'
 import { DowntrendIcon, LightbulbIcon, MentorBadgeIcon, UptrendIcon } from '@/assets/svgs/ExportSvgs';
 import SurveyModal from '@/components/main/SurveyModal/SurveyModal';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { fetchUserBlueprint } from '@/utils/helper'; // Import fetchUserBlueprint
+import { useAuthContext } from '@/contexts/AuthContext'; // Import AuthContext
 
-const Dashboard = () => {
+const Dashboard: React.FC = () => {
   const [isSurveyModalOpen, setSurveyModalOpen] = useState(false);
+  const [hasGeneratedBlueprint, setHasGeneratedBlueprint] = useState(false); // Track if blueprint is generated
+  const navigate = useNavigate(); // Initialize navigation
+  const { userData } = useAuthContext(); // Get user data from AuthContext
+  const userId = userData?._id; // Extract userId from userData
+
+  useEffect(() => {
+    const checkBlueprint = async () => {
+      if (!userId) return; // Exit if userId is not available
+      const blueprint = await fetchUserBlueprint(userId); // Fetch the blueprint
+      setHasGeneratedBlueprint(!!blueprint); // Update state based on blueprint existence
+    };
+
+    checkBlueprint(); // Check if the blueprint exists on component mount
+  }, [userId]); // Dependency on userId
 
   const handleOpenSurveyModal = () => {
     setSurveyModalOpen(true); // Opens the modal
@@ -30,19 +47,54 @@ const Dashboard = () => {
 
   const handleSurveySubmit = (responses: Record<string, any>) => {
     console.log('Survey Responses:', responses);
+    setHasGeneratedBlueprint(true); // Mark blueprint as generated
     setSurveyModalOpen(false); // Close the modal after submission
+  };
+
+  const handleViewBlueprint = () => {
+    navigate('/career'); // Navigate to Career page
   };
 
   return (
     <main>
       {/* Dashboard Header Section */}
-      <div className='bg-[url(@/assets/images/DashboardHeader.png)] bg-cover bg-center w-full h-[230px] rounded-lg flex flex-col items-start justify-center text-white p-6'>
-        <h2 className='text-lg font-normal'>Welcome back!</h2>
-        <h3 className='text-2xl font-bold mt-1'>Your personalized career blueprint starts here!</h3>
-        <p className='text-sm w-[70%] mt-2'>Let's take a quick survey to get to know you better, access your skills and give you a tailored roadmap to take you to a hundred.</p>
-        <button onClick={handleOpenSurveyModal} className='mt-4 px-6 py-3 bg-white text-blue-600 rounded-md text-xs font-medium'>
-          Take a survey
-        </button>
+      <div className='bg-[url(@/assets/images/DashboardHeader.png)] bg-cover bg-center w-full h-[230px] md:h-auto rounded-lg flex flex-col items-start justify-center text-white p-6'>
+        <h2 className='text-md font-normal'>Welcome back!</h2>
+        {hasGeneratedBlueprint ? (
+          <>
+            <h3 className='text-2xl font-bold mt-1'>Your personalized blueprint is ready!</h3>
+            <p className='text-sm w-[70%] mt-2'>
+              To always stay on top of your game and become a leading force, retake your survey to update your career blueprint.
+            </p>
+            <div className='flex gap-4 mt-4'>
+              <button
+                onClick={handleOpenSurveyModal}
+                className='px-6 py-3 bg-white text-blue-600 rounded-md text-xs font-medium'
+              >
+                Retake Survey
+              </button>
+              <button
+                onClick={handleViewBlueprint}
+                className='px-6 py-3 border border-white text-white bg-transparent hover:bg-white hover:bg-opacity-20 ease-in-out delay-150 duration-300 rounded-md text-xs font-medium'
+              >
+                View Your Blueprint
+              </button>
+            </div>
+          </>
+        ) : (
+          <>
+            <h3 className='text-2xl font-bold mt-1'>Your personalized career blueprint starts here!</h3>
+            <p className='text-sm w-[70%] mt-2'>
+              Let's take a quick survey to get to know you better, access your skills and give you a tailored roadmap to take you to a hundred.
+            </p>
+            <button
+              onClick={handleOpenSurveyModal}
+              className='mt-4 px-6 py-3 bg-white text-blue-600 rounded-md text-xs font-medium'
+            >
+              Take a survey
+            </button>
+          </>
+        )}
       </div>
 
       {/* Survey Modal */}
