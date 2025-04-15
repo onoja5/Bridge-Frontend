@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 export default function DigitalAfricaBootcamp() {
   return (
@@ -12,36 +11,10 @@ export default function DigitalAfricaBootcamp() {
               Digital Africa Bootcamp
             </h1>
             <p className="text-xl text-blue-100 max-w-3xl mx-auto mb-8">
-              Empowering Africa's youth with digital skills to thrive in the global economy.
+              Target Audience: Final-year students, early-career professionals & career switchers
+              Overview: A 6–12 week immersive program designed to equip participants with AI-driven career roadmaps, real-world projects, and technical skills needed to thrive in the digital economy.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                to="/explore"
-                className="bg-white text-blue-900 px-8 py-3 rounded-md text-lg font-semibold hover:bg-blue-50 transition duration-300"
-              >
-                Explore Programs
-              </Link>
-              <Link
-                to="/contact"
-                className="border-2 border-white text-white px-8 py-3 rounded-md text-lg font-semibold hover:bg-white/10 transition duration-300"
-              >
-                Contact Us
-              </Link>
-            </div>
           </div>
-        </div>
-      </div>
-
-      {/* Overview Section */}
-      <div className="py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-center mb-16">Digital Africa Bootcamp</h2>
-          <p className="text-xl text-gray-600 mb-6 text-center">
-            Target Audience: Final-year students, early-career professionals & career switchers
-          </p>
-          <p className="text-xl text-gray-600 mb-6 text-center">
-            Overview: A 6–12 week immersive program designed to equip participants with AI-driven career roadmaps, real-world projects, and technical skills needed to thrive in the digital economy.
-          </p>
         </div>
       </div>
 
@@ -99,24 +72,24 @@ export default function DigitalAfricaBootcamp() {
       <div className="bg-blue-900 py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-4xl font-bold text-white mb-6">
-            Ready to Join the Digital Revolution?
+            Ready to Shape the Future of AI?
           </h2>
           <p className="text-xl text-blue-100 max-w-3xl mx-auto mb-8">
-            Enroll in the Digital Africa Bootcamp today and take the first step towards a successful digital career.
+            Join the AI Ignite Community and connect with like-minded professionals to lead in the age of AI.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              to="/apply"
+            <a
+              href="/apply"
               className="bg-white text-blue-900 px-8 py-3 rounded-md text-lg font-semibold hover:bg-blue-50 transition duration-300"
             >
               Apply Now
-            </Link>
-            <Link
-              to="/contact"
+            </a>
+            <a
+              href="/contact"
               className="border-2 border-white text-white px-8 py-3 rounded-md text-lg font-semibold hover:bg-white/10 transition duration-300"
             >
               Contact Us
-            </Link>
+            </a>
           </div>
         </div>
       </div>

@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 
 export default function Blog() {
   const featuredPost = {
-    title: "The Future of Work-Based Learning in Higher Education",
-    excerpt: "Discover how experiential learning is transforming higher education and preparing students for the future workforce.",
+    title: "Project-Based Learning: The Key to Gaining Real-World Experience",
+    excerpt: "Now, let's ditch the textbooks for a minute and talk about getting our hands dirty! You know that feeling of actually doing something, building something real? That's where project-based learning comes in, and trust me, it's a game-changer.",
     image: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80",
     date: "March 15, 2024",
     author: "Sarah Johnson",
@@ -14,24 +14,24 @@ export default function Blog() {
 
   const posts = [
     {
-      title: "5 Ways to Make the Most of Your Virtual Internship",
-      excerpt: "Learn how to maximize your remote work experience and build meaningful professional relationships.",
+      title: "Unlocking Your Potential: Why Personalized Career Blueprints Matter More Than Ever",
+      excerpt: "Okay, let's talk about you. Not the generic, 'everyone' you, but the unique you, with your own specific talents, dreams, and quirks.",
       image: "https://images.unsplash.com/photo-1516387938699-a93567ec168e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
       date: "March 10, 2024",
       author: "Michael Chen",
       category: "Career Development"
     },
     {
-      title: "Industry Partnerships: A Win-Win for Education",
-      excerpt: "Explore how partnerships between educational institutions and businesses create value for all parties involved.",
+      title: "From Learning to Earning: How AI-Powered Career Roadmaps Can Accelerate Your Growth",
+      excerpt: "My friend, let's cut to the chase: you want to go from 'learning' to 'earning,' and you want to do it fast. Enter AI-powered career roadmaps – your turbocharged GPS for professional growth.",
       image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
       date: "March 5, 2024",
       author: "Emily Rodriguez",
       category: "Partnerships"
     },
     {
-      title: "The Rise of Project-Based Learning",
-      excerpt: "Why more universities are adopting project-based learning approaches and how it benefits students.",
+      title: "Bridging the Gap: How AI is Revolutionizing Career Development for Students and Professionals",
+      excerpt: "Alright folks, buckle up, because we're about to dive into something truly mind-blowing! You know that feeling when you're staring at a career path, and it looks like a tangled mess of spaghetti?",
       image: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
       date: "March 1, 2024",
       author: "David Kim",
