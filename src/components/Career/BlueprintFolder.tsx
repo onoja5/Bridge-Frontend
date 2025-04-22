@@ -68,7 +68,7 @@ const BlueprintFolder: React.FC<BlueprintFolderProps> = ({
   };
 
   return (
-    <div className="folder-container relative bg-white p-4 rounded-md shadow-md">
+    <div className="folder-container relative bg-white p-4 rounded-md">
       <div className="flex justify-between items-center">
         {/* Make the file name clickable and add hover effect */}
         <h3

@@ -1,40 +1,53 @@
 import React, { useEffect, useState } from 'react';
 import TasksSection from './TasksSection';
 import ProposedProjectsSection from './ProposedProjectsSection';
-import { parseBlueprint, Task, Project } from '@/utils/parseBlueprint'; // Import Task and Project interfaces
-import { fetchUserBlueprint } from '@/utils/helper';
-import { useAuthContext } from '@/contexts/AuthContext'; // Import AuthContext to get user data
+import { Task, Project } from '@/utils/parseBlueprint';
+import { fetchBlueprintTasksAndProjects } from '@/utils/helper';
+import { useAuthContext } from '@/contexts/AuthContext';
 
 const CareerSection: React.FC = () => {
-  const { userData } = useAuthContext(); // Get user data from AuthContext
-  const userId = userData?._id; // Extract userId from userData
+  const { userData } = useAuthContext();
+  const userId = userData?._id;
 
-  const [tasks, setTasks] = useState<Task[]>([]); // Explicitly type as Task[]
-  const [projects, setProjects] = useState<Project[]>([]); // Explicitly type as Project[]
+  const [tasks, setTasks] = useState<Task[]>([]);
+  const [projects, setProjects] = useState<Project[]>([]);
 
   useEffect(() => {
-    const fetchBlueprintData = async () => {
+    const fetchData = async () => {
       if (!userId) {
         console.error('User ID is not available.');
-        return; // Exit if userId is null
+        return;
       }
 
       try {
-        // Fetch the blueprint data from the backend
-        const blueprint = await fetchUserBlueprint(userId); // Pass userId as an argument
-        console.log('Fetched Blueprint:', blueprint);
+        const data = await fetchBlueprintTasksAndProjects(userId);
+        if (data) {
+          const { tasks, projects } = data;
 
-        // Parse the blueprint to extract tasks and projects
-        const { tasks, projects } = parseBlueprint(blueprint || ''); // Fallback to an empty string
-        setTasks(tasks);
-        setProjects(projects);
+          // Map tasks and projects to the required structure
+          setTasks(
+            tasks.map((task, index) => ({
+              id: index + 1,
+              title: task,
+              status: 'in progress', // Default status
+            }))
+          );
+
+          setProjects(
+            projects.map((project, index) => ({
+              id: index + 1,
+              title: project,
+              subTopics: [], // No subtopics provided in the response
+            }))
+          );
+        }
       } catch (error) {
-        console.error('Error fetching blueprint data:', error);
+        console.error('Error fetching tasks and projects:', error);
       }
     };
 
-    fetchBlueprintData();
-  }, [userId]); // Add userId as a dependency
+    fetchData();
+  }, [userId]);
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">

@@ -99,4 +99,57 @@ export const loadBlueprintFromLocalStorage = (): string | null => {
   return localStorage.getItem('careerBlueprint');
 };
 
+export const fetchBlueprintTasksAndProjects = async (userId: string): Promise<{ tasks: string[]; projects: string[] } | null> => {
+  console.log('Fetching tasks and projects for userId:', userId); // Debug userId
+  const baseUrl = import.meta.env.VITE_API_BASE;
+  if (!baseUrl) {
+    throw new Error('VITE_API_BASE is not defined in .env.local');
+  }
+  const url = `${baseUrl}/users/${userId}/blueprint/get-blueprint/full-structure`;
+  console.log('Constructed URL:', url); // Debug constructed URL
+
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch tasks and projects: ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    console.log('Fetched Data:', data);
+
+    const structuredJson = data?.careerBlueprint?.structuredJson;
+    if (structuredJson) {
+      const tasks = structuredJson.tasks || [];
+      const projects = structuredJson.projects || [];
+      return { tasks, projects };
+    }
+
+    return null;
+  } catch (error) {
+    console.error('Error fetching tasks and projects:', error);
+    return null;
+  }
+};
+
+export const fetchMentors = async (page: number, limit: number): Promise<{ mentors: any[]; totalPages: number }> => {
+  const baseUrl = import.meta.env.VITE_API_BASE;
+  if (!baseUrl) {
+    throw new Error('VITE_API_BASE is not defined in .env.local');
+  }
+
+  const url = `${baseUrl}/users/all-metors/mentors?page=${page}&limit=${limit}`;
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch mentors: ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    return { mentors: data.mentors || [], totalPages: data.totalPages || 1 };
+  } catch (error) {
+    console.error('Error fetching mentors:', error);
+    return { mentors: [], totalPages: 1 };
+  }
+};
+
 
