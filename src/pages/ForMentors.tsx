@@ -2,7 +2,7 @@ import React from 'react';
 import { ArrowRight, BookOpen, CheckCircle, Users, School, GraduationCap, Info } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
-export default function ForEducators() {
+export default function ForMentors() {
   const benefits = [
     {
       title: "Enhanced Curriculum",

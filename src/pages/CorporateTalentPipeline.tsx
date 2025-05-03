@@ -53,7 +53,7 @@ export default function CorporateTalentPipeline() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
-              to="/apply"
+              to="/signup"
               className="bg-white text-blue-900 px-8 py-3 rounded-md text-lg font-semibold hover:bg-blue-50 transition duration-300"
             >
               Apply Now

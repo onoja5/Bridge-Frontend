@@ -15,7 +15,7 @@ import CollegesUniversities from '@/pages/CollegesUniversities';
 import Contact from '@/pages/Contact';
 import Demo from '@/pages/Demo';
 import ExploreOpportunities from '@/pages/ExploreOpportunities';
-import ForEducators from '@/pages/ForEducators';
+import ForMentors from '@/pages/ForMentors';
 import ForEmployers from '@/pages/ForEmployers';
 import ForgotPassword from '@/pages/ForgotPassword';
 import ForStudents from '@/pages/ForStudents';
@@ -57,7 +57,7 @@ const generalRoutes: Route[] = [
   { path: '/terms', element: <Terms /> },
   { path: '/for-students', element: <ForStudents /> },
   { path: '/for-employers', element: <ForEmployers /> },
-  { path: '/for-educators', element: <ForEducators /> },
+  { path: '/for-mentors', element: <ForMentors /> },
   { path: '/explore', element: <ExploreOpportunities /> },
   { path: '/colleges', element: <CollegesUniversities /> },
   { path: '/businesses', element: <BusinessNonprofits /> },

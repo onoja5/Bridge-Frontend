@@ -707,10 +707,10 @@ export default function Home() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
-              to="/post-project"
+              to="/signup"
               className="bg-white text-blue-900 px-8 py-3 rounded-md text-lg font-semibold hover:bg-blue-50 transition duration-300"
             >
-              Post Your First Project
+              Sign-up Today
             </Link>
             <Link
               to="/contact"
