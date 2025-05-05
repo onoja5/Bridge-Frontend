@@ -1,9 +1,16 @@
 import LoginForm from '@/components/main/auth/LoginForm';
 import GoogleAuth from '@/components/main/auth/socialAuth/GoogleAuth';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import AuthSidebar from './AuthSidebar';
+import { useAuthContext } from '@/contexts/AuthContext';
 
 export default function Login() {
+  const { userData } = useAuthContext();
+
+  if (!userData?.role) {
+    return <Navigate to='/select-user-type' replace />; // Redirect if role is not set
+  }
+
   return (
     <main className='min-h-screen flex'>
       <section className='flex-1 flex flex-col justify-center py-12 px-4 sm:px-6 lg:px-8 space-y-8'>

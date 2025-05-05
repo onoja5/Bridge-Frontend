@@ -25,9 +25,9 @@ const DashboardLayout: React.FC<Layout> = ({ children }) => {
     <main className='flex flex-col md:flex-row min-h-screen'>
       {/* Sidebar */}
       <section
-        className={`hidden md:block relative transition-all duration-300 ${
-          isSidebarCollapsed ? 'w-16' : 'w-60'
-        } min-h-screen border-r w-auto border-Line bg-white`}
+        className={`hidden md:block fixed top-0 left-0 transition-all duration-300 z-20 ${
+          isSidebarCollapsed ? 'w-auto' : 'w-60'
+        } min-h-screen border-r border-Line bg-white`}
       >
         <Sidebar isCollapsed={isSidebarCollapsed} />
         <button
@@ -39,9 +39,13 @@ const DashboardLayout: React.FC<Layout> = ({ children }) => {
       </section>
 
       {/* Main Content */}
-      <aside className='flex-1 overflow-y-auto bg-Grey1'>
-        <DashboardNavbar />
-        <div className='container py-10 px-4 md:px-8'>{children}</div>
+      <aside
+        className={`flex-1 transition-all duration-300 ${
+          isSidebarCollapsed ? 'md:ml-16' : 'md:ml-60'
+        } mt-16 md:mt-0 overflow-y-auto bg-Grey1`}
+      >
+        <DashboardNavbar isSidebarCollapsed={isSidebarCollapsed} />
+        <div className='container py-10 px-4 md:px-8 mt-16 md:mt-20'>{children}</div>
       </aside>
 
       {/* Bottom Navigation for mobile */}

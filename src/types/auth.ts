@@ -1,4 +1,4 @@
-export type UserRole = 'EMPLOYER' | 'EDUCATOR' | 'STUDENT';
+export type UserRole = 'EMPLOYER' | 'EDUCATOR' | 'STUDENT'| 'MENTOR';
 
 export interface ResetPassword {
   newPassword: string;
@@ -35,15 +35,20 @@ export interface ThirdPartyAuthDTO {
 
 export interface AuthUserDataDTO {
   _id: string;
-  userId: string; // User's unique ID (required)
-  isNewUser: boolean; // Indicates if the user is new
-  isProfileDataSet: boolean; // Indicates if the profile data is set
-  role: UserRole; // User's role (e.g., EMPLOYER, EDUCATOR, STUDENT)
-  email: string; // User's email address
-  dateCreated: string; // Date the user was created
-  token: string; // Authentication token
-  tokenInitializationDate: string; // Date the token was initialized
-  tokenExpiryDate: string; // Date the token will expire
+  userId: string; // User's unique ID
+  isNewUser: boolean;
+  isProfileDataSet: boolean;
+  role: UserRole;
+  email: string;
+  dateCreated: string;
+  token: string;
+  tokenInitializationDate: string;
+  tokenExpiryDate: string;
+  profileImageUrl?: string; // URL to the user's profile image
+  firstName?: string; // User's first name
+  lastName?: string; // User's last name
+  phoneNumber?: string; // User's phone number
+  date_of_birth?: string; // User's date of birth
   user: {
     firstName: string; // User's first name
     lastName: string; // User's last name
@@ -72,6 +77,8 @@ export interface AuthUserDataDTO {
     additionalInfo?: string; // Additional information provided by the user
     hobbies?: string[]; // User's hobbies
     skills?: string[]; // User's skills
+    Skill_development_strategies?: string[]; // User's skill development strategies
+    Career_goal?: string[]; // User's career goals
   };
 }
 

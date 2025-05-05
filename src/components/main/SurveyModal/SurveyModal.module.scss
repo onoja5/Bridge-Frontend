@@ -1,0 +1,28 @@
+.phase-modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  .phase-illustration {
+    display: none;
+    max-width: 250px;
+    margin: 0 auto;
+
+    @media (min-width: 768px) {
+      display: block;
+    }
+  }
+}
+
+.question-modal {
+  padding: 20px;
+  .custom-checkbox {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  overflow-y: auto;
+  max-height: 90vh;
+}

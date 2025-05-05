@@ -1,4 +1,4 @@
-import type { LoginUserDTO } from '@/types/auth';
+import type { AuthUserDataDTO, LoginUserDTO } from '@/types/auth';
 import { Eye, EyeOff, Lock, Mail } from 'lucide-react';
 import React from 'react';
 import { useState } from 'react';
@@ -20,6 +20,7 @@ const LoginForm = () => {
     email: '',
     password: '',
   });
+  const [rememberMe, setRememberMe] = useState(false); // State for 'Remember Me'
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
@@ -45,7 +46,7 @@ const LoginForm = () => {
         const profileImageUrl = res?.data?.user?.profileImageUrl;
         const role = res?.data?.user?.role;
 
-        setUserData((prev) => ({
+        setUserData((prev: AuthUserDataDTO) => ({
           ...prev,
           firstName,
           lastName,
@@ -55,7 +56,12 @@ const LoginForm = () => {
           role,
         }));
 
-        setCookies('authToken', res?.data?.token);
+        // Set cookie with long expiration if 'Remember Me' is checked
+        setCookies('authToken', res?.data?.token, {
+          path: '/',
+          expires: rememberMe ? 30 : 7, // Use 'expires' instead of 'maxAge'
+        });
+
         setLoading({ ['login']: false });
         handleSuccess('User logged in successfully', navigate, '/dashboard');
       })
@@ -134,6 +140,20 @@ const LoginForm = () => {
         >
           Forgot Password?
         </Link>
+      </article>
+
+      <article className='flex items-center'>
+        <input
+          id='rememberMe'
+          name='rememberMe'
+          type='checkbox'
+          checked={rememberMe}
+          onChange={(e) => setRememberMe(e.target.checked)}
+          className='h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500'
+        />
+        <label htmlFor='rememberMe' className='ml-2 block text-sm text-gray-900'>
+          Remember Me
+        </label>
       </article>
 
       <Button

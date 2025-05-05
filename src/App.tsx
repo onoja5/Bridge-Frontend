@@ -10,6 +10,7 @@ import { Toaster } from './components/ui/toaster';
 import DigitalApprenticeshipProgram from './pages/DigitalApprenticeshipProgram';
 import DigitalAfricaBootcamp from './pages/DigitalAfricaBootcamp';
 import CorporateTalentPipeline from './pages/CorporateTalentPipeline';
+import UserTypeSelection from './pages/auth/UserTypeSelection';
 
 function App() {
   useEffect(() => {
@@ -54,6 +55,16 @@ function App() {
               }
             />
           ))}
+          <Route
+            path='/select-user-type'
+            element={
+              <>
+                <Navbar />
+                <UserTypeSelection />
+                <Footer />
+              </>
+            }
+          />
           {dashboardRoutes.map(({ path, element, name }) => (
             <Route
               key={name}

@@ -9,6 +9,7 @@ import { UserRole } from '@/types/auth';
 import { useAuthContext } from '@/contexts/AuthContext';
 import { useCookies } from '@/hooks/cookiesHook';
 import { useNavigate } from 'react-router-dom';
+import { AuthUserDataDTO } from '@/types/auth'; // Ensure this path is correct
 
 const GoogleAuth = () => {
   const { loading, setLoading } = useGlobalHooks();
@@ -33,6 +34,7 @@ const GoogleAuth = () => {
       profileImageUrl: result.user.photoURL as string,
       role: 'STUDENT' as UserRole,
     };
+
     try {
       const res = await API.authService.thirdPartyAuth(authData);
 
@@ -48,9 +50,15 @@ const GoogleAuth = () => {
         const email = res?.data?.user?.email as string;
         const _id = res?.data?.user?._id as string;
         const profileImageUrl = res?.data?.user?.profileImageUrl as string;
-        const role = res?.data?.user?.role as UserRole;
+        let role = res?.data?.user?.role as UserRole;
 
-        setUserData((prev) => ({
+        if (!role) {
+          // Redirect to UserTypeSelection if role is not set
+          navigate('/select-user-type', { state: { userId: _id } });
+          return;
+        }
+
+        setUserData((prev: AuthUserDataDTO) => ({
           ...prev,
           firstName,
           lastName,
@@ -60,7 +68,10 @@ const GoogleAuth = () => {
           role,
         }));
 
-        setCookies('authToken', res?.data?.token as string);
+        setCookies('authToken', res?.data?.token as string, {
+          path: '/',
+          expires: 7, // Default expiration for Google logins (7 days)
+        });
         handleSuccess(res?.message || 'Welcome Back', navigate, '/dashboard');
       }
     } catch (err) {
@@ -70,12 +81,12 @@ const GoogleAuth = () => {
     }
   };
   return (
-    <div className='mt-6 grid grid-cols-1 gap-3'>
+    <div>
       <Button
         type='button'
         onClick={handleGoogleAuth}
         loading={loading['google']}
-        className='outline-btn !text-black'
+        className='outline-btn !text-black w-full'
       >
         <FcGoogle className='h-5 w-5' />
         <span className='ml-2'>Google</span>

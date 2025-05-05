@@ -1,0 +1,89 @@
+.intro-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(55, 65, 81, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 50;
+}
+
+.intro-modal-content {
+  background: #fff;
+  padding: 24px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.intro-modal-left {
+  flex: 1;
+}
+
+.intro-modal-right img {
+  width: 300px;
+  height: auto;
+}
+
+.input-container {
+  display: flex;
+  align-items: center;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  padding: 8px;
+}
+
+.skills-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.skill-item {
+  background: #003bc3;
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.start-survey-btn {
+  margin-top: 16px;
+  padding: 8px 16px;
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+
+  &.disabled {
+    background: #d1d5db;
+    color: #9ca3af;
+    cursor: not-allowed;
+  }
+}
+
+@media (max-width: 768px) {
+  .modal-content {
+    width: 90vw;
+    height: 80vh;
+  }
+
+  .modal-content img {
+    display: none; // Hide illustrations on mobile
+  }
+
+  .multi-select-grid {
+    display: grid;
+    grid-template-columns: 1fr; // Single column for mobile
+    gap: 8px;
+    overflow-y: auto; // Allow scrolling for overflow
+    max-height: 60vh; // Limit height for breathing space
+  }
+}

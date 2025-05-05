@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import AddSkillsImg from '@/assets/images/Add_skills_img.svg';
 import { CloseCircleIcon, FeatherIcon } from '@/assets/svgs/ExportSvgs';
-import { AddIcon } from '@/assets/svgs/ExportSvgs';
-import SurveyPhaseModal from '@/components/main/SurveyPhaseModal/SurveyPhaseModal';
 import SurveyQuestionModal from '../SurveyQuestionModal/SurveyQuestionModal';
 import FirstPhaseImg from '@/assets/images/Survey_Phase_1.svg';
 import SecondPhaseImg from '@/assets/images/Survey_Phase_2.svg';
@@ -20,13 +18,35 @@ const modalVariants = {
   exit: { opacity: 0, y: 20, transition: { duration: 0.05 } }, // Exit state: fade and slide out
 };
 
+const modalBaseStyles = `bg-white p-4 md:p-6 rounded-lg relative flex gap-4 md:gap-6 overflow-y-auto`;
+const modalResponsiveStyles = `w-[90%] md:w-[60%] h-[70vh]`;
+const modalContentStyles = `flex items-center justify-center gap-6`;
+
 interface SurveyModalProps {
   onClose: () => void;
   isOpen: boolean;
-  onSubmit: (answers: any) => void;
+  phases: {
+    id: string;
+    title: string;
+    description: string;
+    questions: {
+      id: string;
+      type: string;
+      question: string;
+      options?: string[];
+    }[];
+  }[];
+  onSubmit: (responses: Record<string, any>) => void; // Added onSubmit property
 }
 
-const SurveyModal: React.FC<SurveyModalProps> = ({ isOpen, onClose, onSubmit }) => {
+interface Question {
+  id: number;
+  question: string;
+  type: 'text' | 'dropdown' | 'multi-select'; // Restrict type to valid options
+  options?: string[];
+}
+
+const SurveyModal: React.FC<SurveyModalProps> = ({ isOpen, onClose }) => {
   const { userData } = useAuthContext(); // Get the logged-in user's info
   const [isIntroModalOpen, setIntroModalOpen] = useState(false); // Introductory modal state
   const [isPhaseModalOpen, setPhaseModalOpen] = useState(false);
@@ -50,7 +70,14 @@ const SurveyModal: React.FC<SurveyModalProps> = ({ isOpen, onClose, onSubmit }) 
   };
 
   // Define the phases and their content
-  const phases = [
+  const phases: {
+    phaseNumber: string;
+    phaseTitle: string;
+    phaseDescription: string;
+    questionCount: number;
+    illustration: string;
+    questions: Question[];
+  }[] = [
     {
       phaseNumber: 'First Phase',
       phaseTitle: 'Personal & Educational Background',
@@ -106,24 +133,6 @@ const SurveyModal: React.FC<SurveyModalProps> = ({ isOpen, onClose, onSubmit }) 
       setCongratulatoryModalOpen(false);
     }
   }, [isOpen]);
-
-  const handleAddSkill = () => {
-    if (inputValue.trim()) {
-      // Split input by commas and trim each skill
-      const newSkills = inputValue
-        .split(',')
-        .map((skill) => skill.trim())
-        .filter((skill) => skill && !skills.includes(skill)); // Avoid duplicates
-
-      // Add new skills, ensuring the total doesn't exceed 3
-      setSkills((prevSkills) => {
-        const combinedSkills = [...prevSkills, ...newSkills];
-        return combinedSkills.slice(0, 3); // Limit to 3 skills
-      });
-
-      setInputValue(''); // Clear the input field
-    }
-  };
 
   const handleRemoveSkill = (skill: string) => {
     setSkills((prevSkills) => prevSkills.filter((s) => s !== skill));
@@ -198,14 +207,8 @@ const SurveyModal: React.FC<SurveyModalProps> = ({ isOpen, onClose, onSubmit }) 
       if (data.success && data.data) {
         const blueprint = data.data.blueprint || data.data;
 
-        // Commenting out the validation logic for testing
-        // if (typeof blueprint === 'string' && blueprint.trim().length > 0) {
         console.log('Blueprint fetched successfully:', blueprint);
         setBlueprint(blueprint); // Update the blueprint with the resolved value
-        // } else {
-        //   console.error('Blueprint data is incomplete or invalid');
-        //   setBlueprint(null); // Handle incomplete blueprint
-        // }
       } else {
         console.error('Blueprint data is missing or invalid');
         setBlueprint(null); // Handle missing blueprint in the response
@@ -233,23 +236,25 @@ const SurveyModal: React.FC<SurveyModalProps> = ({ isOpen, onClose, onSubmit }) 
   };
 
   const mapAnswersToUserSchema = (
-    answers: Record<number, string | string[]>, 
-    dreams: string // Updated to accept the input from the introductory modal
+    answers: Record<number, string | string[]>,
+    dreams: string
   ): Partial<AuthUserDataDTO> => {
     return {
-      currentStatus: answers[1] as string || '',
-      fieldOfStudy: Array.isArray(answers[2]) ? answers[3] : [answers[3] as string || ''],
-      highestLevelOfEducation: answers[3] as string || '',
-      ageRange: answers[4] as string || '',
-      industriesOfInterest: answers[5] as string[] || [],
-      technicalSkills: (answers[6] as string[] || []).filter(skill => skill !== 'Others'),
-      softSkills: (answers[7] as string[] || []).map(skill => skill.toLowerCase()),
-      workExperience: answers[8] as string || '',
-      Skill_developement_strategies: answers[9] as string[] || [],
-      Career_goal: answers[10] as string[] || [],
-      careerChallenges: answers[11] as string[] || [],
-      additionalInfo: answers[12] as string || '',
-      currentJobTitle: dreams || '', // Pass the introductory modal input here
+      user: {
+        highestLevelOfEducation: answers[3] as string || '',
+        ageRange: answers[4] as string || '',
+        industriesOfInterest: answers[5] as string[] || [],
+        technicalSkills: (answers[6] as string[] || []).filter(skill => skill !== 'Others'),
+        softSkills: (answers[7] as string[] || []).map(skill => skill.toLowerCase()),
+        workExperience: answers[8] as string || '',
+        Skill_development_strategies: answers[9] as string[] || [],
+        Career_goal: answers[10] as string[] || [],
+        careerChallenges: answers[11] as string[] || [],
+        additionalInfo: answers[12] as string || '',
+        currentJobTitle: dreams || '',
+        firstName: userData?.firstName || '',
+        lastName: userData?.lastName || '',
+      },
     };
   };
 
@@ -331,14 +336,6 @@ const SurveyModal: React.FC<SurveyModalProps> = ({ isOpen, onClose, onSubmit }) 
     }));
   };
 
-  const handleOpenBlueprintModal = () => {
-    setIntroModalOpen(false); // Close the introductory modal
-    setPhaseModalOpen(false); // Close the phase modal
-    setQuestionModalOpen(false); // Close the question modal
-    setCongratulatoryModalOpen(false); // Close the congratulatory modal
-    setBlueprintModalOpen(true); // Open the blueprint modal
-  };
-
   return (
     <>
       {isLoading && <LoaderModal isOpen={isLoading} />}
@@ -353,14 +350,6 @@ const SurveyModal: React.FC<SurveyModalProps> = ({ isOpen, onClose, onSubmit }) 
         />
       )}
       {isIntroModalOpen && (
-        <div className="intro-modal">
-          <h2>Assess your skill</h2>
-          {/* Introductory modal content */}
-        </div>
-      )}
-      {/* Other modals and survey logic */}
-      {/* Introductory Modal */}
-      {isIntroModalOpen && !isPhaseModalOpen && !isQuestionModalOpen && !isCongratulatoryModalOpen && (
         <div
           className="modal-overlay fixed inset-0 bg-[#374151] bg-opacity-80 flex items-center justify-center z-50"
           onClick={(e) => {
@@ -370,14 +359,20 @@ const SurveyModal: React.FC<SurveyModalProps> = ({ isOpen, onClose, onSubmit }) 
           }}
         >
           <motion.div
-            className="modal-content bg-white p-6 rounded-lg w-auto md:w-[800px] relative flex gap-10 justify-between items-center"
+            className={`${modalBaseStyles} ${modalResponsiveStyles} ${modalContentStyles}`}
             variants={modalVariants}
             initial="hidden"
             animate="visible"
             exit="exit"
           >
+            <button
+              className="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
+              onClick={onClose}
+            >
+              X
+            </button>
             {/* Left Section */}
-            <div className="flex-1 items-start">
+            <div className="flex-1 items-center md:items-start">
               <h2 className="text-2xl font-bold text-gray-800">Envision Yourself</h2>
               <p className="text-sm text-gray-600 mt-2">
                 Tell us about your dreams and aspirations
@@ -427,49 +422,15 @@ const SurveyModal: React.FC<SurveyModalProps> = ({ isOpen, onClose, onSubmit }) 
             </div>
 
             {/* Right Section */}
-            <div className="hidden md:block">
-              <img src={AddSkillsImg} alt="Add Skills Illustration" className="w-[300px] md:w-img-md h-auto" />
+            <div className="hidden md:block"> {/* Hide illustrations on mobile screens */}
+              <img src={AddSkillsImg} alt="Add Skills Illustration" className="w-[300px] h-auto" />
             </div>
           </motion.div>
         </div>
       )}
 
       {/* Phase Modal */}
-      {isPhaseModalOpen && !isIntroModalOpen && !isQuestionModalOpen && !isCongratulatoryModalOpen && (
-        <div
-          className="modal-overlay fixed inset-0 flex items-center justify-center z-50"
-          onClick={(e) => {
-            if ((e.target as HTMLElement).classList.contains('modal-overlay')) {
-              onClose(); // Close the modal when clicking outside
-            }
-          }}
-        >
-          <motion.div
-            className="modal-content bg-white p-6 rounded-lg w-full max-w-[800px] relative flex flex-col md:flex-row items-center gap-6"
-            variants={modalVariants}
-            initial="hidden"
-            animate="visible"
-            exit="exit"
-          >
-            <SurveyPhaseModal
-              isOpen={isPhaseModalOpen}
-              onClose={onClose}
-              phaseTitle={phases[currentPhase].phaseTitle}
-              phaseDescription={phases[currentPhase].phaseDescription}
-              phaseNumber={phases[currentPhase].phaseNumber}
-              questionCount={phases[currentPhase].questions.length}
-              illustration={phases[currentPhase].illustration}
-              onStart={() => {
-                setPhaseModalOpen(false);
-                setQuestionModalOpen(true);
-              }}
-            />
-          </motion.div>
-        </div>
-      )}
-
-      {/* Question Modal */}
-      {isQuestionModalOpen && !isIntroModalOpen && !isPhaseModalOpen && !isCongratulatoryModalOpen && (
+      {isPhaseModalOpen && (
         <div
           className="modal-overlay fixed inset-0 bg-[#374151] bg-opacity-80 flex items-center justify-center z-50"
           onClick={(e) => {
@@ -479,7 +440,67 @@ const SurveyModal: React.FC<SurveyModalProps> = ({ isOpen, onClose, onSubmit }) 
           }}
         >
           <motion.div
-            className="modal-content bg-white p-6 rounded-lg w-auto relative"
+            className={`${modalBaseStyles} ${modalResponsiveStyles} ${modalContentStyles}`}
+            variants={modalVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+          >
+            <button
+              className="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
+              onClick={onClose}
+            >
+              X
+            </button>
+            {/* Left Section */}
+            <div className="flex-1 text-center md:text-left">
+              <div className="bg-blue-100 text-blue-600 px-4 py-2 rounded-md text-sm font-medium inline-block">
+                {phases[currentPhase].phaseNumber}
+              </div>
+              <h2 className="text-2xl font-bold text-gray-800 mt-4">
+                {phases[currentPhase].phaseTitle}
+              </h2>
+              <p className="text-sm text-gray-600 mt-2">
+                {phases[currentPhase].phaseDescription}
+              </p>
+              <div className="flex md:items-start md:justify-start justify-center mt-6">
+                <button
+                  onClick={() => {
+                    setPhaseModalOpen(false);
+                    setQuestionModalOpen(true);
+                  }}
+                  className="px-6 py-2 bg-blue-600 text-white rounded-md text-sm font-medium"
+                >
+                  Let’s get started
+                </button>
+              </div>
+            </div>
+
+            {/* Right Section (SVG Illustration) */}
+            <div className="hidden md:block"> {/* Hide illustrations on mobile screens */}
+              <img
+                src={phases[currentPhase].illustration}
+                alt={`${phases[currentPhase].phaseTitle} Illustration`}
+                className="w-[250px] h-auto"
+              />
+            </div>
+          </motion.div>
+        </div>
+      )}
+
+      {/* Question Modal */}
+      {isQuestionModalOpen && (
+        <div
+          className="modal-overlay fixed inset-0 bg-[#374151] bg-opacity-80 flex items-center justify-center z-50"
+          onClick={(e) => {
+            if ((e.target as HTMLElement).classList.contains('modal-overlay')) {
+              onClose(); // Close the modal when clicking outside
+            }
+          }}
+        >
+          <motion.div
+            className={`${modalBaseStyles} ${modalResponsiveStyles} ${modalContentStyles} overflow-y-auto`}
+            style={{ boxSizing: 'border-box' }} // Ensure no overflow
             variants={modalVariants}
             initial="hidden"
             animate="visible"
@@ -509,7 +530,7 @@ const SurveyModal: React.FC<SurveyModalProps> = ({ isOpen, onClose, onSubmit }) 
       )}
 
       {/* Congratulatory Modal */}
-      {isCongratulatoryModalOpen && !isIntroModalOpen && !isPhaseModalOpen && !isQuestionModalOpen && (
+      {isCongratulatoryModalOpen && (
         <div
           className="modal-overlay fixed inset-0 bg-[#374151] bg-opacity-80 flex items-center justify-center z-50"
           onClick={(e) => {
@@ -519,7 +540,7 @@ const SurveyModal: React.FC<SurveyModalProps> = ({ isOpen, onClose, onSubmit }) 
           }}
         >
           <motion.div
-            className="modal-content bg-white p-6 rounded-lg w-[90%] md:w-[800px] relative flex flex-col md:flex-row items-center gap-6"
+            className={`${modalBaseStyles} ${modalResponsiveStyles} ${modalContentStyles}`}
             variants={modalVariants}
             initial="hidden"
             animate="visible"

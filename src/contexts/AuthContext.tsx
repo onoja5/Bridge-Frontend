@@ -9,8 +9,8 @@ import React, {
 import type { AuthUserDataDTO } from '../types/auth';
 
 interface AuthContextType {
-  userData: AuthUserDataDTO | null;
-  setUserData: Dispatch<SetStateAction<AuthUserDataDTO | null>>;
+  userData: { role?: string; [key: string]: any };
+  setUserData: Dispatch<SetStateAction<any>>;
   setIsAuthenticated: Dispatch<SetStateAction<boolean>>;
   isAuthenticated: boolean;
 }

@@ -4,7 +4,13 @@ export default {
   theme: {
     extend: {
       screens: {
+        xxs: '320px', // Extra small screens (e.g., older phones)
         xs: '460px', // Custom breakpoint for screens less than 460px
+        sm: '640px', // Default small breakpoint
+        md: '768px', // Medium screens (e.g., tablets)
+        lg: '1024px', // Large screens (e.g., laptops)
+        xl: '1280px', // Extra large screens (e.g., desktops)
+        '2xl': '1536px', // 2X large screens
       },
       colors: {
         primary: '#2563eb',

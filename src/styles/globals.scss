@@ -1,0 +1,64 @@
+// Custom styles for modals
+@media (max-width: 480px) {
+  .modal-content {
+    max-height: 90vh;
+    overflow-y: auto; // Make modal scrollable
+  }
+
+  .multi-select-options {
+    display: flex;
+    flex-direction: column; // Stack options vertically
+    gap: 0.5rem;
+  }
+
+  .hidden-on-small {
+    display: none; // Hide elements like SVGs on small screens
+  }
+}
+
+@media (max-aspect-ratio: 3/4) {
+  .modal-content {
+    max-height: 85vh;
+    overflow-y: auto;
+  }
+
+  .multi-select-options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .hidden-on-small {
+    display: none;
+  }
+}
+
+
+.phase-modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  .phase-illustration {
+    display: none;
+    max-width: 250px;
+    margin: 0 auto;
+
+    @media (min-width: 768px) {
+      display: block;
+    }
+  }
+}
+
+.question-modal {
+  padding: 20px;
+  .custom-checkbox {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  overflow-y: auto;
+  max-height: 90vh;
+}

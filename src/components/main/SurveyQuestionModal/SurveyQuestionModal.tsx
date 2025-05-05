@@ -51,7 +51,7 @@ const SurveyQuestionModal: React.FC<SurveyQuestionModalProps> = ({
         }
       }}
     >
-      <div className="modal-content bg-white p-6 rounded-lg w-[60%] h-auto flex flex-col justify-center relative">
+      <div className="modal-content bg-white rounded-lg md:w-[55%] w-[80%] h-auto flex flex-col items-start relative">
         {/* Phase Title */}
         <div className="mb-4">
           <span className="text-sm font-medium text-blue-600">{phaseTitle}</span>
@@ -93,7 +93,7 @@ const SurveyQuestionModal: React.FC<SurveyQuestionModalProps> = ({
         )}
 
         {question.type === 'multi-select' && (
-          <div className="grid grid-cols-2 gap-2 mt-4">
+          <div className="flex flex-col md:grid md:grid-cols-2 gap-2 mt-4 overflow-y-auto w-full max-h-[30vh]">
             {question.options?.map((option, index) => (
               <label
                 key={index}
@@ -129,7 +129,7 @@ const SurveyQuestionModal: React.FC<SurveyQuestionModalProps> = ({
 
             {/* Render "Others" input field if "Others" is selected */}
             {(answers[question.id] as string[] || []).includes('Others') && (
-              <div className="col-span-2 mt-2">
+              <div className="mt-2">
                 <input
                   type="text"
                   placeholder="Please specify"

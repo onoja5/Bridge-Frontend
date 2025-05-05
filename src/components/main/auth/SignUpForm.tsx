@@ -198,7 +198,7 @@ const SignUpForm = () => {
         )}
       </article>
 
-      <article>
+      {/* <article>
         <label
           htmlFor='role'
           className='block text-sm font-medium text-gray-700'
@@ -218,7 +218,7 @@ const SignUpForm = () => {
             </option>
           ))}
         </select>
-      </article>
+      </article> */}
 
       <Button
         className='pry-btn w-full'

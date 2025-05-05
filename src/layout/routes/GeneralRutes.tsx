@@ -7,6 +7,7 @@ import Login from '@/pages/auth/Login';
 import PasswordChangeSuccess from '@/pages/auth/PasswordChangeSuccess';
 import SignUp from '@/pages/auth/SignUp';
 import SignupSuccess from '@/pages/auth/SignupSuccess';
+import UserTypeSelection from '@/pages/auth/UserTypeSelection';
 import VerifyEmail from '@/pages/auth/VerifyEmai';
 import Blog from '@/pages/Blog';
 import BusinessNonprofits from '@/pages/BusinessNonprofits';
@@ -78,6 +79,7 @@ const generalRoutes: Route[] = [
   { path: '/forgot-password-request', element: <ForgotPasswordRequest /> },
   { path: '/change-password', element: <ChangePassword /> },
   { path: '/change-password-success', element: <PasswordChangeSuccess /> },
+  { path: '/select-user-type', element: <UserTypeSelection /> },
 ];
 
 export default generalRoutes;

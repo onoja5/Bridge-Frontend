@@ -291,3 +291,101 @@ export const FeatherIcon = (props: SVGProps<SVGSVGElement>) => (
     />
   </svg>
 );
+
+export const DocumentIcon = (props: SVGProps<SVGSVGElement>) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="40"
+    height="40"
+    fill="none"
+    viewBox="0 0 40 40"
+    {...props}
+  >
+    <path
+      stroke="#111827"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="3"
+      d="M23.333 3.333H10a3.333 3.333 0 0 0-3.333 3.334v26.666A3.333 3.333 0 0 0 10 36.667h20a3.333 3.333 0 0 0 3.333-3.334v-20z"
+    ></path>
+    <path
+      stroke="#111827"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="3"
+      d="M23.333 3.333v10h10M26.667 21.667H13.333M26.667 28.333H13.333M16.667 15h-3.334"
+    ></path>
+  </svg>
+);
+
+export const BriefcaseIcon = (props: SVGProps<SVGSVGElement>) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="40"
+    height="40"
+    fill="none"
+    viewBox="0 0 40 40"
+    {...props}
+  >
+    <path
+      stroke="#111827"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="3"
+      d="M33.333 11.667H6.667A3.333 3.333 0 0 0 3.333 15v16.667A3.333 3.333 0 0 0 6.667 35h26.666a3.333 3.333 0 0 0 3.334-3.333V15a3.333 3.333 0 0 0-3.334-3.333"
+    ></path>
+    <path
+      stroke="#111827"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="3"
+      d="M26.667 35V8.333A3.333 3.333 0 0 0 23.333 5h-6.666a3.334 3.334 0 0 0-3.334 3.333V35"
+    ></path>
+  </svg>
+);
+
+export const BadgeIcon = (props: SVGProps<SVGSVGElement>) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="40"
+    height="40"
+    fill="none"
+    viewBox="0 0 40 40"
+    {...props}
+  >
+    <path
+      stroke="#111827"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="3"
+      d="M20 25c6.443 0 11.667-5.223 11.667-11.667C31.667 6.89 26.443 1.667 20 1.667S8.333 6.89 8.333 13.333 13.557 25 20 25"
+    ></path>
+    <path
+      stroke="#111827"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="3"
+      d="m13.683 23.15-2.016 15.183 8.333-5 8.333 5-2.016-15.2"
+    ></path>
+  </svg>
+);
+
+
+export const StudentIcon = (props: SVGProps<SVGSVGElement>) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="40"
+    height="40"
+    fill="none"
+    viewBox="0 0 40 40"
+    {...props}
+  >
+    <path
+      stroke="#111827"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="5"
+      d="M20 23.333 35 15 20 6.667 5 15zm0 0 10.265-5.703A20 20 0 0 1 31.667 25q-.002 1.755-.293 3.428A19.92 19.92 0 0 0 20 33.426a19.92 19.92 0 0 0-11.374-4.998A20 20 0 0 1 8.333 25c0-2.603.497-5.09 1.402-7.37zm-6.667 10v-12.5L20 17.13"
+    ></path>
+  </svg>
+);

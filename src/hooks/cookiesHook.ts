@@ -6,20 +6,19 @@ interface ICookieOptions {
 }
 
 export const useCookies = () => {
-  const setCookies = (tokenName: string, token: string) => {
-    const cookieOptions: ICookieOptions = {
-      // Expires in 7 days
-      expires: 7,
-      // The cookie is accessible across all paths on the domain
+  const setCookies = (tokenName: string, token: string, options?: Partial<ICookieOptions>) => {
+    const defaultOptions: ICookieOptions = {
+      expires: 7, // Default expiration: 7 days
       path: '/',
     };
 
     // Conditionally set secure option based on the environment
-    // eslint-disable-next-line no-undef
     if (process.env.NODE_ENV === 'production') {
-      // Set secure to true in production for HTTPS-only
-      cookieOptions.secure = true;
+      defaultOptions.secure = true;
     }
+
+    // Merge default options with custom options, ensuring 'expires' is used instead of 'maxAge'
+    const cookieOptions = { ...defaultOptions, ...options };
 
     Cookies.set(tokenName, token, cookieOptions);
   };

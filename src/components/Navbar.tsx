@@ -156,7 +156,7 @@ export default function Navbar() {
               Log In
             </Link>
             <Link
-              to='/signup'
+              to='/select-user-type' // Redirect to user type selection page
               className='bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700'
             >
               Sign Up
@@ -286,7 +286,7 @@ export default function Navbar() {
               Log In
             </Link>
             <Link
-              to='/signup'
+              to='/select-user-type' // Redirect to user type selection page
               className='w-full block bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700'
             >
               Sign Up

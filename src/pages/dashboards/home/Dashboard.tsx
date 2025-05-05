@@ -99,7 +99,7 @@ const Dashboard: React.FC = () => {
 
       {/* Survey Modal */}
       <SurveyModal
-        phases={surveyPhases}
+        phases={surveyPhases} // Ensure `phases` is added to SurveyModalProps
         onSubmit={handleSurveySubmit}
         onClose={handleCloseSurveyModal}
         isOpen={isSurveyModalOpen}
