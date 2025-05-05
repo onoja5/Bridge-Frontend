@@ -10,14 +10,11 @@ export default function Home() {
 
   // Partner logos array
   const partners = [
-    { name: "Google", url: "https://images.unsplash.com/photo-1573804633927-bfcbcd909acd?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&h=80&q=80" },
+    { name: "SEED Foundation", url: "https://iypglobal.org/wp-content/uploads/2025/04/SEED-foundation.jpeg" }, // Updated logo
     { name: "Microsoft", url: "https://images.unsplash.com/photo-1633419461186-7d40a38105ec?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&h=80&q=80" },
-    { name: "Apple", url: "https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&h=80&q=80" },
-    { name: "Amazon", url: "https://images.unsplash.com/photo-1523474253046-8cd2748b5fd2?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&h=80&q=80" },
-    { name: "Meta", url: "https://images.unsplash.com/photo-1633419461186-7d40a38105ec?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&h=80&q=80" },
-    { name: "IBM", url: "https://images.unsplash.com/photo-1557426272-fc759fdf7a8d?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&h=80&q=80" },
-    { name: "Intel", url: "https://images.unsplash.com/photo-1618477388954-7852f32655ec?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&h=80&q=80" },
-    { name: "Oracle", url: "https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&h=80&q=80" }
+    { name: "AI Ignite", url: "https://iypglobal.org/wp-content/uploads/2025/04/AI-Ignite.jpeg" },
+    { name: "Tech Valley", url: "https://www.techvalley-me.com/images/front/final-logo.svg" },
+    { name: "Ayoks Digital", url: "https://iypglobal.org/wp-content/uploads/2025/04/Ayoks-Digital.jpeg" }
   ];
 
   // Auto-scroll effect
@@ -261,7 +258,7 @@ export default function Home() {
       <div className="py-24 bg-gradient-to-b from-gray-900 to-gray-800 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4">Our Impact</h2>
+            <h2 className="text-4xl font-bold mb-4">3 Year Target </h2>
             <div className="w-24 h-1 bg-blue-500 mx-auto"></div>
           </div>
           
@@ -272,10 +269,10 @@ export default function Home() {
                 <Briefcase className="h-8 w-8 text-blue-400" />
               </div>
               <div className="font-bold text-4xl md:text-5xl mb-2 text-blue-400 group-hover:text-blue-300 transition-colors duration-300">
-                40K+
+              1M+ 
               </div>
               <p className="text-gray-300 font-medium">
-                Employer projects
+              Users Impacted
               </p>
             </div>
 
@@ -285,10 +282,10 @@ export default function Home() {
                 <School className="h-8 w-8 text-blue-400" />
               </div>
               <div className="font-bold text-4xl md:text-5xl mb-2 text-blue-400 group-hover:text-blue-300 transition-colors duration-300">
-                640+
+              75K+
               </div>
               <p className="text-gray-300 font-medium">
-                Educational institutions and training providers
+              Skill-Building enrollments
               </p>
             </div>
 
@@ -298,10 +295,10 @@ export default function Home() {
                 <GraduationCap className="h-8 w-8 text-blue-400" />
               </div>
               <div className="font-bold text-4xl md:text-5xl mb-2 text-blue-400 group-hover:text-blue-300 transition-colors duration-300">
-                217K+
+              20K+
               </div>
               <p className="text-gray-300 font-medium">
-                Learner experiences
+              Mentorship connections
               </p>
             </div>
 
@@ -311,10 +308,10 @@ export default function Home() {
                 <Clock className="h-8 w-8 text-blue-400" />
               </div>
               <div className="font-bold text-4xl md:text-5xl mb-2 text-blue-400 group-hover:text-blue-300 transition-colors duration-300">
-                13.3M+
+              20+
               </div>
               <p className="text-gray-300 font-medium">
-                Hours of applied learning
+              Strategic Partnerships
               </p>
             </div>
           </div>
@@ -401,7 +398,7 @@ export default function Home() {
       <div className="py-20 bg-gradient-to-br from-gray-50 to-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Trusted by 680+ partners</h2>
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">Collaborating With</h2>
             <div className="w-24 h-1 bg-blue-600 mx-auto"></div>
           </div>
 
@@ -710,10 +707,10 @@ export default function Home() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
-              to="/post-project"
+              to="/signup"
               className="bg-white text-blue-900 px-8 py-3 rounded-md text-lg font-semibold hover:bg-blue-50 transition duration-300"
             >
-              Post Your First Project
+              Sign-up Today
             </Link>
             <Link
               to="/contact"

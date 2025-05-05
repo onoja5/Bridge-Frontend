@@ -35,18 +35,18 @@ export default function Footer() {
             <h4 className="text-lg font-semibold mb-4">Product</h4>
             <ul className="space-y-2">
               <li>
-                <Link to="/colleges" className="text-gray-400 hover:text-white transition-colors duration-300">
-                  For Colleges & Universities
+                <Link to="/for-students" className="text-gray-400 hover:text-white transition-colors duration-300">
+                For Students & Graduates
                 </Link>
               </li>
               <li>
-                <Link to="/businesses" className="text-gray-400 hover:text-white transition-colors duration-300">
-                  For Businesses & Non-Profits
+                <Link to="/for-educators" className="text-gray-400 hover:text-white transition-colors duration-300">
+                For Professionals & Mentors
                 </Link>
               </li>
               <li>
-                <Link to="/learners" className="text-gray-400 hover:text-white transition-colors duration-300">
-                  For Learners
+                <Link to="/for-employers" className="text-gray-400 hover:text-white transition-colors duration-300">
+                For Employers & Partners
                 </Link>
               </li>
             </ul>
@@ -89,13 +89,8 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link to="/news" className="text-gray-400 hover:text-white transition-colors duration-300">
+                <Link to="/blog" className="text-gray-400 hover:text-white transition-colors duration-300">
                   News
-                </Link>
-              </li>
-              <li>
-                <Link to="/partners" className="text-gray-400 hover:text-white transition-colors duration-300">
-                  Partners
                 </Link>
               </li>
             </ul>
@@ -105,11 +100,7 @@ export default function Footer() {
           <div>
             <h4 className="text-lg font-semibold mb-4">Help</h4>
             <ul className="space-y-2">
-              <li>
-                <Link to="/status" className="text-gray-400 hover:text-white transition-colors duration-300">
-                  Status
-                </Link>
-              </li>
+
               <li>
                 <Link to="/updates" className="text-gray-400 hover:text-white transition-colors duration-300">
                   Product Updates

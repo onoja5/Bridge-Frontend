@@ -16,7 +16,7 @@ import CollegesUniversities from '@/pages/CollegesUniversities';
 import Contact from '@/pages/Contact';
 import Demo from '@/pages/Demo';
 import ExploreOpportunities from '@/pages/ExploreOpportunities';
-import ForEducators from '@/pages/ForEducators';
+// Removed duplicate import of ForMentors
 import ForEmployers from '@/pages/ForEmployers';
 import ForgotPassword from '@/pages/ForgotPassword';
 import ForStudents from '@/pages/ForStudents';
@@ -37,6 +37,7 @@ import Webinars from '@/pages/Webinars';
 import WorkBasedLearning from '@/pages/WorkBasedLearning';
 import WorkforceDevelopment from '@/pages/WorkforceDevelopment';
 import { ReactElement } from 'react';
+import ForMentors from '@/pages/ForMentors';
 
 interface Route {
   path: string;
@@ -58,7 +59,7 @@ const generalRoutes: Route[] = [
   { path: '/terms', element: <Terms /> },
   { path: '/for-students', element: <ForStudents /> },
   { path: '/for-employers', element: <ForEmployers /> },
-  { path: '/for-educators', element: <ForEducators /> },
+  { path: '/for-educators', element: <ForMentors /> },
   { path: '/explore', element: <ExploreOpportunities /> },
   { path: '/colleges', element: <CollegesUniversities /> },
   { path: '/businesses', element: <BusinessNonprofits /> },

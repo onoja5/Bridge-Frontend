@@ -51,11 +51,9 @@ export default function DigitalAfricaBootcamp() {
                 <p>✅ Industry projects with real-world applications</p>
                 <p>✅ Personalized mentorship from industry leaders</p>
                 <p>✅ Resume reviews, mock interviews & job placement support</p>
-                <p>✅ Certification upon completion</p>
+                <p>✅ Certification upon completion of the Program </p>
               </div>
-              <p className="text-xl text-gray-600 mt-6">
-                Corporate Talent Pipeline Program
-              </p>
+    
             </div>
             <div>
               <img
@@ -79,7 +77,7 @@ export default function DigitalAfricaBootcamp() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
-              href="/apply"
+              href="/signup"
               className="bg-white text-blue-900 px-8 py-3 rounded-md text-lg font-semibold hover:bg-blue-50 transition duration-300"
             >
               Apply Now

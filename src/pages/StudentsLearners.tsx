@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, GraduationCap, Briefcase, Users, Star, CheckCircle } from 'lucide-react';
+import { ArrowRight, GraduationCap, Briefcase, Users } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 export default function StudentsLearners() {
@@ -36,23 +36,6 @@ export default function StudentsLearners() {
       title: "Creative Projects",
       description: "Design and create innovative solutions",
       image: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
-    }
-  ];
-
-  const testimonials = [
-    {
-      name: "Alex Thompson",
-      role: "Computer Science Student",
-      university: "Stanford University",
-      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=crop&w=128&h=128&q=80",
-      quote: "Through BridgeAI, I worked on a real AI project that helped me land my dream internship."
-    },
-    {
-      name: "Sarah Chen",
-      role: "Business Major",
-      university: "NYU",
-      image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=crop&w=128&h=128&q=80",
-      quote: "The hands-on experience I gained was invaluable for my career development."
     }
   ];
 
@@ -147,37 +130,6 @@ export default function StudentsLearners() {
                 >
                   Learn More <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Testimonials Section */}
-      <div className="py-24 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-center mb-16">Student Success Stories</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {testimonials.map((testimonial, index) => (
-              <div key={index} className="bg-white p-6 rounded-lg shadow-lg">
-                <div className="flex items-center mb-4">
-                  <img
-                    src={testimonial.image}
-                    alt={testimonial.name}
-                    className="w-12 h-12 rounded-full mr-4"
-                  />
-                  <div>
-                    <h4 className="font-semibold">{testimonial.name}</h4>
-                    <p className="text-gray-600 text-sm">{testimonial.role}</p>
-                    <p className="text-gray-500 text-sm">{testimonial.university}</p>
-                  </div>
-                </div>
-                <div className="flex mb-4">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="h-5 w-5 text-yellow-400 fill-current" />
-                  ))}
-                </div>
-                <p className="text-gray-600">{testimonial.quote}</p>
               </div>
             ))}
           </div>
