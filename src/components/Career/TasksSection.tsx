@@ -1,56 +1,66 @@
-import React, { useState, useEffect } from 'react';
-import { Task } from '@/utils/parseBlueprint';
+import React, { useState } from 'react';
+import CompleteTaskModal from './CompleteTaskModal';
 
 interface TasksSectionProps {
-  tasks: Task[];
+  tasks: string[];
 }
 
 const TasksSection: React.FC<TasksSectionProps> = ({ tasks }) => {
-  const [taskList, setTaskList] = useState<Task[]>([]);
+  const [completedTask, setCompletedTask] = useState(false);
+  const [taskName, setTaskName] = useState('');
 
-  // Update local state when the tasks prop changes
-  useEffect(() => {
-    setTaskList(tasks);
-  }, [tasks]);
+  const handleOpenCompleteTask = (task: string) => {
+    setCompletedTask(true);
+    setTaskName(task);
+  };
 
-  const handleStatusChange = (id: number, newStatus: 'in progress' | 'done') => {
-    setTaskList((prevTasks) =>
-      prevTasks.map((task) =>
-        task.id === id ? { ...task, status: newStatus } : task
-      )
-    );
+  const handleCompleteTask = (task: string) => {
+    setCompletedTask(true);
+    setTaskName(task);
   };
 
   return (
-    <div className="bg-white p-4 rounded-md">
-      <h3 className="text-md font-semibold mb-4">Tasks</h3>
-      {taskList.length > 0 ? (
-        <ul className="space-y-4">
-          {taskList.map((task) => (
-            <li key={task.id} className="flex justify-between items-center gap-5">
-              <span className="text-sm font-normal">{task.title}</span>
-              <select
-                value={task.status}
-                onChange={(e) =>
-                  handleStatusChange(task.id, e.target.value as 'in progress' | 'done')
-                }
-                className={`appearance-none px-3 py-1 text-center rounded-full outline-none w-auto text-white text-sm ${
-                  task.status === 'in progress' ? 'bg-blue-500' : 'bg-green-500'
-                }`}
-                style={{
-                  backgroundImage: 'none', // Removes the dropdown arrow
-                }}
+    <>
+      <div className='bg-white p-4 rounded-md'>
+        <h3 className='text-md font-semibold mb-4'>Tasks</h3>
+        <hr />
+        {tasks.length > 0 ? (
+          <ul className='space-y-4 divide-y divide-gray-200'>
+            {tasks.map((task, idx) => (
+              <li
+                key={idx}
+                className='flex justify-between items-center gap-5 py-2'
               >
-                <option value="in progress">In Progress</option>
-                <option value="done">Done</option>
-              </select>
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p className="text-sm text-gray-500">No tasks available.</p>
+                <article className='flex justify-between items-center gap-4'>
+                  <span className='text-sm font-normal rounded-full bg-gray-200 px-2 py-1'>
+                    {idx + 1}.
+                  </span>
+                  <span className='text-sm font-normal flex-1'>{task}</span>
+                </article>
+
+                <button
+                  onClick={() => handleOpenCompleteTask(task)}
+                  className='text-sm font-normal rounded-full bg-gray-200 px-2 py-1'
+                >
+                  Mark as Completed
+                </button>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className='text-sm text-gray-500'>No tasks available.</p>
+        )}
+      </div>
+
+      {completedTask && (
+        <CompleteTaskModal
+          isOpen={completedTask}
+          onClose={() => setCompletedTask(false)} // Close modal
+          onConfirm={() => handleCompleteTask(taskName)} // Confirm delete action
+          taskName={taskName} // Pass folder name
+        />
       )}
-    </div>
+    </>
   );
 };
 

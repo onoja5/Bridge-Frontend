@@ -62,7 +62,9 @@ export function setGreeting() {
   }
 }
 
-export const fetchUserBlueprint = async (userId: string): Promise<string | null> => {
+export const fetchUserBlueprint = async (
+  userId: string,
+): Promise<string | null> => {
   console.log('Fetching blueprint for userId:', userId); // Debug userId
   const baseUrl = import.meta.env.VITE_API_BASE;
   if (!baseUrl) {
@@ -99,7 +101,9 @@ export const loadBlueprintFromLocalStorage = (): string | null => {
   return localStorage.getItem('careerBlueprint');
 };
 
-export const fetchBlueprintTasksAndProjects = async (userId: string): Promise<{ tasks: string[]; projects: string[] } | null> => {
+export const fetchBlueprintTasksAndProjects = async (
+  userId: string,
+): Promise<{ tasks: string[]; projects: string[] } | null> => {
   console.log('Fetching tasks and projects for userId:', userId); // Debug userId
   const baseUrl = import.meta.env.VITE_API_BASE;
   if (!baseUrl) {
@@ -111,7 +115,9 @@ export const fetchBlueprintTasksAndProjects = async (userId: string): Promise<{ 
   try {
     const response = await fetch(url);
     if (!response.ok) {
-      throw new Error(`Failed to fetch tasks and projects: ${response.statusText}`);
+      throw new Error(
+        `Failed to fetch tasks and projects: ${response.statusText}`,
+      );
     }
 
     const data = await response.json();
@@ -131,7 +137,10 @@ export const fetchBlueprintTasksAndProjects = async (userId: string): Promise<{ 
   }
 };
 
-export const fetchMentors = async (page: number, limit: number): Promise<{ mentors: any[]; totalPages: number }> => {
+export const fetchMentors = async (
+  page: number,
+  limit: number,
+): Promise<{ mentors: any[]; totalPages: number }> => {
   const baseUrl = import.meta.env.VITE_API_BASE;
   if (!baseUrl) {
     throw new Error('VITE_API_BASE is not defined in .env.local');
@@ -152,4 +161,5 @@ export const fetchMentors = async (page: number, limit: number): Promise<{ mento
   }
 };
 
-
+// For better organization,  and scalability, let all api calls be inside the services directory.,
+// create a new file for each page api calls
