@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { Menu, X, ChevronDown } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const pathname = useLocation().pathname;
 
   const solutions = [
     { name: 'For Students', path: '/for-students' },
@@ -20,7 +21,10 @@ export default function Navbar() {
 
   const programs = [
     { name: 'AI Ignite Community', path: '/workforce-development' },
-    { name: 'Digital Apprenticeship Program', path: '/digital-apprenticeship-program' },
+    {
+      name: 'Digital Apprenticeship Program',
+      path: '/digital-apprenticeship-program',
+    },
     { name: 'Digital Africa Bootcamp', path: '/digital-africa-bootcamp' },
     { name: 'Corporate Talent Pipeline', path: '/corporate-talent-pipeline' },
   ];
@@ -66,7 +70,11 @@ export default function Navbar() {
           <div className='hidden md:flex items-center space-x-8'>
             <Link
               to='/how-it-works'
-              className='text-gray-600 hover:text-blue-600'
+              className={` hover:text-blue-600 ${
+                pathname === '/how-it-works'
+                  ? 'text-blue-600 font-bold'
+                  : 'text-gray-600'
+              }`}
             >
               How It Works
             </Link>
@@ -74,7 +82,11 @@ export default function Navbar() {
             {/* Solutions Dropdown */}
             <div className='relative' onClick={handleDropdownClick}>
               <button
-                className='flex items-center text-gray-600 hover:text-blue-600'
+                className={`flex items-center text-gray-600 hover:text-blue-600 ${
+                  pathname === '/solutions'
+                    ? 'text-blue-600 font-bold'
+                    : 'text-gray-600'
+                }`}
                 onClick={() => toggleDropdown('solutions')}
               >
                 Solutions <ChevronDown className='ml-1 h-4 w-4' />
@@ -85,7 +97,11 @@ export default function Navbar() {
                     <Link
                       key={item.path}
                       to={item.path}
-                      className='block px-4 py-2 text-gray-700 hover:bg-blue-50'
+                      className={`block px-4 py-2 ${
+                        pathname === item.path
+                          ? 'text-blue-600 font-bold'
+                          : 'text-gray-600'
+                      } hover:bg-blue-50`}
                     >
                       {item.name}
                     </Link>
@@ -131,7 +147,11 @@ export default function Navbar() {
                     <Link
                       key={item.path}
                       to={item.path}
-                      className='block px-4 py-2 text-gray-700 hover:bg-blue-50'
+                      className={`block px-4 py-2 ${
+                        pathname === item.path
+                          ? 'text-blue-600 font-bold'
+                          : 'text-gray-600'
+                      } hover:bg-blue-50`}
                     >
                       {item.name}
                     </Link>
@@ -140,24 +160,49 @@ export default function Navbar() {
               )}
             </div>
 
-            <Link to='/about' className='text-gray-600 hover:text-blue-600'>
+            <Link
+              to='/about'
+              className={` hover:text-blue-600 ${
+                pathname === '/about'
+                  ? 'text-blue-600 font-bold'
+                  : 'text-gray-600'
+              }`}
+            >
               About
             </Link>
-            <Link to='/blog' className='text-gray-600 hover:text-blue-600'>
+            <Link
+              to='/blog'
+              className={` hover:text-blue-600 ${
+                pathname === '/blog'
+                  ? 'text-blue-600 font-bold'
+                  : 'text-gray-600'
+              }`}
+            >
               Blog
             </Link>
-            <Link to='/contact' className='text-gray-600 hover:text-blue-600'>
+            <Link
+              to='/contact'
+              className={` hover:text-blue-600 ${
+                pathname === '/contact'
+                  ? 'text-blue-600 font-bold'
+                  : 'text-gray-600'
+              }`}
+            >
               Contact
             </Link>
           </div>
 
           <div className='hidden md:flex items-center space-x-4'>
-            <Link to='/login' className='text-blue-600 hover:text-blue-700'>
+            <Link to='/login' className={`text-blue-600 hover:text-blue-700  `}>
               Log In
             </Link>
             <Link
               to='/select-user-type' // Redirect to user type selection page
-              className='bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700'
+              className={`bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 ${
+                pathname === '/select-user-type'
+                  ? 'text-blue-600 font-bold'
+                  : ''
+              }`}
             >
               Sign Up
             </Link>
@@ -185,7 +230,11 @@ export default function Navbar() {
           <div className='px-2 pt-2 pb-3 space-y-1 sm:px-3'>
             <Link
               to='/how-it-works'
-              className='block px-3 py-2 text-gray-600 hover:text-blue-600'
+              className={`block px-3 py-2 ${
+                pathname === '/how-it-works'
+                  ? 'text-blue-600 font-bold'
+                  : 'text-gray-600'
+              } hover:text-blue-600`}
             >
               How It Works
             </Link>
@@ -204,7 +253,11 @@ export default function Navbar() {
                     <Link
                       key={item.path}
                       to={item.path}
-                      className='block px-3 py-2 text-gray-600 hover:text-blue-600'
+                      className={`block px-3 py-2 ${
+                        pathname === item.path
+                          ? 'text-blue-600 font-bold'
+                          : 'text-gray-600'
+                      } hover:text-blue-600`}
                     >
                       {item.name}
                     </Link>
@@ -227,7 +280,11 @@ export default function Navbar() {
                     <Link
                       key={item.path}
                       to={item.path}
-                      className='block px-3 py-2 text-gray-600 hover:text-blue-600'
+                      className={`block px-3 py-2 ${
+                        pathname === item.path
+                          ? 'text-blue-600 font-bold'
+                          : 'text-gray-600'
+                      } hover:text-blue-600`}
                     >
                       {item.name}
                     </Link>
@@ -250,7 +307,11 @@ export default function Navbar() {
                     <Link
                       key={item.path}
                       to={item.path}
-                      className='block px-3 py-2 text-gray-600 hover:text-blue-600'
+                      className={`block px-3 py-2 ${
+                        pathname === item.path
+                          ? 'text-blue-600 font-bold'
+                          : 'text-gray-600'
+                      } hover:text-blue-600`}
                     >
                       {item.name}
                     </Link>
@@ -261,19 +322,31 @@ export default function Navbar() {
 
             <Link
               to='/about'
-              className='block px-3 py-2 text-gray-600 hover:text-blue-600'
+              className={`block px-3 py-2 ${
+                pathname === '/about'
+                  ? 'text-blue-600 font-bold'
+                  : 'text-gray-600'
+              } hover:text-blue-600`}
             >
               About
             </Link>
             <Link
               to='/blog'
-              className='block px-3 py-2 text-gray-600 hover:text-blue-600'
+              className={`block px-3 py-2 ${
+                pathname === '/blog'
+                  ? 'text-blue-600 font-bold'
+                  : 'text-gray-600'
+              } hover:text-blue-600`}
             >
               Blog
             </Link>
             <Link
               to='/contact'
-              className='block px-3 py-2 text-gray-600 hover:text-blue-600'
+              className={`block px-3 py-2 ${
+                pathname === '/contact'
+                  ? 'text-blue-600 font-bold'
+                  : 'text-gray-600'
+              } hover:text-blue-600`}
             >
               Contact
             </Link>
@@ -281,13 +354,21 @@ export default function Navbar() {
           <div className='px-4 py-3 space-y-2'>
             <Link
               to='/login'
-              className='w-full text-center block text-blue-600 hover:text-blue-700'
+              className={`w-full text-center block ${
+                pathname === '/login'
+                  ? 'text-blue-600 font-bold'
+                  : 'text-gray-600'
+              } hover:text-blue-600`}
             >
               Log In
             </Link>
             <Link
               to='/select-user-type' // Redirect to user type selection page
-              className='w-full block bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700'
+              className={`w-full block ${
+                pathname === '/select-user-type'
+                  ? 'text-blue-600 font-bold'
+                  : 'text-gray-600'
+              } hover:text-blue-600`}
             >
               Sign Up
             </Link>
