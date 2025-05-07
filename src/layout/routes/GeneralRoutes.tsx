@@ -1,5 +1,3 @@
-// generalRoutes.js
-
 import About from '@/pages/About';
 import ChangePassword from '@/pages/auth/ChangePassword';
 import ForgotPasswordRequest from '@/pages/auth/ForgotPasswordRequest';
@@ -8,7 +6,7 @@ import PasswordChangeSuccess from '@/pages/auth/PasswordChangeSuccess';
 import SignUp from '@/pages/auth/SignUp';
 import SignupSuccess from '@/pages/auth/SignupSuccess';
 import UserTypeSelection from '@/pages/auth/UserTypeSelection';
-import VerifyEmail from '@/pages/auth/VerifyEmai';
+import VerifyEmail from '@/pages/auth/VerifyEmail';
 import Blog from '@/pages/Blog';
 import BusinessNonprofits from '@/pages/BusinessNonprofits';
 import Careers from '@/pages/Careers';
@@ -16,7 +14,6 @@ import CollegesUniversities from '@/pages/CollegesUniversities';
 import Contact from '@/pages/Contact';
 import Demo from '@/pages/Demo';
 import ExploreOpportunities from '@/pages/ExploreOpportunities';
-// Removed duplicate import of ForMentors
 import ForEmployers from '@/pages/ForEmployers';
 import ForgotPassword from '@/pages/ForgotPassword';
 import ForStudents from '@/pages/ForStudents';

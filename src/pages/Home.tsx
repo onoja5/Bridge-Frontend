@@ -92,7 +92,7 @@ export default function Home() {
 
 🤝 Connect with mentors & hiring managers for career guidance.`,
       image: "https://images.unsplash.com/photo-1606761568499-6d2451b23c66?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-      path: "/career-changers"
+      path: "/for-educators"
     },
     {
       title: "🧑‍🏫 Mentors & Industry Experts",
@@ -173,7 +173,7 @@ export default function Home() {
       },
       secondaryButton: {
         text: "Learn more",
-        link: "/colleges"
+        link: "/corporate-talent-pipeline"
       }
     },
     businesses: {
@@ -192,7 +192,7 @@ export default function Home() {
       },
       secondaryButton: {
         text: "Learn more",
-        link: "/businesses"
+        link: "/for-employers"
       }
     },
     students: {
