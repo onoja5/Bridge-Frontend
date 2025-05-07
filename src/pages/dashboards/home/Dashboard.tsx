@@ -1,24 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import Mentor1 from '@/assets/images/mentor 1.svg';
-import Mentor2 from '@/assets/images/mentor 2.svg';
-import Mentor3 from '@/assets/images/mentor 3.svg';
+
 import {
   DowntrendIcon,
   LightbulbIcon,
-  MentorBadgeIcon,
   UptrendIcon,
 } from '@/assets/svgs/ExportSvgs';
 import SurveyModal from '@/components/main/SurveyModal/SurveyModal';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
-import { fetchUserBlueprint } from '@/utils/helper'; // Import fetchUserBlueprint
-import { useAuthContext } from '@/contexts/AuthContext'; // Import AuthContext
+import { useNavigate } from 'react-router-dom';
+import { fetchUserBlueprint } from '@/utils/helper';
+import { useAuthContext } from '@/contexts/AuthContext';
+import DashboardProgressReport from '@/components/main/home/dashboardProgressReport';
 
 const Dashboard: React.FC = () => {
   const [isSurveyModalOpen, setSurveyModalOpen] = useState(false);
-  const [hasGeneratedBlueprint, setHasGeneratedBlueprint] = useState(false); // Track if blueprint is generated
-  const navigate = useNavigate(); // Initialize navigation
-  const { userData } = useAuthContext(); // Get user data from AuthContext
-  const userId = userData?._id; // Extract userId from userData
+  const [hasGeneratedBlueprint, setHasGeneratedBlueprint] = useState(false);
+  const navigate = useNavigate();
+  const { userData } = useAuthContext();
+  const userId = userData?._id;
 
   useEffect(() => {
     const checkBlueprint = async () => {
@@ -122,152 +120,7 @@ const Dashboard: React.FC = () => {
       />
 
       {/* Mid Section (Recommended Career Paths, Suggested Mentors, Skill Gap Analysis) */}
-      <section className='grid grid-cols-1  lg:grid-cols-3 gap-6 mt-8'>
-        {/* Recommended Career Paths */}
-        <div className='bg-white p-6 rounded-lg'>
-          <h3 className='text-sm font-bold mb-5'>Recommended Career Paths</h3>
-          <ul className='flex flex-col gap-3'>
-            <li className='flex justify-between items-center mb-2'>
-              <span className='text-sm'>UI/UX Design</span>
-              <span className='bg-blue-100 text-blue-600 text-sm px-2 py-1 rounded'>
-                High Demand
-              </span>
-            </li>
-            <li className='flex justify-between items-center mb-2'>
-              <span className='text-sm'>Software Engineering</span>
-              <span className='bg-yellow-100 text-yellow-600 text-sm px-2 py-1 rounded'>
-                Trending
-              </span>
-            </li>
-            <li className='flex justify-between items-center mb-2'>
-              <span className='text-sm'>Video Editing</span>
-              <span className='bg-blue-100 text-blue-600 text-sm px-2 py-1 rounded'>
-                High Demand
-              </span>
-            </li>
-            <li className='flex justify-between items-center'>
-              <span className='text-sm'>ML/AI Engineering</span>
-              <span className='bg-yellow-100 text-yellow-600 text-sm px-2 py-1 rounded'>
-                Trending
-              </span>
-            </li>
-          </ul>
-        </div>
-
-        {/* Suggested Mentors */}
-        <div className='bg-white p-6 rounded-lg'>
-          <h3 className='text-sm font-bold mb-5'>Suggested Mentors</h3>
-          <ul className='flex flex-col gap-5'>
-            <li className='flex items-center justify-between'>
-              <div className='flex'>
-                <img
-                  src={Mentor1}
-                  alt='Jude Onakoya'
-                  className='w-10 h-10 rounded-full mr-4'
-                />
-                <div>
-                  <p className='font-semibold text-sm'>Jude Onakoya</p>
-                  <p className='text-xs text-[#2563EB]'>ML Engineer & Expert</p>
-                </div>
-              </div>
-              <MentorBadgeIcon />
-            </li>
-            <li className='flex items-center justify-between'>
-              <div className='flex'>
-                <img
-                  src={Mentor2}
-                  alt='Sharon Obiegeli'
-                  className='w-10 h-10 rounded-full mr-4'
-                />
-                <div>
-                  <p className='font-semibold text-sm'>Sharon Obiegeli .C.</p>
-                  <p className='text-xs text-[#2563EB]'>
-                    Senior Product Designer
-                  </p>
-                </div>
-              </div>
-              <MentorBadgeIcon />
-            </li>
-            <li className='flex items-center justify-between'>
-              <div className='flex'>
-                <img
-                  src={Mentor3}
-                  alt='Okafor Blessing'
-                  className='w-10 h-10 rounded-full mr-4'
-                />
-                <div>
-                  <p className='font-semibold text-sm'>Okafor Blessing .O.</p>
-                  <p className='text-xs text-[#2563EB]'>Data Analyst Expert</p>
-                </div>
-              </div>
-              <MentorBadgeIcon />
-            </li>
-          </ul>
-        </div>
-
-        {/* Skill Gap Analysis */}
-        <div className='bg-white p-6 rounded-lg'>
-          <div className='flex justify-between items-center mb-5'>
-            <h3 className='text-sm font-bold'>Skill Gap Analysis</h3>
-            <a href='#' className='text-sm text-blue-600'>
-              View All
-            </a>
-          </div>
-          <ul>
-            <li className='mb-4'>
-              <div className='flex justify-between items-center mb-1'>
-                <span className='text-sm'>Data Analysis</span>
-                <span className='bg-green-100 text-green-600 text-sm px-2 py-1 rounded'>
-                  Strong
-                </span>
-              </div>
-              <div className='w-full flex items-center justify-between'>
-                <div className='bg-gray-200 rounded-xs h-4 w-[60%]'>
-                  <div
-                    className='bg-blue-600 h-full rounded-xs'
-                    style={{ width: '98%' }}
-                  ></div>
-                </div>
-                <p className='text-sm text-gray-600 mt-1'>98/100</p>
-              </div>
-            </li>
-            <li className='mb-4'>
-              <div className='flex justify-between items-center mb-1'>
-                <span className='text-sm'>ML</span>
-                <span className='bg-red-100 text-red-600 text-sm px-2 py-1 rounded'>
-                  Weak
-                </span>
-              </div>
-              <div className='w-full flex items-center justify-between'>
-                <div className='bg-gray-200 rounded-xs h-4 w-[60%]'>
-                  <div
-                    className='bg-blue-600 h-full rounded-xs'
-                    style={{ width: '25%' }}
-                  ></div>
-                </div>
-                <p className='text-sm text-gray-600 mt-1'>25/100</p>
-              </div>
-            </li>
-            <li className='mb-4'>
-              <div className='flex justify-between items-center mb-1'>
-                <span className='text-sm'>Python</span>
-                <span className='bg-yellow-100 text-yellow-600 text-sm px-2 py-1 rounded'>
-                  Good
-                </span>
-              </div>
-              <div className='w-full flex items-center justify-between'>
-                <div className='bg-gray-200 rounded-xs h-4 w-[60%]'>
-                  <div
-                    className='bg-blue-600 h-full rounded-xs'
-                    style={{ width: '70%' }}
-                  ></div>
-                </div>
-                <p className='text-sm text-gray-600 mt-1'>70/100</p>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </section>
+      <DashboardProgressReport />
 
       {/* Bottom Section (Skill Growth Tracker, Personalized AI Tips) */}
       <section className='grid grid-cols-1 md:grid-cols-2 gap-6 mt-8'>

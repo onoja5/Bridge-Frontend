@@ -40,7 +40,7 @@ const TasksSection: React.FC<TasksSectionProps> = ({ tasks }) => {
 
                 <button
                   onClick={() => handleOpenCompleteTask(task)}
-                  className='text-sm font-normal rounded-full bg-gray-200 px-2 py-1'
+                  className='text-sm font-normal rounded-full bg-primary text-white px-4 py-2'
                 >
                   Mark as Completed
                 </button>
