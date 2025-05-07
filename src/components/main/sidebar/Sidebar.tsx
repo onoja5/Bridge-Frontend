@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { SidebarData } from './SidebarData';
 
 interface SidebarProps {
@@ -10,8 +10,12 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed }) => {
     <main className='flex flex-col h-full p-5 gap-5 w-auto'>
       <section className='mt-3 mb-5 flex flex-col gap-3'>
         <div className='flex items-center justify-center'>
-          <h1 className={`text-xl font-bold text-blue-600 ${isCollapsed ? 'hidden' : ''}`}>
-            Bridge AI
+          <h1
+            className={`text-xl font-bold text-blue-600 ${
+              isCollapsed ? 'hidden' : ''
+            }`}
+          >
+            <Link to='/'>Bridge AI</Link>
           </h1>
         </div>
       </section>
@@ -28,7 +32,8 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed }) => {
               }
             >
               <span className='text-xl'>{icon}</span>
-              {!isCollapsed && <span>{name}</span>} {/* Hide text if collapsed */}
+              {!isCollapsed && <span>{name}</span>}{' '}
+              {/* Hide text if collapsed */}
             </NavLink>
           ))}
         </ul>
