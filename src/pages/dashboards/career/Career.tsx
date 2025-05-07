@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 
 import { useAuthContext } from '@/contexts/AuthContext';
-import BlueprintFolder from '@/components/Career/BlueprintFolder';
-import CareerSection from '@/components/Career/CareerSection';
+import BlueprintFolder from '@/components/main/Career/BlueprintFolder';
+import CareerSection from '@/components/main/Career/CareerSection';
 import { getBlueprint } from '@/services/career.api';
 import Skeleton from '@/components/ui/skeleton/skeleton';
 import { useQuery } from '@tanstack/react-query';
-import ViewBlueprint from '@/components/Career/ViewBlueprint';
+import ViewBlueprint from '@/components/main/Career/ViewBlueprint';
+import SocialShare from '@/components/socialShare';
 
 const Career: React.FC = () => {
   const { userData } = useAuthContext();
@@ -16,6 +17,7 @@ const Career: React.FC = () => {
   });
 
   const [isDetailViewOpen, setIsDetailViewOpen] = useState(false);
+  const [isShareModalOpen, setIsShareModalOpen] = useState(false);
 
   const userName = `${userData?.firstName} ${userData?.lastName}`;
 
@@ -29,6 +31,10 @@ const Career: React.FC = () => {
 
   const handleUpdateBlueprint = () => {
     console.log('Update blueprint functionality here');
+  };
+
+  const handleShare = () => {
+    setIsShareModalOpen(true);
   };
 
   const taskData = data?.careerBlueprint?.structuredJson?.tasks;
@@ -62,9 +68,9 @@ const Career: React.FC = () => {
             <BlueprintFolder
               name={`${userName}'s Career Blueprint`}
               onView={handleViewBlueprint}
-              onDelete={handleDeleteBlueprint} // Pass delete handler
-              onUpdate={handleUpdateBlueprint} // Pass the update handler
-              onShare={() => console.log('Share blueprint functionality here')}
+              onDelete={handleDeleteBlueprint}
+              onUpdate={handleUpdateBlueprint}
+              onShare={handleShare}
             />
           ) : (
             <p>Loading blueprint...</p>
@@ -73,6 +79,15 @@ const Career: React.FC = () => {
       )}
 
       <CareerSection taskData={taskData} />
+
+      {isShareModalOpen && (
+        <SocialShare
+          title={`${userName}'s Career Blueprint`}
+          description='Check out my career blueprint on Bridge!'
+          url={window.location.href}
+          onClose={() => setIsShareModalOpen(false)}
+        />
+      )}
     </main>
   );
 };

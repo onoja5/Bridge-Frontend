@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useMemo, Fragment } from 'react';
-import MentorCard from '@/components/Mentorship/MentorCard';
+import MentorCard from '@/components/main/Mentorship/MentorCard';
 import { fetchMentors } from '@/utils/helper';
 import { useAuthContext } from '@/contexts/AuthContext';
 

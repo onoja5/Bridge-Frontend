@@ -1,5 +1,5 @@
 import React from 'react';
-import MentorCard from '@/components/Mentorship/MentorCard';
+import MentorCard from '@/components/main/Mentorship/MentorCard';
 import { useQuery } from '@tanstack/react-query';
 import { getAllMentors } from '@/services/mentors.api';
 import Skeleton from '@/components/ui/skeleton/skeleton';

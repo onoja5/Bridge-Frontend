@@ -2,11 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setBlueprint, clearBlueprint } from '@/utils/reduxslice';
 import { fetchUserBlueprint } from '@/utils/helper';
-import { loadBlueprintFromLocalStorage, saveBlueprintToLocalStorage } from '@/utils/helper';
+import {
+  loadBlueprintFromLocalStorage,
+  saveBlueprintToLocalStorage,
+} from '@/utils/helper';
 import { useAuthContext } from '@/contexts/AuthContext';
-import BlueprintFolder from '@/components/Career/BlueprintFolder';
-import BlueprintDetailView from '@/components/Career/BlueprintDetailView';
-import CareerSection from '@/components/Career/CareerSection';
+import BlueprintFolder from '@/components/main/Career/BlueprintFolder';
+import BlueprintDetailView from '@/components/main/Career/BlueprintDetailView';
+import CareerSection from '@/components/main/Career/CareerSection';
 import { useToast } from '@/hooks/use-toast';
 
 const Career: React.FC = () => {
@@ -14,7 +17,9 @@ const Career: React.FC = () => {
   const blueprint = useSelector((state: any) => state.blueprint.blueprint);
   const [error, setError] = useState<string | null>(null);
   const [isDetailViewOpen, setIsDetailViewOpen] = useState(false);
-  const [selectedBlueprint, setSelectedBlueprint] = useState<string | null>(null);
+  const [selectedBlueprint, setSelectedBlueprint] = useState<string | null>(
+    null,
+  );
 
   // Access the userId and user's name from the AuthContext
   const { userData } = useAuthContext();
@@ -81,13 +86,16 @@ const Career: React.FC = () => {
   };
 
   if (error) {
-    return <div className="error-message">{error}</div>;
+    return <div className='error-message'>{error}</div>;
   }
 
   return (
     <div>
       {isDetailViewOpen && selectedBlueprint ? (
-        <BlueprintDetailView blueprint={selectedBlueprint} onBack={handleBackToFolder} />
+        <BlueprintDetailView
+          blueprint={selectedBlueprint}
+          onBack={handleBackToFolder}
+        />
       ) : (
         <div>
           {blueprint ? (
@@ -104,7 +112,7 @@ const Career: React.FC = () => {
         </div>
       )}
 
-      <CareerSection/>
+      <CareerSection />
     </div>
   );
 };

@@ -1,11 +1,16 @@
 import React, { useState } from 'react';
 import CompleteTaskModal from './CompleteTaskModal';
-
+import { useAuthContext } from '@/contexts/AuthContext';
+import { updateTask } from '@/services/career.api';
+import { handleError, handleSuccess } from '@/utils/helper';
 interface TasksSectionProps {
   tasks: string[];
 }
 
 const TasksSection: React.FC<TasksSectionProps> = ({ tasks }) => {
+  const { userData } = useAuthContext();
+  const [isLoading, setIsLoading] = useState(false);
+
   const [completedTask, setCompletedTask] = useState(false);
   const [taskName, setTaskName] = useState('');
 
@@ -14,9 +19,27 @@ const TasksSection: React.FC<TasksSectionProps> = ({ tasks }) => {
     setTaskName(task);
   };
 
-  const handleCompleteTask = (task: string) => {
-    setCompletedTask(true);
-    setTaskName(task);
+  const handleCompleteTask = async () => {
+    setIsLoading(true);
+    try {
+      const rsp = await updateTask(userData?._id, { tasks: [taskName] });
+
+      if (!rsp?.success) {
+        handleError(rsp?.message || 'An error occurred');
+        setCompletedTask(false);
+        setIsLoading(false);
+        return;
+      } else {
+        handleSuccess(rsp?.message || 'Task completed successfully');
+        setCompletedTask(false);
+      }
+
+      setIsLoading(false);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -29,7 +52,7 @@ const TasksSection: React.FC<TasksSectionProps> = ({ tasks }) => {
             {tasks.map((task, idx) => (
               <li
                 key={idx}
-                className='flex justify-between items-center gap-5 py-2'
+                className='flex flex-wrap justify-between items-center gap-5 py-2'
               >
                 <article className='flex justify-between items-center gap-4'>
                   <span className='text-sm font-normal rounded-full bg-gray-200 px-2 py-1'>
@@ -55,9 +78,10 @@ const TasksSection: React.FC<TasksSectionProps> = ({ tasks }) => {
       {completedTask && (
         <CompleteTaskModal
           isOpen={completedTask}
-          onClose={() => setCompletedTask(false)} // Close modal
-          onConfirm={() => handleCompleteTask(taskName)} // Confirm delete action
-          taskName={taskName} // Pass folder name
+          onClose={() => setCompletedTask(false)}
+          onConfirm={handleCompleteTask}
+          taskName={taskName}
+          loading={isLoading}
         />
       )}
     </>
