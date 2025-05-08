@@ -9,10 +9,10 @@ import React, {
 import type { AuthUserDataDTO } from '../types/auth';
 
 interface AuthContextType {
-  userData: { role?: string; [key: string]: any };
-  setUserData: Dispatch<SetStateAction<any>>;
-  setIsAuthenticated: Dispatch<SetStateAction<boolean>>;
+  userData: AuthUserDataDTO | null;
+  setUserData: React.Dispatch<React.SetStateAction<AuthUserDataDTO | null>>;
   isAuthenticated: boolean;
+  setIsAuthenticated: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);

@@ -4,15 +4,22 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import DefaultAvatar from '@/assets/images/noAvatar.png'; // Default avatar image
 
+// Adjust Session type to handle null values for selectedDate
+interface Session {
+  date: Date;
+  title: string;
+  note: string;
+}
+
 const MentorDetails = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { profileImage, firstName, lastName, name, email, specialty } = location.state || {};
-  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [sessionTitle, setSessionTitle] = useState('');
   const [sessionNote, setSessionNote] = useState('');
-  const [bookedSessions, setBookedSessions] = useState([]);
+  const [bookedSessions, setBookedSessions] = useState<Session[]>([]);
   const [showCalendar, setShowCalendar] = useState(false);
 
   const handleBackClick = () => {
@@ -23,32 +30,38 @@ const MentorDetails = () => {
     setIsModalOpen(true); // Open the booking modal
   };
 
-  const handleDateChange = (date) => {
-    setSelectedDate(date); // Update selected date
+  // Investigate and fix date type compatibility
+  const handleDateChange = (date: any) => {
+    if (date instanceof Date || date === null) {
+      setSelectedDate(date);
+    } else if (Array.isArray(date) && date.length > 0 && date[0] instanceof Date) {
+      setSelectedDate(date[0]);
+    }
   };
 
   const handleBookSession = () => {
-    // Simulate booking logic
-    const newSession = {
-      date: selectedDate,
-      title: sessionTitle,
-      note: sessionNote,
-    };
+    if (selectedDate) {
+      const newSession: Session = {
+        date: selectedDate,
+        title: sessionTitle,
+        note: sessionNote,
+      };
 
-    // Update booked sessions state
-    setBookedSessions((prev) => [...prev, newSession]);
+      // Update booked sessions state
+      setBookedSessions((prev) => [...prev, newSession]);
 
-    // Close the modal after booking
-    setIsModalOpen(false);
+      // Close the modal after booking
+      setIsModalOpen(false);
 
-    // Simulate email notification
-    console.log('Booking confirmed:', newSession);
+      // Simulate email notification
+      console.log('Booking confirmed:', newSession);
 
-    // Highlight the booked slot on the calendar (example logic)
-    alert('Session booked successfully!');
+      // Highlight the booked slot on the calendar (example logic)
+      alert('Session booked successfully!');
+    }
   };
 
-  const isSlotBooked = (date) => {
+  const isSlotBooked = (date: Date): boolean => {
     return bookedSessions.some((session) => session.date.toDateString() === date.toDateString());
   };
 
@@ -128,7 +141,7 @@ const MentorDetails = () => {
             </button>
             <h2 className="text-xl font-bold mb-4">Book a Session</h2>
             <div className="flex items-center justify-between mb-4">
-              <p className="text-gray-600">Selected Date: {selectedDate.toDateString()}</p>
+              <p className="text-gray-600">Selected Date: {selectedDate?.toDateString()}</p>
               <button
                 onClick={() => setShowCalendar(!showCalendar)}
                 className="text-blue-600 hover:underline flex items-center"

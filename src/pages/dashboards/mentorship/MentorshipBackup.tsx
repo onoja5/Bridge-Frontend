@@ -3,14 +3,25 @@ import MentorCard from '@/components/main/Mentorship/MentorCard';
 import { fetchMentors } from '@/utils/helper';
 import { useAuthContext } from '@/contexts/AuthContext';
 
+// Update Mentor interface to include all required properties
+interface Mentor {
+  id: string;
+  name: string;
+  specialty: string[];
+  email: string;
+  profileImage: string;
+  firstName: string;
+  lastName: string;
+}
+
 const MentorshipBackup: React.FC = () => {
   const { userData } = useAuthContext();
-  const userSkills = userData?.user?.technicalSkills || [];
-  const userInterests = userData?.user?.industriesOfInterest || [];
+  const userSkills: string[] = userData?.user?.technicalSkills || [];
+  const userInterests: string[] = userData?.user?.industriesOfInterest || [];
 
-  const [mentors, setMentors] = useState<any[]>([]);
-  const [relevantMentors, setRelevantMentors] = useState<any[]>([]);
-  const [groupedMentors, setGroupedMentors] = useState<Record<string, any[]>>(
+  const [mentors, setMentors] = useState<Mentor[]>([]);
+  const [relevantMentors, setRelevantMentors] = useState<Mentor[]>([]);
+  const [groupedMentors, setGroupedMentors] = useState<Record<string, Mentor[]>>(
     {},
   );
   const [page, setPage] = useState(1);
@@ -60,9 +71,11 @@ const MentorshipBackup: React.FC = () => {
   // Group mentors by specialty
   useEffect(() => {
     if (mentors.length > 0) {
-      const grouped = mentors.reduce((acc: Record<string, any[]>, mentor) => {
-        if (!acc[mentor.specialty]) acc[mentor.specialty] = [];
-        acc[mentor.specialty].push(mentor);
+      const grouped = mentors.reduce((acc: Record<string, Mentor[]>, mentor) => {
+        mentor.specialty.forEach((specialty) => {
+          if (!acc[specialty]) acc[specialty] = [];
+          acc[specialty].push(mentor);
+        });
         return acc;
       }, {});
       setGroupedMentors(grouped);
@@ -80,17 +93,20 @@ const MentorshipBackup: React.FC = () => {
         <h2 className='text-md font-semibold mb-4'>Mentors Relevant to You</h2>
         <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4'>
           {relevantMentors.length > 0 ? (
-            relevantMentors.map((mentor) => (
-              <MentorCard
-                key={mentor.id}
-                profileImage={mentor.profileImage}
-                firstName={mentor.firstName}
-                lastName={mentor.lastName}
-                name={mentor.name}
-                email={mentor.email}
-                specialty={mentor.specialty}
-              />
-            ))
+            relevantMentors.map((mentor) => {
+              const mentorSpecialty = mentor.specialty.join(', ');
+              return (
+                <MentorCard
+                  key={mentor.id}
+                  profileImage={mentor.profileImage}
+                  firstName={mentor.firstName}
+                  lastName={mentor.lastName}
+                  name={mentor.name}
+                  email={mentor.email}
+                  specialty={mentorSpecialty}
+                />
+              );
+            })
           ) : (
             <p className='text-sm text-gray-500'>No relevant mentors found.</p>
           )}
@@ -102,18 +118,21 @@ const MentorshipBackup: React.FC = () => {
         <h2 className='text-md font-semibold mb-4'>All Mentors</h2>
         <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4'>
           {mentors.length > 0 ? (
-            mentors.map((mentor) => (
-              <Fragment key={mentor.id}>
-                <MentorCard
-                  profileImage={mentor.profileImage}
-                  firstName={mentor.firstName}
-                  lastName={mentor.lastName}
-                  name={mentor.name}
-                  email={mentor.email}
-                  specialty={mentor.specialty}
-                />
-              </Fragment>
-            ))
+            mentors.map((mentor) => {
+              const mentorSpecialty = mentor.specialty.join(', ');
+              return (
+                <Fragment key={mentor.id}>
+                  <MentorCard
+                    profileImage={mentor.profileImage}
+                    firstName={mentor.firstName}
+                    lastName={mentor.lastName}
+                    name={mentor.name}
+                    email={mentor.email}
+                    specialty={mentorSpecialty}
+                  />
+                </Fragment>
+              );
+            })
           ) : (
             <p className='text-sm text-gray-500'>No mentors available.</p>
           )}
@@ -144,17 +163,20 @@ const MentorshipBackup: React.FC = () => {
             <div key={specialty} className='mb-6'>
               <h3 className='text-sm font-medium mb-2'>{specialty}</h3>
               <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4'>
-                {mentors.map((mentor) => (
-                  <MentorCard
-                    key={mentor.id}
-                    profileImage={mentor.profileImage}
-                    firstName={mentor.firstName}
-                    lastName={mentor.lastName}
-                    name={mentor.name}
-                    email={mentor.email}
-                    specialty={mentor.specialty}
-                  />
-                ))}
+                {mentors.map((mentor) => {
+                  const mentorSpecialty = mentor.specialty.join(', ');
+                  return (
+                    <MentorCard
+                      key={mentor.id}
+                      profileImage={mentor.profileImage}
+                      firstName={mentor.firstName}
+                      lastName={mentor.lastName}
+                      name={mentor.name}
+                      email={mentor.email}
+                      specialty={mentorSpecialty}
+                    />
+                  );
+                })}
               </div>
             </div>
           ))

@@ -1,4 +1,4 @@
-import type { LoginUserDTO } from '@/types/auth';
+import type { AuthUserDataDTO, UserRole } from '@/types/auth';
 import { Eye, EyeOff, Lock, Mail } from 'lucide-react';
 import React from 'react';
 import { useState } from 'react';
@@ -10,13 +10,42 @@ import { useAuthContext } from '@/contexts/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
 import { useCookies } from '@/hooks/cookiesHook';
 
+// Define AuthResponse type
+interface AuthResponse {
+  user: {
+    firstName: string;
+    lastName: string;
+    email: string;
+    _id: string;
+    profileImageUrl: string;
+    role: UserRole;
+    userId: string;
+    isNewUser: boolean;
+    isProfileDataSet: boolean;
+    dateCreated: string;
+    tokenInitializationDate: string;
+    tokenExpiryDate: string;
+    phoneNumber?: string;
+    date_of_birth?: string;
+    isEmailVerified?: boolean;
+    skills?: string[];
+    token: string;
+  };
+}
+
+// Add types for formData and API response
+interface LoginFormData {
+  email: string;
+  password: string;
+}
+
 const LoginForm = () => {
   const { setCookies } = useCookies();
   const { setUserData, setIsAuthenticated } = useAuthContext();
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const { loading, setLoading } = useGlobalHooks();
-  const [formData, setFormData] = useState<LoginUserDTO>({
+  const [formData, setFormData] = useState<LoginFormData>({
     email: '',
     password: '',
   });
@@ -35,27 +64,12 @@ const LoginForm = () => {
 
     API.authService
       .login(formData)
-      .then((res) => {
+      .then((res: { data: AuthResponse }) => {
+        const userData = res.data.user;
+        setUserData(userData);
+
         setIsAuthenticated(true);
-
-        const firstName = res?.data?.user?.firstName;
-        const lastName = res?.data?.user?.lastName;
-        const email = res?.data?.user?.email;
-        const _id = res?.data?.user?._id;
-        const profileImageUrl = res?.data?.user?.profileImageUrl;
-        const role = res?.data?.user?.role;
-
-        setUserData((prev) => ({
-          ...prev,
-          firstName,
-          lastName,
-          email,
-          _id,
-          profileImageUrl,
-          role,
-        }));
-
-        setCookies('authToken', res?.data?.token);
+        setCookies('authToken', res.data.user.token);
         setLoading({ ['login']: false });
         handleSuccess('User logged in successfully', navigate, '/dashboard');
       })

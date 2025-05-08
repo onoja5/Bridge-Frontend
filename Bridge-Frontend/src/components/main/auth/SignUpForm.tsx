@@ -1,6 +1,5 @@
 import * as API from '@/services/auth';
 import Button from '@/components/ui/Button';
-import type { CreateAccountDto } from '@/types/auth';
 import { ROLES } from '@/utils/constants';
 import { Eye, EyeOff, Lock, Mail, User } from 'lucide-react';
 
@@ -11,18 +10,54 @@ import { useGlobalHooks } from '@/hooks/globalHooks';
 import { useState } from 'react';
 import { handleError, handleSuccess } from '@/utils/helper';
 
+// Ensure UserRole is properly imported
+import type { AuthUserDataDTO, UserRole } from '@/types/auth';
+
+// Align AuthResponse with AuthUserDataDTO
+interface AuthResponse {
+  user: {
+    firstName: string;
+    lastName: string;
+    email: string;
+    _id: string;
+    profileImageUrl: string;
+    role: UserRole;
+    userId: string;
+    isNewUser: boolean;
+    isProfileDataSet: boolean;
+    dateCreated: string;
+    tokenInitializationDate: string;
+    tokenExpiryDate: string;
+    phoneNumber?: string;
+    date_of_birth?: string;
+    isEmailVerified?: boolean;
+    skills?: string[];
+    token: string;
+  };
+}
+
+// Update role type in SignUpFormData
+interface SignUpFormData {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  role: UserRole;
+}
+
 const SignUpForm = () => {
   const navigate = useNavigate();
   const { setUserData } = useAuthContext();
   const { loading, setLoading } = useGlobalHooks();
   const [showPassword, setShowPassword] = useState(false);
 
-  const [formData, setFormData] = useState<CreateAccountDto>({
+  // Update role property to match UserRole type
+  const [formData, setFormData] = useState<SignUpFormData>({
     firstName: '',
     lastName: '',
     email: '',
     password: '',
-    role: 'STUDENT',
+    role: 'USER' as UserRole,
   });
 
   const [validationErrors, setValidationErrors] = useState<
@@ -69,11 +104,12 @@ const SignUpForm = () => {
       return;
     }
 
+    // Validate API response handling
     API.authService
       .signup(formData)
-      .then((res) => {
-        const { firstName, lastName, email, _id } = res?.data?.user;
-        setUserData({ firstName, lastName, email, _id });
+      .then((res: { data: AuthResponse }) => {
+        const userData = res.data.user;
+        setUserData(userData);
 
         handleSuccess('User created successfully', navigate, '/verify-email');
         setLoading({ ['login']: false });
