@@ -1,102 +1,76 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { setBlueprint, clearBlueprint } from '@/utils/reduxslice';
-import { fetchUserBlueprint } from '@/utils/helper';
-import { loadBlueprintFromLocalStorage, saveBlueprintToLocalStorage } from '@/utils/helper';
+import React, { useState } from 'react';
+
 import { useAuthContext } from '@/contexts/AuthContext';
-import BlueprintFolder from '@/components/Career/BlueprintFolder';
-import BlueprintDetailView from '@/components/Career/BlueprintDetailView';
-import CareerSection from '@/components/Career/CareerSection';
-import { useToast } from '@/hooks/use-toast';
+import BlueprintFolder from '@/components/main/Career/BlueprintFolder';
+import CareerSection from '@/components/main/Career/CareerSection';
+import { getBlueprint } from '@/services/career.api';
+import Skeleton from '@/components/ui/skeleton/skeleton';
+import { useQuery } from '@tanstack/react-query';
+import ViewBlueprint from '@/components/main/Career/ViewBlueprint';
+import SocialShare from '@/components/socialShare';
 
 const Career: React.FC = () => {
-  const dispatch = useDispatch();
-  const blueprint = useSelector((state: any) => state.blueprint.blueprint);
-  const [error, setError] = useState<string | null>(null);
-  const [isDetailViewOpen, setIsDetailViewOpen] = useState(false);
-  const [selectedBlueprint, setSelectedBlueprint] = useState<string | null>(null);
-
-  // Access the userId and user's name from the AuthContext
   const { userData } = useAuthContext();
-  const userId = userData?._id;
-  const userName = userData?.firstName || 'User';
+  const { data, isLoading, error } = useQuery({
+    queryKey: ['mentors', userData?._id],
+    queryFn: () => getBlueprint(userData?._id),
+  });
 
-  const { toast } = useToast();
+  const [isDetailViewOpen, setIsDetailViewOpen] = useState(false);
+  const [isShareModalOpen, setIsShareModalOpen] = useState(false);
 
-  useEffect(() => {
-    const loadBlueprint = async () => {
-      if (!userId) {
-        setError('User ID is not available.');
-        return;
-      }
+  const userName = `${userData?.firstName} ${userData?.lastName}`;
 
-      const cachedBlueprint = loadBlueprintFromLocalStorage();
-      if (cachedBlueprint) {
-        console.log('Loaded blueprint from localStorage:', cachedBlueprint);
-        dispatch(setBlueprint(cachedBlueprint));
-      } else {
-        try {
-          const fetchedBlueprint = await fetchUserBlueprint(userId);
-          if (fetchedBlueprint) {
-            dispatch(setBlueprint(fetchedBlueprint));
-            saveBlueprintToLocalStorage(fetchedBlueprint);
-          } else {
-            setError('Blueprint not found for the user.');
-          }
-        } catch (err) {
-          setError('Failed to fetch blueprint. Please try again later.');
-        }
-      }
-    };
-
-    loadBlueprint();
-  }, [dispatch, userId]);
-
-  const handleViewBlueprint = (blueprint: string) => {
-    setSelectedBlueprint(blueprint);
-    setIsDetailViewOpen(true);
-  };
-
-  const handleUpdateBlueprint = (updatedBlueprint: string) => {
-    dispatch(setBlueprint(updatedBlueprint)); // Update Redux state
-    saveBlueprintToLocalStorage(updatedBlueprint); // Save to localStorage
-    setSelectedBlueprint(updatedBlueprint); // Set the updated blueprint for detail view
-    setIsDetailViewOpen(true); // Open the detail view
+  const handleViewBlueprint = () => {
+    setIsDetailViewOpen(!isDetailViewOpen);
   };
 
   const handleDeleteBlueprint = () => {
-    dispatch(clearBlueprint()); // Clear blueprint from Redux state
-    saveBlueprintToLocalStorage(''); // Clear blueprint from localStorage
-    setSelectedBlueprint(null); // Reset selected blueprint
-    toast({
-      title: `${userName}'s Career Blueprint`,
-      description: 'has been deleted.',
-      variant: 'default',
-    });
+    console.log('Delete blueprint functionality here');
   };
 
-  const handleBackToFolder = () => {
-    setIsDetailViewOpen(false);
-    setSelectedBlueprint(null);
+  const handleUpdateBlueprint = () => {
+    console.log('Update blueprint functionality here');
   };
+
+  const handleShare = () => {
+    setIsShareModalOpen(true);
+  };
+
+  const taskData = data?.careerBlueprint?.structuredJson?.tasks;
 
   if (error) {
-    return <div className="error-message">{error}</div>;
+    return <div className='error-message'>{error?.message}</div>;
+  }
+
+  if (isLoading) {
+    return (
+      <ul className='flex flex-col gap-4'>
+        {Array.from({ length: 8 }).map((_, index) => (
+          <li key={index}>
+            <Skeleton className='!h-5 !w-full' />
+          </li>
+        ))}
+      </ul>
+    );
   }
 
   return (
-    <div>
-      {isDetailViewOpen && selectedBlueprint ? (
-        <BlueprintDetailView blueprint={selectedBlueprint} onBack={handleBackToFolder} />
+    <main>
+      {isDetailViewOpen && data?.careerBlueprint?.structuredJson ? (
+        <ViewBlueprint
+          blueprint={data?.careerBlueprint?.structuredJson}
+          onBack={handleViewBlueprint}
+        />
       ) : (
         <div>
-          {blueprint ? (
+          {data?.careerBlueprint?.structuredJson ? (
             <BlueprintFolder
               name={`${userName}'s Career Blueprint`}
-              onView={() => handleViewBlueprint(blueprint)}
-              onDelete={handleDeleteBlueprint} // Pass delete handler
-              onUpdate={handleUpdateBlueprint} // Pass the update handler
-              onShare={() => console.log('Share blueprint functionality here')}
+              onView={handleViewBlueprint}
+              onDelete={handleDeleteBlueprint}
+              onUpdate={handleUpdateBlueprint}
+              onShare={handleShare}
             />
           ) : (
             <p>Loading blueprint...</p>
@@ -104,8 +78,17 @@ const Career: React.FC = () => {
         </div>
       )}
 
-      <CareerSection/>
-    </div>
+      <CareerSection taskData={taskData} />
+
+      {isShareModalOpen && (
+        <SocialShare
+          title={`${userName}'s Career Blueprint`}
+          description='Check out my career blueprint on Bridge!'
+          url={window.location.href}
+          onClose={() => setIsShareModalOpen(false)}
+        />
+      )}
+    </main>
   );
 };
 

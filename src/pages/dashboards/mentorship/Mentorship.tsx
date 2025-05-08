@@ -2,7 +2,6 @@ import React, { useEffect, useState, useMemo } from 'react';
 import MentorCard from '@/components/Mentorship/MentorCard';
 import { fetchMentors } from '@/utils/helper';
 import { useAuthContext } from '@/contexts/AuthContext';
-import SearchComponent from '@/components/ui/SearchComponent';
 
 const Mentorship: React.FC = () => {
   const { userData } = useAuthContext();
@@ -16,8 +15,6 @@ const Mentorship: React.FC = () => {
   const [limit] = useState(6); // Number of mentors per page
   const [error, setError] = useState<string | null>(null); // Track errors
   const [totalPages, setTotalPages] = useState(1);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [filteredMentors, setFilteredMentors] = useState<any[]>((mentors));
 
   const fetchAndSetMentors = async () => {
     try {
@@ -36,7 +33,7 @@ const Mentorship: React.FC = () => {
   }, [page]);
 
   // Memoize the filtered mentors to avoid unnecessary re-renders
-  const filteredRelevantMentors = useMemo(() => {
+  const filteredMentors = useMemo(() => {
     if (mentors.length > 0) {
       return mentors.filter((mentor) =>
         userSkills.some((skill) => mentor.specialty.includes(skill)) ||
@@ -48,8 +45,8 @@ const Mentorship: React.FC = () => {
 
   // Update relevant mentors only if the filtered mentors change
   useEffect(() => {
-    setRelevantMentors(filteredRelevantMentors);
-  }, [filteredRelevantMentors]);
+    setRelevantMentors(filteredMentors);
+  }, [filteredMentors]);
 
   // Group mentors by specialty
   useEffect(() => {
@@ -63,36 +60,14 @@ const Mentorship: React.FC = () => {
     }
   }, [mentors]);
 
-  useEffect(() => {
-    if (searchTerm.trim() === '') {
-      setFilteredMentors(mentors);
-    } else {
-      const lowercasedTerm = searchTerm.toLowerCase();
-      setFilteredMentors(
-        mentors.filter(
-          (mentor) =>
-            mentor.firstName.toLowerCase().includes(lowercasedTerm) ||
-            mentor.lastName.toLowerCase().includes(lowercasedTerm) ||
-            mentor.specialty.toLowerCase().includes(lowercasedTerm)
-        )
-      );
-    }
-  }, [searchTerm, mentors]);
-
   return (
     <div className="p-6 w-full bg-white">
       <h1 className="text-lg font-bold mb-4">Mentorship</h1>
 
-      <SearchComponent
-        placeholder="Search mentors by name or specialty..."
-        value={searchTerm}
-        onSearch={setSearchTerm}
-      />
-
       {error && <p className="text-sm text-red-500 mb-4">{error}</p>}
 
       {/* Relevant Mentors Section */}
-      <section className="mb-8 mt-8">
+      <section className="mb-8">
         <h2 className="text-md font-semibold mb-4">Mentors Relevant to You</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
           {relevantMentors.length > 0 ? (
@@ -108,7 +83,7 @@ const Mentorship: React.FC = () => {
               />
             ))
           ) : (
-            <p className="text-sm text-gray-500">No relevant mentors found.</p>
+            <p className='text-sm text-gray-500'>No relevant mentors found.</p>
           )}
         </div>
       </section>
@@ -117,8 +92,8 @@ const Mentorship: React.FC = () => {
       <section className="mb-8">
         <h2 className="text-md font-semibold mb-4">All Mentors</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-          {filteredMentors.length > 0 ? (
-            filteredMentors.map((mentor) => (
+          {mentors.length > 0 ? (
+            mentors.map((mentor) => (
               <MentorCard
                 key={mentor.id}
                 profileImage={mentor.profileImage}
@@ -130,52 +105,26 @@ const Mentorship: React.FC = () => {
               />
             ))
           ) : (
-            <p className="text-sm text-gray-500">No mentors found.</p>
+            <p className="text-sm text-gray-500">No mentors available.</p>
           )}
         </div>
         <div className="flex justify-center mt-4">
           <button
-            onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
-            className="px-4 py-2 bg-gray-200 text-gray-800 rounded-md mr-2"
-            disabled={page === 1}
+            className='px-4 py-2 bg-gray-200 rounded disabled:opacity-50'
+            onClick={() => handlePageChange(page - 1)}
+            disabled={page <= 1}
           >
             Previous
           </button>
+          <span className='px-4 py-2'>{page}</span>
           <button
-            onClick={() => setPage((prev) => prev + 1)}
-            className="px-4 py-2 bg-blue-600 text-white rounded-md"
-            disabled={page === totalPages}
+            className='px-4 py-2 bg-gray-200 rounded'
+            onClick={() => handlePageChange(page + 1)}
+            disabled={data && data.mentors && data.mentors.length < pageLimit}
           >
             Next
           </button>
-        </div>
-      </section>
-
-      {/* Grouped Mentors Section */}
-      <section>
-        <h2 className="text-md font-semibold mb-4">Mentors by Specialty</h2>
-        {Object.keys(groupedMentors).length > 0 ? (
-          Object.entries(groupedMentors).map(([specialty, mentors]) => (
-            <div key={specialty} className="mb-6">
-              <h3 className="text-sm font-medium mb-2">{specialty}</h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                {mentors.map((mentor) => (
-                  <MentorCard
-                    key={mentor.id}
-                    profileImage={mentor.profileImage}
-                    firstName={mentor.firstName}
-                    lastName={mentor.lastName}
-                    name={mentor.name}
-                    email={mentor.email}
-                    specialty={mentor.specialty}
-                  />
-                ))}
-              </div>
-            </div>
-          ))
-        ) : (
-          <p className="text-sm text-gray-500">No mentors grouped by specialty.</p>
-        )}
+        </article>
       </section>
     </div>
   );
