@@ -4,6 +4,7 @@ import Jobs from '@/pages/dashboards/jobs/Jobs';
 import Mentorship from '@/pages/dashboards/mentorship/Mentorship';
 import Projects from '@/pages/dashboards/projects/Projects';
 import Recomendations from '@/pages/dashboards/recommendations/Recomendations';
+import MentorDetails from '@/pages/dashboards/mentorship/MentorDetails';
 import { ReactElement } from 'react';
 
 interface Route {
@@ -39,6 +40,11 @@ const dashboardRoutes: Route[] = [
     name: 'Jobs',
     path: '/jobs',
     element: <Jobs />,
+  },
+  {
+    name: 'MentorDetails',
+    path: '/dashboards/mentorship/MentorDetails',
+    element: <MentorDetails />,
   },
 ];
 

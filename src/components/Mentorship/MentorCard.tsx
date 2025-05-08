@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import DefaultAvatar from '@/assets/images/noAvatar.png'; // Default avatar image
 
 interface MentorCardProps {
@@ -11,8 +12,19 @@ interface MentorCardProps {
 }
 
 const MentorCard: React.FC<MentorCardProps> = ({ profileImage, firstName, lastName, name, email, specialty }) => {
+  const navigate = useNavigate();
+
+  const handleCardClick = () => {
+    navigate('/dashboards/mentorship/MentorDetails', {
+      state: { profileImage, firstName, lastName, name, email, specialty },
+    });
+  };
+
   return (
-    <div className="bg-white p-4 rounded-md shadow-md flex flex-col items-center text-center">
+    <div
+      className="bg-white p-4 rounded-md shadow-md flex flex-col items-center text-center cursor-pointer"
+      onClick={handleCardClick}
+    >
       <img
         src={profileImage || DefaultAvatar}
         alt={name}
