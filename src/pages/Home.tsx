@@ -111,7 +111,7 @@ export default function Home() {
     • Access mentorship and opportunities that accelerate growth`,
       image:
         'https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
-      path: '/workforce-development',
+      path: '/for-students',
     },
     {
       title: '🧭 Mentors',
@@ -121,7 +121,7 @@ export default function Home() {
     • Shape the future of work through impactful mentorship`,
       image:
         'https://images.unsplash.com/photo-1606761568499-6d2451b23c66?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
-      path: '/mentors',
+      path: '/for-educators',
     },
     {
       title: '🤝 Partners',
@@ -131,7 +131,7 @@ export default function Home() {
     • Co-create value through upskilling, mentorship, and project-based training`,
       image:
         'https://images.unsplash.com/photo-1531482615713-2afd69097998?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
-      path: '/partners',
+      path: '/for-employers',
     },
   ];
 
