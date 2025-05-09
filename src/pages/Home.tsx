@@ -104,49 +104,34 @@ export default function Home() {
 
   const opportunities = [
     {
-      title: '🎓 Students & Graduates',
-      description: `Find your path, gain skills, and land opportunities
-
-🌟 Discover your path – Find the right career based on your interests and strengths
-
-📚 Upskill with ease – Close skill gaps with personalized learning recommendations
-
-🤝 Gain real-world experience – Access mentors, internships, and hands-on projects
-
-🎯 Land the perfect job – Use AI-powered job matching to connect with the right employers`,
+      title: '🎯 Talents',
+      description: `For emerging and evolving professionals ready to unlock their potential and step into their dream future:
+    • Discover personalized career paths powered by AI
+    • Build job-ready skills through project-based learning
+    • Access mentorship and opportunities that accelerate growth`,
       image:
         'https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
       path: '/workforce-development',
     },
     {
-      title: '💼 Professionals & Career Changers',
-      description: `Upskill, transition, and accelerate your career.
-
-📈 Identify growth opportunities and future-proof your career.
-
-📚 Access specialized learning paths & industry certifications.
-
-🛠️ Gain hands-on experience through job simulations & projects.
-
-🤝 Connect with mentors & hiring managers for career guidance.`,
+      title: '🧭 Mentors',
+      description: `For industry leaders looking to give back and grow their influence:
+    • Guide and inspire the next generation of talent
+    • Share insights while expanding your professional network
+    • Shape the future of work through impactful mentorship`,
       image:
         'https://images.unsplash.com/photo-1606761568499-6d2451b23c66?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
-      path: '/career-changers',
+      path: '/mentors',
     },
     {
-      title: '🧑‍🏫 Mentors & Industry Experts',
-      description: `Shape the next generation of talent.
-
-📖 Share knowledge & industry insights with emerging professionals.
-
-🤝 Offer guidance through 1:1 mentorship & career coaching.
-
-🛠️ Contribute to real-world projects & skill-building initiatives.
-
-🌟 Build your reputation as a thought leader in your field.`,
+      title: '🤝 Partners',
+      description: `For businesses and institutions building the workforce of tomorrow:
+    • Connect with pre-vetted, future-ready talent
+    • Access on-demand expertise for agile business needs
+    • Co-create value through upskilling, mentorship, and project-based training`,
       image:
         'https://images.unsplash.com/photo-1531482615713-2afd69097998?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
-      path: '/mentors',
+      path: '/partners',
     },
   ];
 
@@ -506,13 +491,11 @@ export default function Home() {
         <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
           <h2 className='text-3xl font-bold text-center mb-4'>Who We Serve</h2>
           <p className='text-xl text-gray-600 text-center max-w-4xl mx-auto mb-12'>
-            BridgeAI is designed to empower individuals and organizations by
-            bridging the gap between education and the workforce. Whether you’re
-            a student, professional, mentor, or employer, our AI-driven platform
-            provides personalized solutions to help you achieve your career and
-            talent development goals.
+            BridgeAI is designed to empower the workforce of tomorrow by
+            bridging the gap between formal education and the evolving demands
+            of the marketplace.
           </p>
-          <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 text-center'>
+          <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 text-center'>
             {opportunities.map((opportunity, index) => (
               <div
                 key={index}
@@ -535,43 +518,6 @@ export default function Home() {
                 </Link>
               </div>
             ))}
-
-            {/* Employers & Hiring Partners */}
-            <div className='group bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow duration-300'>
-              <div className='mb-6 overflow-hidden rounded-lg'>
-                <img
-                  src='https://images.unsplash.com/photo-1593642634367-d91a135587b5?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'
-                  alt='Employers & Hiring Partners'
-                  className='w-full h-48 object-cover transform group-hover:scale-105 transition-transform duration-300'
-                />
-              </div>
-              <h3 className='text-xl font-bold mb-2'>
-                🏢 Employers & Hiring Partners
-              </h3>
-              <div className='space-y-4 text-gray-600 text-center'>
-                <ul className='list-none space-y-2'>
-                  <li>
-                    📖 Identify and recruit top candidates using AI-powered
-                    talent matching.
-                  </li>
-                  <li>
-                    🤝 Access a pipeline of skilled graduates & professionals.
-                  </li>
-                  <li>
-                    🛠️ Offer internships, apprenticeships & industry projects.
-                  </li>
-                  <li>
-                    🌟 Leverage AI-driven insights for workforce development.
-                  </li>
-                </ul>
-              </div>
-              <Link
-                to='/employers'
-                className='text-blue-600 font-semibold hover:text-blue-700 flex items-center justify-center mt-4'
-              >
-                Learn More <ArrowRight className='ml-2 h-4 w-4' />
-              </Link>
-            </div>
           </div>
         </div>
       </div>

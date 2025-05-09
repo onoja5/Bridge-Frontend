@@ -8,9 +8,9 @@ export default function Navbar() {
   const pathname = useLocation().pathname;
 
   const solutions = [
-    { name: 'For Students', path: '/for-students' },
-    { name: 'For Educators', path: '/for-educators' },
-    { name: 'For Employers', path: '/for-employers' },
+    { name: 'For Talents', path: '/for-students' },
+    { name: 'For Mentors', path: '/for-educators' },
+    { name: 'For Partners', path: '/for-employers' },
   ];
 
   const explore = [

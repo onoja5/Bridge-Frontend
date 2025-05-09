@@ -67,9 +67,9 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link to="/testimonials" className="text-gray-400 hover:text-white transition-colors duration-300">
+                <span className="text-gray-400 hover:text-white transition-colors duration-300">
                   Testimonials
-                </Link>
+                </span>
               </li>
             </ul>
           </div>
