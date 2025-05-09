@@ -1,6 +1,6 @@
-/** @type {import('tailwindcss').Config} */
-export default {
-  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+// filepath: c:\Users\Edward\Bridge-Frontend\tailwind.config.js
+module.exports = {
+  content: ['./index.html', './src/**/*.{html,js,jsx,ts,tsx}'],
   theme: {
     extend: {
       screens: {

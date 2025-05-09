@@ -12,6 +12,8 @@ interface Layout {
   children: ReactNode;
 }
 
+const isActive: boolean = true; // Example
+
 const DashboardLayout: React.FC<Layout> = ({ children }) => {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false); // State for sidebar collapse
   const { isAuthenticated } = useAuthContext();
