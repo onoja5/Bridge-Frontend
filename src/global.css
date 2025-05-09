@@ -1,9 +1,15 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
 .container {
-  @apply mx-auto w-[95%] lg:w-[93%];
+  margin-left: auto;
+  margin-right: auto;
+  width: 95%;
+}
+
+@media (min-width: 1024px) {
+  .container {
+    width: 93%;
+  }
 }
 
 :root {

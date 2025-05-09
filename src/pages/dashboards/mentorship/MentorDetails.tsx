@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
@@ -30,11 +30,11 @@ const MentorDetails = () => {
     setIsModalOpen(true); // Open the booking modal
   };
 
-  // Investigate and fix date type compatibility
-  const handleDateChange = (date: any) => {
+  // Fixed type mismatch for handleDateChange
+  const handleDateChange = (date: Date | [Date, Date] | null) => {
     if (date instanceof Date || date === null) {
       setSelectedDate(date);
-    } else if (Array.isArray(date) && date.length > 0 && date[0] instanceof Date) {
+    } else if (Array.isArray(date) && date.length === 2 && date[0] instanceof Date) {
       setSelectedDate(date[0]);
     }
   };

@@ -2,9 +2,7 @@ import React, {
   createContext,
   useContext,
   useState,
-  useEffect,
-  Dispatch,
-  SetStateAction,
+  useEffect
 } from 'react';
 import type { AuthUserDataDTO } from '../types/auth';
 
