@@ -73,7 +73,7 @@ function App() {
             />
           ))}
           <Route
-            path="/digital-apprenticeship-program"
+            path='/digital-apprenticeship-program'
             element={
               <>
                 <Navbar />
@@ -83,7 +83,7 @@ function App() {
             }
           />
           <Route
-            path="/digital-africa-bootcamp"
+            path='/digital-africa-bootcamp'
             element={
               <>
                 <Navbar />
@@ -93,7 +93,7 @@ function App() {
             }
           />
           <Route
-            path="/corporate-talent-pipeline"
+            path='/corporate-talent-pipeline'
             element={
               <>
                 <Navbar />

@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import {
   ArrowRight,
   Users,
   BookOpen,
-  Building,
-  Star,
   Briefcase,
   School,
   GraduationCap,
@@ -12,13 +10,25 @@ import {
   CheckCircle,
   ChevronDown,
 } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuthContext } from '@/contexts/AuthContext';
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState('colleges');
   const [scrollPosition, setScrollPosition] = useState(0);
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const navigate = useNavigate();
+
+  // this is to ensure that loggedin users are automatically redirected to dashboard
+  // instead of the website homepage
+  const { isAuthenticated } = useAuthContext();
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      return navigate('/dashboard');
+    }
+  }, [isAuthenticated]);
 
   // Partner logos array
   const partners = [
