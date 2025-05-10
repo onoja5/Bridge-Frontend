@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
+import { useAuthContext } from '@/contexts/AuthContext';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const pathname = useLocation().pathname;
+  const { isAuthenticated } = useAuthContext();
 
   const solutions = [
     { name: 'For Talents', path: '/for-students' },
@@ -191,22 +193,37 @@ export default function Navbar() {
               Contact
             </Link>
           </div>
+          {isAuthenticated ? (
+            <div className='hidden md:flex items-center space-x-4'>
+              <Link
+                to='/dashboard'
+                className={`bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700
 
-          <div className='hidden md:flex items-center space-x-4'>
-            <Link to='/login' className={`text-blue-600 hover:text-blue-700  `}>
-              Log In
-            </Link>
-            <Link
-              to='/select-user-type' // Redirect to user type selection page
-              className={`bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 ${
-                pathname === '/select-user-type'
-                  ? 'text-blue-600 font-bold'
-                  : ''
-              }`}
-            >
-              Sign Up
-            </Link>
-          </div>
+               `}
+              >
+                Got to My Dashboard
+              </Link>
+            </div>
+          ) : (
+            <div className='hidden md:flex items-center space-x-4'>
+              <Link
+                to='/login'
+                className={`text-blue-600 hover:text-blue-700  `}
+              >
+                Log In
+              </Link>
+              <Link
+                to='/select-user-type' // Redirect to user type selection page
+                className={`bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 ${
+                  pathname === '/select-user-type'
+                    ? 'text-blue-600 font-bold'
+                    : ''
+                }`}
+              >
+                Sign Up
+              </Link>
+            </div>
+          )}
 
           {/* Mobile menu button */}
           <div className='md:hidden flex items-center'>
