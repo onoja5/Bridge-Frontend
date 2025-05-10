@@ -14,6 +14,7 @@ const Career: React.FC = () => {
   const { data, isLoading, error } = useQuery({
     queryKey: ['mentors', userData?._id],
     queryFn: () => getBlueprint(userData?._id),
+
   });
 
   const [isDetailViewOpen, setIsDetailViewOpen] = useState(false);
