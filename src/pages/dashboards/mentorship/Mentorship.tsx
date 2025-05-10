@@ -4,6 +4,8 @@ import { useQuery } from '@tanstack/react-query';
 import { getAllMentors } from '@/services/mentors.api';
 import Skeleton from '@/components/ui/skeleton/skeleton';
 import { useSearchParams } from 'react-router-dom';
+import SearchMentors from '@/components/SearchMentors';
+import { MentorsProps } from '@/types/mentors.types';
 
 const Mentorship: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -16,6 +18,14 @@ const Mentorship: React.FC = () => {
     queryKey: ['mentors', page],
     queryFn: () => getAllMentors(page, pageLimit),
   });
+
+  const [filteredMentors, setFilteredMentors] = React.useState<MentorsProps[]>([]);
+
+  React.useEffect(() => {
+    if (data?.mentors) {
+      setFilteredMentors(data.mentors);
+    }
+  }, [data]);
 
   const handlePageChange = (newPage: number) => {
     setSearchParams({ page: newPage.toString() });
@@ -40,18 +50,17 @@ const Mentorship: React.FC = () => {
     );
   }
 
-  // the backend will provide api for different type of mentors later
-  // for now, we are using the same api for all mentors
-
   return (
     <div className='p-6 w-full bg-white'>
       <h1 className='text-lg font-bold mb-4'>Mentorship</h1>
 
+      <SearchMentors mentors={data?.mentors || []} onFilter={setFilteredMentors} />
+
       <section className='mb-8'>
         <h2 className='text-md font-semibold mb-4'>Mentors Relevant to You</h2>
         <ul className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4'>
-          {data && data?.mentors?.length > 0 ? (
-            data?.mentors.map((mentor) => (
+          {filteredMentors.length > 0 ? (
+            filteredMentors.map((mentor) => (
               <li key={mentor._id}>
                 <MentorCard
                   profileImage={mentor.profileImageUrl}

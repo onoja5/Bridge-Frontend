@@ -2,10 +2,9 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuthContext } from '@/contexts/AuthContext';
 import {
-  BriefcaseIcon,
   DocumentIcon,
   BadgeIcon,
-  StudentIcon,
+  BriefcaseIcon,
 } from '@/assets/svgs/ExportSvgs';
 
 const UserTypeSelection = () => {
@@ -21,36 +20,30 @@ const UserTypeSelection = () => {
 
   const userTypes = [
     {
-      role: 'Employer',
-      icon: BriefcaseIcon,
-      description:
-        "You'll be able to connect with bright students seeking opportunities to grow, learn, and be exposed.",
-    },
-    {
-      role: 'Student',
-      icon: StudentIcon,
-      description:
-        "You'll be able to connect with great employers, mentors, and professionals so that you can grow.",
-    },
-    {
-      role: 'Professional',
+      role: 'Talents',
       icon: DocumentIcon,
       description:
-        "You'll be able to connect with bright students seeking opportunities to grow, learn, and be exposed.",
+        "Unlock your potential with AI-driven guidance, practical learning experiences, and the right connections to thrive in your dream career.",
     },
     {
-      role: 'Mentor',
+      role: 'Mentors',
       icon: BadgeIcon,
       description:
-        "You'll be able to connect with bright students seeking opportunities to grow, learn, and be exposed.",
+        "Inspire the next generation, expand your influence, and leave a lasting legacy through meaningful mentorship.",
+    },
+    {
+      role: 'Partners',
+      icon: BriefcaseIcon,
+      description:
+        "Access future-ready talent, tap into on-demand expertise, and collaborate on upskilling initiatives through project-based training. Institutions offering skilling and training opportunities can join to empower tomorrow’s workforce.",
     },
   ];
 
   return (
     <main className='min-h-screen flex flex-col items-center justify-center bg-gray-100 px-4'>
-      <h2 className='text-3xl font-bold mb-4'>Let’s get to know you!</h2>
+      <h2 className='text-3xl font-bold mb-4 mt-28'>Tailor your experience</h2>
       <p className='text-center mb-8 text-gray-600'>Tell us what type of user you are, this will help us craft a great experience for you.</p>
-      <div className='grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl'>
+      <div className='grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl mb-20'>
         {userTypes.map(({ role, icon: Icon, description }) => (
           <button
             key={role}

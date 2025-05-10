@@ -1,19 +1,16 @@
 import React, { useState, useEffect } from 'react';
-
-import {
-  DowntrendIcon,
-  LightbulbIcon,
-  UptrendIcon,
-} from '@/assets/svgs/ExportSvgs';
 import SurveyModal from '@/components/main/SurveyModal/SurveyModal';
 import { useNavigate } from 'react-router-dom';
 import { fetchUserBlueprint } from '@/utils/helper';
 import { useAuthContext } from '@/contexts/AuthContext';
-import DashboardProgressReport from '@/components/main/home/dashboardProgressReport';
+import noAvatar from '@/assets/images/noAvatar.png';
+import { FaLinkedin, FaFolder, FaCalendar, FaComments, FaCompass } from 'react-icons/fa';
+import SocialShare from '@/components/socialShare';
 
 const Dashboard: React.FC = () => {
   const [isSurveyModalOpen, setSurveyModalOpen] = useState(false);
   const [hasGeneratedBlueprint, setHasGeneratedBlueprint] = useState(false);
+  const [isSocialShareOpen, setSocialShareOpen] = useState(false);
   const navigate = useNavigate();
   const { userData } = useAuthContext();
   const userId = userData?._id;
@@ -34,6 +31,14 @@ const Dashboard: React.FC = () => {
 
   const handleCloseSurveyModal = () => {
     setSurveyModalOpen(false); // Closes the modal
+  };
+
+  const handleSocialShareOpen = () => {
+    setSocialShareOpen(true);
+  };
+
+  const handleSocialShareClose = () => {
+    setSocialShareOpen(false);
   };
 
   const surveyPhases = [
@@ -119,70 +124,145 @@ const Dashboard: React.FC = () => {
         isOpen={isSurveyModalOpen}
       />
 
-      {/* Mid Section (Recommended Career Paths, Suggested Mentors, Skill Gap Analysis) */}
-      <DashboardProgressReport />
-
-      {/* Bottom Section (Skill Growth Tracker, Personalized AI Tips) */}
-      <section className='grid grid-cols-1 md:grid-cols-2 gap-6 mt-8'>
-        {/* Skill Growth Tracker */}
-        <article className='bg-white p-6 rounded-lg'>
-          <div className='flex items-center flex-col lg:flex-row justify-between'>
-            <h3 className='text-sm font-bold mb-5'>Skill Growth Tracker</h3>
-            <div className='flex justify-between items-center mb-4'>
-              <select className='text-sm border outline-none border-[#D1D5DB] rounded-md p-1'>
-                <option>Graphic Design</option>
-                <option>UI/UX Design</option>
-                <option>Software Engineering</option>
-              </select>
-            </div>
+      {/* Top Section: Welcome & Vision Snapshot */}
+      <section className='p-6 bg-white rounded-lg shadow-md mt-6'>
+        <div className='flex items-center gap-4'>
+          <img
+            src={userData?.profileImageUrl || noAvatar}
+            alt='Profile'
+            className='w-20 h-20 rounded-full object-cover'
+          />
+          <div>
+            <h3 className='text-lg font-bold'>Hi {userData?.firstName}, your journey to becoming an AI Product Leader is underway. Let’s keep building!</h3>
+            <button
+              onClick={() => navigate('/career')}
+              className='mt-2 px-4 py-2 bg-blue-600 text-white rounded-md'
+            >
+              View Full Blueprint
+            </button>
+            <button className='mt-2 ml-4 px-4 py-2 bg-gray-200 rounded-md'>Update My Details</button>
           </div>
+        </div>
+      </section>
 
-          <div className='flex justify-center flex-col lg:flex-row gap-10 items-end mt-10 px-10'>
-            <div className='flex flex-col items-center gap-3'>
-              <div className='flex items-end gap-1'>
-                <p className='text-3xl font-semibold text-red-600'>50%</p>
-                <DowntrendIcon />
-              </div>
-
-              <div className='flex items-center gap-2'>
-                <span className='text-xs py-1 px-2 bg-[#DDEAFF] text-[#2563EB] rounded-sm'>
-                  Skill Level
-                </span>
-                <p className='text-xs text-gray-600'>Last month</p>
-              </div>
-            </div>
-            <div className='flex flex-col items-center gap-3'>
-              <div className='flex items-end gap-1'>
-                <p className='text-5xl font-semibold text-green-600'>70%</p>
-                <UptrendIcon />
-              </div>
-
-              <div className='flex items-center gap-2'>
-                <span className='text-xs py-1 px-2 bg-[#DDEAFF] text-[#2563EB] rounded-sm'>
-                  Skill Level
-                </span>
-                <p className='text-xs text-gray-600'>Last month</p>
-              </div>
-            </div>
-          </div>
+      {/* Main Cards Layout */}
+      <section className='grid grid-cols-1 md:grid-cols-3 gap-6 mt-6'>
+        {/* My Career Roadmap */}
+        <article className='bg-white p-6 rounded-lg shadow-md'>
+          <h3 className='text-md font-bold mb-4'>My Career Roadmap</h3>
+          <ul className='space-y-2'>
+            <li>✅ Completed Intro to Product Thinking</li>
+            <li>🔄 Scheduled mentorship session</li>
+            <li>🔲 Join AI-focused capstone project</li>
+          </ul>
+          <button className='mt-4 px-4 py-2 bg-blue-600 text-white rounded-md'>See Full Roadmap</button>
         </article>
 
-        {/* Personalized AI Tips */}
-        <article className='bg-white p-6 rounded-lg border-2 border-[#2563EB]'>
-          <h3 className='text-sm font-bold mb-5'>Personalized AI Tips</h3>
-          <div className='bg-[#2563EB] p-4 rounded-lg'>
-            <div className='flex items-start gap-1'>
-              <LightbulbIcon />
-              <p className='text-sm text-white flex-1'>
-                Based on your skills, you may benefit from learning SQL for
-                better data analysis!
-              </p>
+        {/* Learning Plan */}
+        <article className='bg-white p-6 rounded-lg shadow-md'>
+          <h3 className='text-md font-bold mb-4'>Learning Plan</h3>
+          <div className='mb-4'>
+            <div className='h-2 bg-gray-200 rounded-full overflow-hidden'>
+              <div className='h-full bg-blue-600' style={{ width: '70%' }}></div>
             </div>
-            <button className='mt-6 px-4 py-2 w-full bg-white text-[#2563EB] text-sm font-medium rounded-md'>
-              Start Learning SQL Now!
+            <p className='text-sm mt-2'>70% Progress</p>
+          </div>
+          <ul className='space-y-2'>
+            <li>✅ Finished: Agile Basics</li>
+            <li>🔄 In Progress: Python for Data Analysis</li>
+            <li>🔲 Start: Product Management Simulation</li>
+          </ul>
+          <div className='flex flex-col gap-4 mt-4'>
+            <button className='px-4 py-2 bg-blue-600 text-white rounded-md flex items-center gap-2'>
+              <FaCompass />
+              <span>Explore</span>
+            </button>
+            <button className='px-4 py-2 bg-gray-200 rounded-md flex items-center gap-2'>
+              <FaFolder />
+              <span>Apply for Projects</span>
             </button>
           </div>
         </article>
+
+        {/* Mentorship Hub */}
+        <article className='bg-white p-6 rounded-lg shadow-md'>
+          <h3 className='text-md font-bold mb-4'>Mentorship Hub</h3>
+          <div className='flex items-center gap-4'>
+            <img
+              src={noAvatar}
+              alt='Mentor Avatar'
+              className='w-12 h-12 rounded-full object-cover'
+            />
+            <div>
+              <p className='text-sm font-semibold'>John Doe</p>
+              <p className='text-sm text-gray-500'>Next session: 📅 May 15, 2025</p>
+            </div>
+          </div>
+          <ul className='mt-4 space-y-2'>
+            <li>💡 Tips from mentor: "Focus on building your portfolio."</li>
+          </ul>
+          <div className='flex flex-col gap-4 mt-4'>
+            <button className='px-4 py-2 bg-blue-600 text-white rounded-md flex items-center gap-2'>
+              <FaComments />
+              <span>Message</span>
+            </button>
+            <button className='px-4 py-2 bg-gray-200 rounded-md flex items-center gap-2'>
+              <FaCalendar />
+              <span>Book</span>
+            </button>
+          </div>
+        </article>
+      </section>
+
+      {/* Lower Section: Opportunities & Engagement */}
+      <section className='mt-8'>
+        {/* Recommended Opportunities */}
+        <article className='bg-white p-6 rounded-lg shadow-md mb-6'>
+          <h3 className='text-md font-bold mb-4'>Recommended Opportunities</h3>
+          <ul className='space-y-2'>
+            <li>🧠 AI Career Week - Apply Now</li>
+            <li>🧩 Product Analyst Intern @ TechStart</li>
+          </ul>
+          <button className='mt-4 px-4 py-2 bg-blue-600 text-white rounded-md'>Browse All</button>
+        </article>
+
+        {/* Community & Events */}
+        <article className='bg-white p-6 rounded-lg shadow-md mb-6'>
+          <h3 className='text-md font-bold mb-4'>Community & Events</h3>
+          <ul className='space-y-2'>
+            <li>🔔 AMA with AI Leaders</li>
+            <li>💬 Join the AI Hackathon Challenge</li>
+          </ul>
+          <div className='flex gap-4 mt-4'>
+            <button className='px-4 py-2 bg-blue-600 text-white rounded-md'>Join Discussion</button>
+            <button className='px-4 py-2 bg-gray-200 rounded-md'>Attend Event</button>
+          </div>
+        </article>
+
+        {/* Badges & Shares */}
+        <article className='bg-white p-6 rounded-lg shadow-md'>
+          <h3 className='text-md font-bold mb-4'>Badges & Shares</h3>
+          <p className='text-sm'>Most recent achievement: "AI Skills Challenger Badge"</p>
+          <div className='flex gap-4 mt-4'>
+            <button
+              className='px-4 py-2 bg-blue-600 text-white rounded-md flex items-center gap-2'
+              onClick={handleSocialShareOpen}
+            >
+              <FaLinkedin />
+              <span>Share to LinkedIn</span>
+            </button>
+            <button className='px-4 py-2 bg-gray-200 rounded-md'>View All Badges</button>
+          </div>
+        </article>
+
+        {isSocialShareOpen && (
+          <SocialShare
+            title='AI Skills Challenger Badge'
+            description='I just earned the AI Skills Challenger Badge!'
+            url='https://www.linkedin.com'
+            onClose={handleSocialShareClose}
+          />
+        )}
       </section>
     </main>
   );
