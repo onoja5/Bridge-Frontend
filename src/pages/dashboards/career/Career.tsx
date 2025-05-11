@@ -14,7 +14,6 @@ const Career: React.FC = () => {
   const { data, isLoading, error } = useQuery({
     queryKey: ['mentors', userData?._id],
     queryFn: () => getBlueprint(userData?._id),
-
   });
 
   const [isDetailViewOpen, setIsDetailViewOpen] = useState(false);
@@ -74,7 +73,7 @@ const Career: React.FC = () => {
               onShare={handleShare}
             />
           ) : (
-            <p>Loading blueprint...</p>
+            <p>No data to display</p>
           )}
         </div>
       )}

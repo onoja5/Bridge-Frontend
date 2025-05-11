@@ -1,5 +1,10 @@
 import { useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useLocation,
+} from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
 import generalRoutes from './layout/routes/GeneralRoutes';
 import dashboardRoutes from './layout/routes/DashboardRoutes';
@@ -12,7 +17,6 @@ import DigitalApprenticeshipProgram from './pages/DigitalApprenticeshipProgram';
 import DigitalAfricaBootcamp from './pages/DigitalAfricaBootcamp';
 import CorporateTalentPipeline from './pages/CorporateTalentPipeline';
 import UserTypeSelection from './pages/auth/UserTypeSelection';
-import ScrollToTop from './components/ScrollToTop';
 import VerifyEmail from './pages/auth/VerifyEmail';
 import Profile from './pages/Profile';
 import ProtectedRoute from './components/ProtectedRoute';
@@ -26,9 +30,15 @@ const ScrollToTopWrapper = () => {
 
 function App() {
   useEffect(() => {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => entry.isIntersecting && entry.target.classList.add('is-visible'));
-    }, { root: null, rootMargin: '0px', threshold: 0.1 });
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(
+          (entry) =>
+            entry.isIntersecting && entry.target.classList.add('is-visible'),
+        );
+      },
+      { root: null, rootMargin: '0px', threshold: 0.1 },
+    );
 
     const revealElements = document.querySelectorAll('.reveal-on-scroll');
     revealElements.forEach(observer.observe);
@@ -37,7 +47,7 @@ function App() {
 
   return (
     <AuthProvider>
-      <main className="App">
+      <main className='App'>
         <Toaster />
         <Router>
           <ScrollToTopWrapper />
@@ -56,7 +66,7 @@ function App() {
               />
             ))}
             <Route
-              path="/select-user-type"
+              path='/select-user-type'
               element={
                 <>
                   <Navbar />
@@ -73,10 +83,10 @@ function App() {
               />
             ))}
             <Route element={<ProtectedRoute />}>
-              <Route path="/profile" element={<Profile />} />
+              <Route path='/profile' element={<Profile />} />
             </Route>
             <Route
-              path="/digital-apprenticeship-program"
+              path='/digital-apprenticeship-program'
               element={
                 <>
                   <Navbar />
@@ -86,7 +96,7 @@ function App() {
               }
             />
             <Route
-              path="/digital-africa-bootcamp"
+              path='/digital-africa-bootcamp'
               element={
                 <>
                   <Navbar />
@@ -96,7 +106,7 @@ function App() {
               }
             />
             <Route
-              path="/corporate-talent-pipeline"
+              path='/corporate-talent-pipeline'
               element={
                 <>
                   <Navbar />
@@ -105,8 +115,8 @@ function App() {
                 </>
               }
             />
-            <Route path="/verify-email" element={<VerifyEmail />} />
-            <Route path="*" element={<NotFound />} />
+            <Route path='/verify-email' element={<VerifyEmail />} />
+            <Route path='*' element={<NotFound />} />
           </Routes>
         </Router>
       </main>

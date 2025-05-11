@@ -47,9 +47,9 @@ const TasksSection: React.FC<TasksSectionProps> = ({ tasks }) => {
       <div className='bg-white p-4 rounded-md'>
         <h3 className='text-md font-semibold mb-4'>Tasks</h3>
         <hr />
-        {tasks.length > 0 ? (
+        {tasks?.length > 0 ? (
           <ul className='space-y-4 divide-y divide-gray-200'>
-            {tasks.map((task, idx) => (
+            {tasks?.map((task, idx) => (
               <li
                 key={idx}
                 className='flex flex-wrap justify-between items-center gap-5 py-2'

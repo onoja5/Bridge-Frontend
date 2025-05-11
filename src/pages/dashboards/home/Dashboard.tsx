@@ -4,7 +4,13 @@ import { useNavigate } from 'react-router-dom';
 import { fetchUserBlueprint } from '@/utils/helper';
 import { useAuthContext } from '@/contexts/AuthContext';
 import noAvatar from '@/assets/images/noAvatar.png';
-import { FaLinkedin, FaFolder, FaCalendar, FaComments, FaCompass } from 'react-icons/fa';
+import {
+  FaLinkedin,
+  FaFolder,
+  FaCalendar,
+  FaComments,
+  FaCompass,
+} from 'react-icons/fa';
 import SocialShare from '@/components/socialShare';
 
 const Dashboard: React.FC = () => {
@@ -126,21 +132,28 @@ const Dashboard: React.FC = () => {
 
       {/* Top Section: Welcome & Vision Snapshot */}
       <section className='p-6 bg-white rounded-lg shadow-md mt-6'>
-        <div className='flex items-center gap-4'>
+        <div className='flex flex-col lg:flex-row items-center gap-10'>
           <img
             src={userData?.profileImageUrl || noAvatar}
             alt='Profile'
             className='w-20 h-20 rounded-full object-cover'
           />
-          <div>
-            <h3 className='text-lg font-bold'>Hi {userData?.firstName}, your journey to becoming an AI Product Leader is underway. Let’s keep building!</h3>
-            <button
-              onClick={() => navigate('/career')}
-              className='mt-2 px-4 py-2 bg-blue-600 text-white rounded-md'
-            >
-              View Full Blueprint
-            </button>
-            <button className='mt-2 ml-4 px-4 py-2 bg-gray-200 rounded-md'>Update My Details</button>
+          <div className='space-y-4 flex-1'>
+            <h3 className='text-lg font-bold text-center lg:text-start'>
+              Hi {userData?.firstName}, your journey to becoming an AI Product
+              Leader is underway. Let’s keep building!
+            </h3>
+            <div className='flex flex-wrap gap-4'>
+              <button
+                onClick={() => navigate('/career')}
+                className='w-full lg:w-fit px-4 py-2 bg-blue-600 text-white rounded-md'
+              >
+                View Full Blueprint
+              </button>
+              <button className='w-full lg:w-fit px-4 py-2 bg-gray-200 rounded-md'>
+                Update My Details
+              </button>
+            </div>
           </div>
         </div>
       </section>
@@ -155,7 +168,9 @@ const Dashboard: React.FC = () => {
             <li>🔄 Scheduled mentorship session</li>
             <li>🔲 Join AI-focused capstone project</li>
           </ul>
-          <button className='mt-4 px-4 py-2 bg-blue-600 text-white rounded-md'>See Full Roadmap</button>
+          <button className='mt-4 px-4 py-2 bg-blue-600 text-white rounded-md'>
+            See Full Roadmap
+          </button>
         </article>
 
         {/* Learning Plan */}
@@ -163,7 +178,10 @@ const Dashboard: React.FC = () => {
           <h3 className='text-md font-bold mb-4'>Learning Plan</h3>
           <div className='mb-4'>
             <div className='h-2 bg-gray-200 rounded-full overflow-hidden'>
-              <div className='h-full bg-blue-600' style={{ width: '70%' }}></div>
+              <div
+                className='h-full bg-blue-600'
+                style={{ width: '70%' }}
+              ></div>
             </div>
             <p className='text-sm mt-2'>70% Progress</p>
           </div>
@@ -195,7 +213,9 @@ const Dashboard: React.FC = () => {
             />
             <div>
               <p className='text-sm font-semibold'>John Doe</p>
-              <p className='text-sm text-gray-500'>Next session: 📅 May 15, 2025</p>
+              <p className='text-sm text-gray-500'>
+                Next session: 📅 May 15, 2025
+              </p>
             </div>
           </div>
           <ul className='mt-4 space-y-2'>
@@ -223,7 +243,9 @@ const Dashboard: React.FC = () => {
             <li>🧠 AI Career Week - Apply Now</li>
             <li>🧩 Product Analyst Intern @ TechStart</li>
           </ul>
-          <button className='mt-4 px-4 py-2 bg-blue-600 text-white rounded-md'>Browse All</button>
+          <button className='mt-4 px-4 py-2 bg-blue-600 text-white rounded-md'>
+            Browse All
+          </button>
         </article>
 
         {/* Community & Events */}
@@ -234,15 +256,21 @@ const Dashboard: React.FC = () => {
             <li>💬 Join the AI Hackathon Challenge</li>
           </ul>
           <div className='flex gap-4 mt-4'>
-            <button className='px-4 py-2 bg-blue-600 text-white rounded-md'>Join Discussion</button>
-            <button className='px-4 py-2 bg-gray-200 rounded-md'>Attend Event</button>
+            <button className='px-4 py-2 bg-blue-600 text-white rounded-md'>
+              Join Discussion
+            </button>
+            <button className='px-4 py-2 bg-gray-200 rounded-md'>
+              Attend Event
+            </button>
           </div>
         </article>
 
         {/* Badges & Shares */}
         <article className='bg-white p-6 rounded-lg shadow-md'>
           <h3 className='text-md font-bold mb-4'>Badges & Shares</h3>
-          <p className='text-sm'>Most recent achievement: "AI Skills Challenger Badge"</p>
+          <p className='text-sm'>
+            Most recent achievement: "AI Skills Challenger Badge"
+          </p>
           <div className='flex gap-4 mt-4'>
             <button
               className='px-4 py-2 bg-blue-600 text-white rounded-md flex items-center gap-2'
@@ -251,7 +279,9 @@ const Dashboard: React.FC = () => {
               <FaLinkedin />
               <span>Share to LinkedIn</span>
             </button>
-            <button className='px-4 py-2 bg-gray-200 rounded-md'>View All Badges</button>
+            <button className='px-4 py-2 bg-gray-200 rounded-md'>
+              View All Badges
+            </button>
           </div>
         </article>
 
