@@ -368,28 +368,41 @@ export default function Navbar() {
               Contact
             </Link>
           </div>
-          <div className='px-4 py-3 space-y-2'>
-            <Link
-              to='/login'
-              className={`w-full text-center block ${
-                pathname === '/login'
-                  ? 'text-blue-600 font-bold'
-                  : 'text-gray-600'
-              } hover:text-blue-600`}
-            >
-              Log In
-            </Link>
-            <Link
-              to='/select-user-type' // Redirect to user type selection page
-              className={`w-full block ${
-                pathname === '/select-user-type'
-                  ? 'text-blue-600 font-bold'
-                  : 'text-gray-600'
-              } hover:text-blue-600`}
-            >
-              Sign Up
-            </Link>
-          </div>
+          {isAuthenticated ? (
+            <div className='flex items-center justify-center pb-5 space-x-4'>
+              <Link
+                to='/dashboard'
+                className={`bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700
+
+               `}
+              >
+                Go to My Dashboard
+              </Link>
+            </div>
+          ) : (
+            <div className='px-4 py-3 space-y-2'>
+              <Link
+                to='/login'
+                className={`w-full text-center block ${
+                  pathname === '/login'
+                    ? 'text-blue-600 font-bold'
+                    : 'text-gray-600'
+                } hover:text-blue-600`}
+              >
+                Log In
+              </Link>
+              <Link
+                to='/select-user-type' // Redirect to user type selection page
+                className={`w-full block ${
+                  pathname === '/select-user-type'
+                    ? 'text-blue-600 font-bold'
+                    : 'text-gray-600'
+                } hover:text-blue-600`}
+              >
+                Sign Up
+              </Link>
+            </div>
+          )}
         </div>
       )}
     </nav>
