@@ -201,7 +201,7 @@ export default function Navbar() {
 
                `}
               >
-                Got to My Dashboard
+                Go to My Dashboard
               </Link>
             </div>
           ) : (
