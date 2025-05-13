@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 
 import { useAuthContext } from '@/contexts/AuthContext';
 import BlueprintFolder from '@/components/main/Career/BlueprintFolder';
-import CareerSection from '@/components/main/Career/CareerSection';
+// import CareerSection from '@/components/main/Career/CareerSection';
 import { getBlueprint } from '@/services/career.api';
 import Skeleton from '@/components/ui/skeleton/skeleton';
 import { useQuery } from '@tanstack/react-query';
 import ViewBlueprint from '@/components/main/Career/ViewBlueprint';
 import SocialShare from '@/components/socialShare';
+import FiveYearRoadmap from '@/components/main/Career/FiveYearRoadmap';
 
 const Career: React.FC = () => {
   const { userData } = useAuthContext();
@@ -37,7 +38,7 @@ const Career: React.FC = () => {
     setIsShareModalOpen(true);
   };
 
-  const taskData = data?.careerBlueprint?.structuredJson?.tasks;
+  // const taskData = data?.careerBlueprint?.structuredJson?.tasks;
 
   if (error) {
     return <div className='error-message'>{error?.message}</div>;
@@ -78,7 +79,9 @@ const Career: React.FC = () => {
         </div>
       )}
 
-      <CareerSection taskData={taskData} />
+      {/* <CareerSection taskData={taskData} /> */}
+
+      <FiveYearRoadmap />
 
       {isShareModalOpen && (
         <SocialShare

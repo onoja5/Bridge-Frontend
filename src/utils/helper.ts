@@ -64,13 +64,13 @@ export function setGreeting() {
 
 export const fetchUserBlueprint = async (
   userId: string,
-): Promise<string | null> => {
+): Promise<any | null> => {
   console.log('Fetching blueprint for userId:', userId); // Debug userId
   const baseUrl = import.meta.env.VITE_API_BASE;
   if (!baseUrl) {
     throw new Error('VITE_API_BASE is not defined in .env.local');
   }
-  const url = `${baseUrl}/users/user-id/${userId}`;
+  const url = `${baseUrl}/users/${userId}/blueprint/get-blueprint/full-structure`;
   console.log('Constructed URL:', url); // Debug constructed URL
 
   try {
@@ -79,14 +79,10 @@ export const fetchUserBlueprint = async (
       throw new Error(`Failed to fetch user data: ${response.statusText}`);
     }
 
-    const userData = await response.json();
-    console.log('Fetched User Data:', userData);
-
-    // Extract the careerBlueprint field from the nested data object
-    const blueprint = userData?.data?.careerBlueprint || null;
-    console.log('Filtered Blueprint:', blueprint);
-
-    return blueprint;
+    const data = await response.json();
+    console.log('Fetched Blueprint Data:', data);
+    // Return the full careerBlueprint object
+    return data?.careerBlueprint || null;
   } catch (error) {
     console.error('Error fetching blueprint:', error);
     return null;

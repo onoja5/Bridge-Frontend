@@ -1,11 +1,19 @@
-import TasksSection from './TasksSection';
+import { parseBlueprint } from '@/utils/parseBlueprint';
 
-const CareerSection = ({ taskData }: { taskData: string[] }) => {
+const CareerSection = ({ blueprint }: { blueprint: string }) => {
+  const { roadmap } = parseBlueprint(blueprint);
+
   return (
-    <section className='  mt-8'>
-      {/* Left Section: Tasks */}
+    <section className='mt-8'>
       <div className='col-span-1'>
-        <TasksSection tasks={taskData} />
+        <h3 className='text-lg font-bold mb-4'>Five Year Roadmap</h3>
+        <ul className='space-y-4'>
+          {roadmap.map((year, index) => (
+            <li key={index} className='border-b pb-4'>
+              <span>{year}</span>
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );

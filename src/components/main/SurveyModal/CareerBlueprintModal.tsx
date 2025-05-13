@@ -63,7 +63,7 @@ const CareerBlueprintModal: React.FC<CareerBlueprintModalProps> = ({
       }}
     >
       <motion.div
-        className="modal-content bg-white p-6 rounded-lg w-[90%] md:w-[600px] relative flex flex-col items-center gap-6"
+        className="modal-content bg-white p-6 rounded-lg w-[90%] md:w-[600px] h-[88vh] relative flex flex-col items-center gap-6"
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.9 }}
