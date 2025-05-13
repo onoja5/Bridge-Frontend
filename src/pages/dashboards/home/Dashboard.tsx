@@ -15,6 +15,7 @@ import {
 import SocialShare from '@/components/socialShare';
 
 const CareerVision: React.FC<{ vision: string | null }> = ({ vision }) => {
+  const navigate = useNavigate();
   console.log('CareerVision Prop:', vision); // Debugging log
   return (
     <section className='bg-white p-6 rounded-lg shadow-md mt-6'>
@@ -22,6 +23,17 @@ const CareerVision: React.FC<{ vision: string | null }> = ({ vision }) => {
       <p className='text-sm text-gray-600'>
         {vision || 'Loading your personalized career vision...'}
       </p>
+      <div className='flex flex-wrap gap-4 mt-6'>
+        <button
+          onClick={() => navigate('/career')}
+          className='w-full lg:w-fit px-4 py-2 bg-blue-600 text-white rounded-md'
+        >
+          View Full Blueprint
+        </button>
+        <button className='w-full lg:w-fit px-4 py-2 bg-gray-200 rounded-md'>
+          Share
+        </button>
+      </div>
     </section>
   );
 };
@@ -66,8 +78,8 @@ const Dashboard: React.FC = () => {
   const [hasGeneratedBlueprint, setHasGeneratedBlueprint] = useState(false);
   const [careerVision, setCareerVision] = useState<string | null>(null);
   const [isSocialShareOpen, setSocialShareOpen] = useState(false);
-  const navigate = useNavigate();
   const { userData } = useAuthContext();
+  const navigate = useNavigate();
   const userId = userData?._id;
 
   useEffect(() => {
@@ -183,7 +195,7 @@ const Dashboard: React.FC = () => {
       />
 
       {/* Top Section: Welcome & Vision Snapshot */}
-      <section className='p-6 bg-white rounded-lg shadow-md mt-6'>
+      {/* <section className='p-6 bg-white rounded-lg shadow-md mt-6'>
         <div className='flex flex-col lg:flex-row items-center gap-10'>
           <img
             src={userData?.profileImageUrl || noAvatar}
@@ -208,7 +220,7 @@ const Dashboard: React.FC = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Career Vision Section */}
       <CareerVision vision={careerVision} />
