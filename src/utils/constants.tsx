@@ -1,3 +1,3 @@
 import type { UserRole } from '@/types/auth';
 
-export const ROLES: UserRole[] = ['STUDENT', 'EDUCATOR', 'EMPLOYER'];
+export const ROLES: UserRole[] = ['TALENT', 'MENTOR', 'PARTNER'];

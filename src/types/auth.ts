@@ -1,4 +1,4 @@
-export type UserRole = 'EMPLOYER' | 'EDUCATOR' | 'STUDENT'| 'MENTOR';
+export type UserRole = 'PARTNER' | 'TALENT'| 'MENTOR';
 
 export interface ResetPassword {
   newPassword: string;

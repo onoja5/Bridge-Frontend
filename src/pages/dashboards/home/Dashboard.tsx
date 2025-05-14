@@ -56,7 +56,7 @@ const MyCareerRoadmap = () => (
 
 const LearningPlan = () => (
   <article className='bg-white p-6 rounded-lg shadow-md'>
-    <h3 className='text-md font-bold mb-4'>Learning Plan</h3>
+    <h3 className='text-md font-bold mb-4'>Career Milestones</h3>
     <ul className='space-y-4'>
       {['Year 1', 'Year 2', 'Year 3', 'Year 4', 'Year 5'].map((year, index) => (
         <li key={index} className='flex justify-between items-center'>
