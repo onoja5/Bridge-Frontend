@@ -10,7 +10,16 @@ export interface Project {
   subTopics: string[];
 }
 
-export const parseBlueprint = (blueprint: string): { tasks: Task[]; projects: Project[]; roadmap: string[]; vision: string; careerVision: string; fiveYearRoadmap: Record<string, string[]> } => {
+export const parseBlueprint = (
+  blueprint: string,
+): {
+  tasks: Task[];
+  projects: Project[];
+  roadmap: string[];
+  vision: string;
+  careerVision: string;
+  fiveYearRoadmap: Record<string, string[]>;
+} => {
   const tasks: Task[] = [];
   const projects: Project[] = [];
   const roadmap: string[] = [];

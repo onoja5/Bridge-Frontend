@@ -1,26 +1,27 @@
 import React, { useState } from 'react';
-
 import { useAuthContext } from '@/contexts/AuthContext';
 import BlueprintFolder from '@/components/main/Career/BlueprintFolder';
-// import CareerSection from '@/components/main/Career/CareerSection';
+import { useQuery } from '@tanstack/react-query';
 import { getBlueprint } from '@/services/career.api';
 import Skeleton from '@/components/ui/skeleton/skeleton';
-import { useQuery } from '@tanstack/react-query';
-import ViewBlueprint from '@/components/main/Career/ViewBlueprint';
 import SocialShare from '@/components/socialShare';
 import FiveYearRoadmap from '@/components/main/Career/FiveYearRoadmap';
+import BlueprintDetailView from '@/components/main/Career/BlueprintDetailView';
+import { handleError } from '@/utils/helper';
 
 const Career: React.FC = () => {
   const { userData } = useAuthContext();
+  const userId = userData?._id; // Define userId from userData._id
   const { data, isLoading, error } = useQuery({
-    queryKey: ['mentors', userData?._id],
-    queryFn: () => getBlueprint(userData?._id),
+    queryKey: ['mentors', userId], // Use userId instead of userData?._id
+    queryFn: () => getBlueprint(userId),
+    enabled: !!userId, // Only run query if userId is available
   });
 
   const [isDetailViewOpen, setIsDetailViewOpen] = useState(false);
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
 
-  const userName = `${userData?.firstName} ${userData?.lastName}`;
+  const userName = `${userData?.firstName || ''} ${userData?.lastName || ''}`.trim();
 
   const handleViewBlueprint = () => {
     setIsDetailViewOpen(!isDetailViewOpen);
@@ -38,18 +39,17 @@ const Career: React.FC = () => {
     setIsShareModalOpen(true);
   };
 
-  // const taskData = data?.careerBlueprint?.structuredJson?.tasks;
-
   if (error) {
-    return <div className='error-message'>{error?.message}</div>;
+    handleError(error.message || 'Failed to load career data.');
+    return <div className="error-message">Failed to load career data. Please try again.</div>;
   }
 
   if (isLoading) {
     return (
-      <ul className='flex flex-col gap-4'>
+      <ul className="flex flex-col gap-4">
         {Array.from({ length: 8 }).map((_, index) => (
           <li key={index}>
-            <Skeleton className='!h-5 !w-full' />
+            <Skeleton className="h-5 w-full" />
           </li>
         ))}
       </ul>
@@ -58,14 +58,14 @@ const Career: React.FC = () => {
 
   return (
     <main>
-      {isDetailViewOpen && data?.careerBlueprint?.structuredJson ? (
-        <ViewBlueprint
-          blueprint={data?.careerBlueprint?.structuredJson}
+      {isDetailViewOpen ? (
+        <BlueprintDetailView
+          userId={userId} // Pass the defined userId
           onBack={handleViewBlueprint}
         />
       ) : (
         <div>
-          {data?.careerBlueprint?.structuredJson ? (
+          {data?.careerBlueprint ? (
             <BlueprintFolder
               name={`${userName}'s Career Blueprint`}
               onView={handleViewBlueprint}
@@ -79,14 +79,12 @@ const Career: React.FC = () => {
         </div>
       )}
 
-      {/* <CareerSection taskData={taskData} /> */}
-
-      <FiveYearRoadmap />
+      <FiveYearRoadmap /> {/* Pass userId to FiveYearRoadmap */}
 
       {isShareModalOpen && (
         <SocialShare
           title={`${userName}'s Career Blueprint`}
-          description='Check out my career blueprint on Bridge!'
+          description="Check out my career blueprint on Bridge!"
           url={window.location.href}
           onClose={() => setIsShareModalOpen(false)}
         />

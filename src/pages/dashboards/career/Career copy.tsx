@@ -9,7 +9,7 @@ import {
 import { useAuthContext } from '@/contexts/AuthContext';
 import BlueprintFolder from '@/components/main/Career/BlueprintFolder';
 import BlueprintDetailView from '@/components/main/Career/BlueprintDetailView';
-import CareerSection from '@/components/main/Career/CareerSection';
+// import CareerSection from '@/components/main/Career/CareerSection';
 import { useToast } from '@/hooks/use-toast';
 
 const Career: React.FC = () => {
@@ -93,7 +93,7 @@ const Career: React.FC = () => {
     <div>
       {isDetailViewOpen && selectedBlueprint ? (
         <BlueprintDetailView
-          blueprint={selectedBlueprint}
+          userId={userId}
           onBack={handleBackToFolder}
         />
       ) : (
@@ -112,7 +112,7 @@ const Career: React.FC = () => {
         </div>
       )}
 
-      <CareerSection />
+      {/* <CareerSection /> */}
     </div>
   );
 };

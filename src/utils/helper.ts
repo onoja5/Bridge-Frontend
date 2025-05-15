@@ -62,29 +62,75 @@ export function setGreeting() {
   }
 }
 
-export const fetchUserBlueprint = async (
-  userId: string,
-): Promise<any | null> => {
-  console.log('Fetching blueprint for userId:', userId); // Debug userId
+export const fetchUserData = async (userId: string): Promise<any | null> => {
+  if (!userId) {
+    console.error('userId is undefined or invalid');
+    handleError('User ID is missing or invalid.');
+    return null;
+  }
+
+  console.log('Fetching user data for userId:', userId);
   const baseUrl = import.meta.env.VITE_API_BASE;
   if (!baseUrl) {
-    throw new Error('VITE_API_BASE is not defined in .env.local');
+    console.error('VITE_API_BASE is not defined in .env.local');
+    handleError('API base URL is not configured.');
+    return null;
   }
-  const url = `${baseUrl}/users/${userId}/blueprint/get-blueprint/full-structure`;
-  console.log('Constructed URL:', url); // Debug constructed URL
+  const url = `${baseUrl}/users/user-id/${userId}`; // Ensure this matches your backend endpoint
+  console.log('Constructed URL:', url);
 
   try {
     const response = await fetch(url);
     if (!response.ok) {
+      console.error('Fetch failed with status:', response.status, response.statusText);
+      throw new Error(`Failed to fetch user data: ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    console.log('Fetched User Data:', data);
+    if (!data?.data?.careerBlueprint) {
+      console.warn('careerBlueprint not found in response:', data);
+      handleError('Career blueprint not found for this user.');
+      return null;
+    }
+    return data.data.careerBlueprint;
+  } catch (error) {
+    console.error('Error fetching user data:', error);
+    handleError('Failed to load user blueprint.');
+    return null;
+  }
+};
+
+export const fetchUserBlueprint = async (userId: string): Promise<any | null> => {
+  if (!userId) {
+    console.error('userId is undefined or invalid');
+    handleError('User ID is missing or invalid.');
+    return null;
+  }
+
+  console.log('Fetching blueprint for userId:', userId);
+  const baseUrl = import.meta.env.VITE_API_BASE;
+  if (!baseUrl) {
+    console.error('VITE_API_BASE is not defined in .env.local');
+    handleError('API base URL is not configured.');
+    return null;
+  }
+  const url = `${baseUrl}/users/${userId}/blueprint/get-blueprint/full-structure`;
+  console.log('Constructed URL:', url);
+
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      console.error('Fetch failed with status:', response.status, response.statusText);
       throw new Error(`Failed to fetch user data: ${response.statusText}`);
     }
 
     const data = await response.json();
     console.log('Fetched Blueprint Data:', data);
-    // Return the full careerBlueprint object
     return data?.careerBlueprint || null;
   } catch (error) {
     console.error('Error fetching blueprint:', error);
+    handleError('Failed to load career blueprint.');
     return null;
   }
 };
@@ -100,20 +146,27 @@ export const loadBlueprintFromLocalStorage = (): string | null => {
 export const fetchBlueprintTasksAndProjects = async (
   userId: string,
 ): Promise<{ tasks: string[]; projects: string[] } | null> => {
-  console.log('Fetching tasks and projects for userId:', userId); // Debug userId
+  if (!userId) {
+    console.error('userId is undefined or invalid');
+    handleError('User ID is missing or invalid.');
+    return null;
+  }
+
+  console.log('Fetching tasks and projects for userId:', userId);
   const baseUrl = import.meta.env.VITE_API_BASE;
   if (!baseUrl) {
-    throw new Error('VITE_API_BASE is not defined in .env.local');
+    console.error('VITE_API_BASE is not defined in .env.local');
+    handleError('API base URL is not configured.');
+    return null;
   }
   const url = `${baseUrl}/users/${userId}/blueprint/get-blueprint/full-structure`;
-  console.log('Constructed URL:', url); // Debug constructed URL
+  console.log('Constructed URL:', url);
 
   try {
     const response = await fetch(url);
     if (!response.ok) {
-      throw new Error(
-        `Failed to fetch tasks and projects: ${response.statusText}`,
-      );
+      console.error('Fetch failed with status:', response.status, response.statusText);
+      throw new Error(`Failed to fetch tasks and projects: ${response.statusText}`);
     }
 
     const data = await response.json();
@@ -129,6 +182,7 @@ export const fetchBlueprintTasksAndProjects = async (
     return null;
   } catch (error) {
     console.error('Error fetching tasks and projects:', error);
+    handleError('Failed to load tasks and projects.');
     return null;
   }
 };
@@ -139,13 +193,16 @@ export const fetchMentors = async (
 ): Promise<{ mentors: any[]; totalPages: number }> => {
   const baseUrl = import.meta.env.VITE_API_BASE;
   if (!baseUrl) {
-    throw new Error('VITE_API_BASE is not defined in .env.local');
+    console.error('VITE_API_BASE is not defined in .env.local');
+    handleError('API base URL is not configured.');
+    return { mentors: [], totalPages: 1 };
   }
 
   const url = `${baseUrl}/users/all-metors/mentors?page=${page}&limit=${limit}`;
   try {
     const response = await fetch(url);
     if (!response.ok) {
+      console.error('Fetch failed with status:', response.status, response.statusText);
       throw new Error(`Failed to fetch mentors: ${response.statusText}`);
     }
 
@@ -153,9 +210,7 @@ export const fetchMentors = async (
     return { mentors: data.mentors || [], totalPages: data.totalPages || 1 };
   } catch (error) {
     console.error('Error fetching mentors:', error);
+    handleError('Failed to load mentors.');
     return { mentors: [], totalPages: 1 };
   }
 };
-
-// For better organization,  and scalability, let all api calls be inside the services directory.,
-// create a new file for each page api calls
