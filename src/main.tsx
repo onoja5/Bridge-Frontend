@@ -7,6 +7,17 @@ import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { AuthProvider } from './contexts/AuthContext.tsx';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { createBrowserHistory } from 'history';
+import { unstable_HistoryRouter as HistoryRouter } from 'react-router-dom';
+
+// Create custom history with future flags
+const history = createBrowserHistory({
+  window,
+  future: {
+    v7_startTransition: true,
+    v7_relativeSplatPath: true,
+  },
+});
 
 const queryClient = new QueryClient();
 
@@ -22,7 +33,9 @@ createRoot(document.getElementById('root')!).render(
               console.log('Redux state rehydrated');
             }}
           >
-            <App />
+            <HistoryRouter history={history}>
+              <App />
+            </HistoryRouter>
           </PersistGate>
         </Provider>
       </AuthProvider>

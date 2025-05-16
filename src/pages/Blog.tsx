@@ -1,44 +1,9 @@
 import React from 'react';
 import { Calendar, User, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { posts, featuredPost } from '../data/posts';
 
 export default function Blog() {
-  const featuredPost = {
-    title: "Project-Based Learning: The Key to Gaining Real-World Experience",
-    excerpt: "Now, let's ditch the textbooks for a minute and talk about getting our hands dirty! You know that feeling of actually doing something, building something real? That's where project-based learning comes in, and trust me, it's a game-changer.",
-    image: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80",
-    date: "March 15, 2024",
-    author: "Sarah Johnson",
-    category: "Education"
-  };
-
-  const posts = [
-    {
-      title: "Unlocking Your Potential: Why Personalized Career Blueprints Matter More Than Ever",
-      excerpt: "Okay, let's talk about you. Not the generic, 'everyone' you, but the unique you, with your own specific talents, dreams, and quirks.",
-      image: "https://images.unsplash.com/photo-1516387938699-a93567ec168e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-      date: "March 10, 2024",
-      author: "Michael Chen",
-      category: "Career Development"
-    },
-    {
-      title: "From Learning to Earning: How AI-Powered Career Roadmaps Can Accelerate Your Growth",
-      excerpt: "My friend, let's cut to the chase: you want to go from 'learning' to 'earning,' and you want to do it fast. Enter AI-powered career roadmaps – your turbocharged GPS for professional growth.",
-      image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-      date: "March 5, 2024",
-      author: "Emily Rodriguez",
-      category: "Partnerships"
-    },
-    {
-      title: "Bridging the Gap: How AI is Revolutionizing Career Development for Students and Professionals",
-      excerpt: "Alright folks, buckle up, because we're about to dive into something truly mind-blowing! You know that feeling when you're staring at a career path, and it looks like a tangled mess of spaghetti?",
-      image: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-      date: "March 1, 2024",
-      author: "David Kim",
-      category: "Education"
-    }
-  ];
-
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
@@ -83,7 +48,7 @@ export default function Blog() {
                   <span>{featuredPost.author}</span>
                 </div>
                 <Link
-                  to="/blog/post"
+                  to={`/blog/${featuredPost.slug}`}
                   className="inline-flex items-center text-blue-600 font-semibold hover:text-blue-700"
                 >
                   Read More <ArrowRight className="ml-2 h-4 w-4" />
@@ -121,7 +86,7 @@ export default function Blog() {
                     <span>{post.author}</span>
                   </div>
                   <Link
-                    to="/blog/post"
+                    to={`/blog/${post.slug}`}
                     className="inline-flex items-center text-blue-600 font-semibold hover:text-blue-700"
                   >
                     Read More <ArrowRight className="ml-2 h-4 w-4" />
@@ -133,34 +98,7 @@ export default function Blog() {
         </div>
       </div>
 
-      {/* Newsletter Section */}
-      <div className="bg-blue-900 py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <h2 className="text-3xl font-bold text-white mb-4">
-              Subscribe to Our Newsletter
-            </h2>
-            <p className="text-blue-100 mb-8">
-              Get the latest insights and updates delivered to your inbox.
-            </p>
-            <form className="max-w-md mx-auto">
-              <div className="flex gap-4">
-                <input
-                  type="email"
-                  placeholder="Enter your email"
-                  className="flex-1 px-4 py-3 rounded-md"
-                />
-                <button
-                  type="submit"
-                  className="bg-blue-600 text-white px-6 py-3 rounded-md font-semibold hover:bg-blue-700 transition duration-300"
-                >
-                  Subscribe
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
+      {/* Newsletter Section (keep existing code) */}
     </div>
   );
 }

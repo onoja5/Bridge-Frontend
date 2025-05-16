@@ -1,8 +1,19 @@
+// styles/globals.scss
+
 // Custom styles for modals
 @media (max-width: 480px) {
   .modal-content {
     max-height: 90vh;
     overflow-y: auto; // Make modal scrollable
+
+    // Add blog content specific mobile styles
+    .blog-content {
+      padding: 1rem;
+      
+      h2 {
+        font-size: 1.5rem !important;
+      }
+    }
   }
 
   .multi-select-options {
@@ -33,7 +44,44 @@
   }
 }
 
+// Blog-specific styles
+.blog-post {
+  &-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
 
+    // Responsive images
+    img {
+      max-width: 100%;
+      height: auto;
+      margin: 2rem 0;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    // Typography enhancements
+    h2 {
+      font-size: 2rem;
+      margin: 2rem 0 1rem;
+      color: #1a365d;
+    }
+
+    h3 {
+      font-size: 1.5rem;
+      margin: 1.5rem 0 0.75rem;
+      color: #2d3748;
+    }
+
+    p {
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+      color: #4a5568;
+    }
+  }
+}
+
+// Modal styles
 .phase-modal {
   display: flex;
   flex-direction: column;
@@ -62,3 +110,9 @@
   overflow-y: auto;
   max-height: 90vh;
 }
+
+// Add Tailwind-like utility classes
+.bg-blue-50 { background-color: #eff6ff; }
+.bg-green-50 { background-color: #f0fdf4; }
+.bg-orange-50 { background-color: #fff7ed; }
+.bg-purple-50 { background-color: #faf5ff; }

@@ -1,10 +1,9 @@
 import { useEffect } from 'react';
 import {
-  BrowserRouter as Router,
   Routes,
   Route,
   useLocation,
-} from 'react-router-dom';
+} from 'react-router-dom'; // Removed BrowserRouter import
 import { AuthProvider } from './contexts/AuthContext';
 import generalRoutes from './layout/routes/GeneralRoutes';
 import dashboardRoutes from './layout/routes/DashboardRoutes';
@@ -20,6 +19,8 @@ import UserTypeSelection from './pages/auth/UserTypeSelection';
 import VerifyEmail from './pages/auth/VerifyEmail';
 import Profile from './pages/Profile';
 import ProtectedRoute from './components/ProtectedRoute';
+import Blog from './pages/Blog';
+import BlogPost from './pages/BlogPost';
 
 // Scroll restoration component
 const ScrollToTopWrapper = () => {
@@ -49,76 +50,95 @@ function App() {
     <AuthProvider>
       <main className='App'>
         <Toaster />
-        <Router>
-          <ScrollToTopWrapper />
-          <Routes>
-            {generalRoutes.map((route, idx: number) => (
-              <Route
-                key={idx}
-                path={route.path}
-                element={
-                  <>
-                    <Navbar />
-                    {route.element}
-                    <Footer />
-                  </>
-                }
-              />
-            ))}
+        {/* Removed Router wrapper */}
+        <ScrollToTopWrapper />
+        <Routes>
+          {generalRoutes.map((route, idx: number) => (
             <Route
-              path='/select-user-type'
+              key={idx}
+              path={route.path}
               element={
                 <>
                   <Navbar />
-                  <UserTypeSelection />
+                  {route.element}
                   <Footer />
                 </>
               }
             />
-            {dashboardRoutes.map(({ path, element, name }) => (
-              <Route
-                key={name}
-                path={path}
-                element={<DashboardLayout>{element}</DashboardLayout>}
-              />
-            ))}
-            <Route element={<ProtectedRoute />}>
-              <Route path='/profile' element={<Profile />} />
-            </Route>
+          ))}
+          <Route
+            path="/blog"
+            element={
+              <>
+                <Navbar />
+                <Blog />
+                <Footer />
+              </>
+            }
+          />
+          <Route
+            path="/blog/:slug"
+            element={
+              <>
+                <Navbar />
+                <BlogPost />
+                <Footer />
+              </>
+            }
+          />
+          <Route
+            path='/select-user-type'
+            element={
+              <>
+                <Navbar />
+                <UserTypeSelection />
+                <Footer />
+              </>
+            }
+          />
+          {dashboardRoutes.map(({ path, element, name }) => (
             <Route
-              path='/digital-apprenticeship-program'
-              element={
-                <>
-                  <Navbar />
-                  <DigitalApprenticeshipProgram />
-                  <Footer />
-                </>
-              }
+              key={name}
+              path={path}
+              element={<DashboardLayout>{element}</DashboardLayout>}
             />
-            <Route
-              path='/digital-africa-bootcamp'
-              element={
-                <>
-                  <Navbar />
-                  <DigitalAfricaBootcamp />
-                  <Footer />
-                </>
-              }
-            />
-            <Route
-              path='/corporate-talent-pipeline'
-              element={
-                <>
-                  <Navbar />
-                  <CorporateTalentPipeline />
-                  <Footer />
-                </>
-              }
-            />
-            <Route path='/verify-email' element={<VerifyEmail />} />
-            <Route path='*' element={<NotFound />} />
-          </Routes>
-        </Router>
+          ))}
+          <Route element={<ProtectedRoute />}>
+            <Route path='/profile' element={<Profile />} />
+          </Route>
+          <Route
+            path='/digital-apprenticeship-program'
+            element={
+              <>
+                <Navbar />
+                <DigitalApprenticeshipProgram />
+                <Footer />
+              </>
+            }
+          />
+          <Route
+            path='/digital-africa-bootcamp'
+            element={
+              <>
+                <Navbar />
+                <DigitalAfricaBootcamp />
+                <Footer />
+              </>
+            }
+          />
+          <Route
+            path='/corporate-talent-pipeline'
+            element={
+              <>
+                <Navbar />
+                <CorporateTalentPipeline />
+                <Footer />
+              </>
+            }
+          />
+          <Route path='/verify-email' element={<VerifyEmail />} />
+          <Route path='*' element={<NotFound />} />
+        </Routes>
       </main>
     </AuthProvider>
   );
