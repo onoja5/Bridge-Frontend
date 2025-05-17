@@ -6,17 +6,20 @@ import { useAuthContext } from '@/contexts/AuthContext';
 import noAvatar from '@/assets/images/noAvatar.png';
 import {
   FaLinkedin,
-
   FaCalendar,
   FaComments,
-
   FaArrowRight,
 } from 'react-icons/fa';
 import SocialShare from '@/components/socialShare';
+import { useQuery } from '@tanstack/react-query';
+import { getSkillGapAnalysis } from '@/services/home';
+import ProgressBar from '@/components/ui/progressBar';
+import Skeleton from '@/components/ui/skeleton/skeleton';
 
 const CareerVision: React.FC<{ vision: string | null }> = ({ vision }) => {
   const navigate = useNavigate();
   console.log('CareerVision Prop:', vision); // Debugging log
+
   return (
     <section className='bg-white p-6 rounded-lg shadow-md mt-6'>
       <h3 className='text-lg font-bold mb-4'>Career Vision</h3>
@@ -54,24 +57,73 @@ const MyCareerRoadmap = () => (
   </article>
 );
 
-const LearningPlan = () => (
-  <article className='bg-white p-6 rounded-lg shadow-md'>
-    <h3 className='text-md font-bold mb-4'>Career Milestones</h3>
-    <ul className='space-y-4'>
-      {['Year 1', 'Year 2', 'Year 3', 'Year 4', 'Year 5'].map((year, index) => (
-        <li key={index} className='flex justify-between items-center'>
-          <span>{year}</span>
-          <div className='w-full flex items-center gap-2'>
-            <div className='h-2 bg-gray-200 rounded-full flex-1'>
-              <div className='h-full bg-blue-600 rounded-full' style={{ width: `${(index + 1) * 20}%` }}></div>
-            </div>
-            <span>{(index + 1) * 20}%</span>
-          </div>
-        </li>
-      ))}
-    </ul>
-  </article>
-);
+const LearningPlan = () => {
+  const { userData } = useAuthContext();
+  const userId = userData?._id;
+  const { data, isLoading } = useQuery({
+    queryKey: ['mentors', userId],
+    queryFn: () => getSkillGapAnalysis(userId),
+    enabled: !!userId,
+  });
+
+  console.log(data);
+
+  const completionStats = data?.data?.completionStats;
+
+  const progressStats = [
+    {
+      title: 'Year 1',
+      progress: completionStats?.year1MilestonesCompleted,
+    },
+    {
+      title: 'Year 2',
+      progress: completionStats?.year2MilestonesCompleted,
+    },
+    {
+      title: 'Year 3',
+      progress: completionStats?.year3MilestonesCompleted,
+    },
+    {
+      title: 'Year 4',
+      progress: completionStats?.year4MilestonesCompleted,
+    },
+    {
+      title: 'Year 5',
+      progress: completionStats?.year5MilestonesCompleted,
+    },
+  ];
+
+  return (
+    <article className='bg-white p-6 rounded-lg shadow-md'>
+      <h3 className='text-md font-bold mb-4'>Career Milestones</h3>
+      {isLoading ? (
+        <div className='space-y-3'>
+          {Array.from({ length: 5 }).map((_, idx) => (
+            <Skeleton key={idx} height='!h-5' />
+          ))}
+        </div>
+      ) : (
+        <ul className='space-y-4'>
+          {progressStats?.map(({ title, progress }, index) => (
+            <li key={index} className='flex justify-between gap-4 items-center'>
+              <span>{title}</span>
+              {/* <div className='w-full flex items-center gap-2'>
+              <div className='h-2 bg-gray-200 rounded-full flex-1'>
+                <div
+                  className='h-full bg-blue-600 rounded-full'
+                  style={{ width: `${(index + 1) * 20}%` }}
+                ></div>
+              </div>
+              <span>{progress}%</span>
+            </div> */}
+              <ProgressBar progress={Number(progress ?? 0)} />
+            </li>
+          ))}
+        </ul>
+      )}
+    </article>
+  );
+};
 
 const Dashboard: React.FC = () => {
   const [isSurveyModalOpen, setSurveyModalOpen] = useState(false);
@@ -158,12 +210,14 @@ const Dashboard: React.FC = () => {
             <div className='flex gap-4 mt-4'>
               <button
                 onClick={handleOpenSurveyModal}
-                className='px-6 py-3 bg-white text-blue-600 rounded-md text-xs font-medium'>
+                className='px-6 py-3 bg-white text-blue-600 rounded-md text-xs font-medium'
+              >
                 Retake Survey
               </button>
               <button
                 onClick={handleViewBlueprint}
-                className='px-6 py-3 border border-white text-white bg-transparent hover:bg-white hover:bg-opacity-20 ease-in-out delay-150 duration-300 rounded-md text-xs font-medium'>
+                className='px-6 py-3 border border-white text-white bg-transparent hover:bg-white hover:bg-opacity-20 ease-in-out delay-150 duration-300 rounded-md text-xs font-medium'
+              >
                 View Your Blueprint
               </button>
             </div>
@@ -179,7 +233,8 @@ const Dashboard: React.FC = () => {
             </p>
             <button
               onClick={handleOpenSurveyModal}
-              className='mt-4 px-6 py-3 bg-white text-blue-600 rounded-md text-xs font-medium'>
+              className='mt-4 px-6 py-3 bg-white text-blue-600 rounded-md text-xs font-medium'
+            >
               Take a survey
             </button>
           </>
