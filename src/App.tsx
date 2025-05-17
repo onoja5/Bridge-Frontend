@@ -3,7 +3,8 @@ import {
   Routes,
   Route,
   useLocation,
-} from 'react-router-dom'; // Removed BrowserRouter import
+  Navigate // Add this import
+} from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
 import generalRoutes from './layout/routes/GeneralRoutes';
 import dashboardRoutes from './layout/routes/DashboardRoutes';
@@ -50,9 +51,12 @@ function App() {
     <AuthProvider>
       <main className='App'>
         <Toaster />
-        {/* Removed Router wrapper */}
         <ScrollToTopWrapper />
         <Routes>
+          {/* Add redirects before main routes */}
+          <Route path="/for-educators" element={<Navigate to="/for-mentors" replace />} />
+          <Route path="/for-employers" element={<Navigate to="/for-partners" replace />} />
+
           {generalRoutes.map((route, idx: number) => (
             <Route
               key={idx}

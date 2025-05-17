@@ -10,9 +10,9 @@ export default function Navbar() {
   const { isAuthenticated } = useAuthContext();
 
   const solutions = [
-    { name: 'For Talents', path: '/for-students' },
-    { name: 'For Mentors', path: '/for-educators' },
-    { name: 'For Partners', path: '/for-employers' },
+    { name: 'For Talents', path: '/for-talents' },
+    { name: 'For Mentors', path: '/for-mentors' },
+    { name: 'For Partners', path: '/for-partners' },
   ];
 
   const explore = [
