@@ -101,7 +101,8 @@ const Career: React.FC = () => {
         <SocialShare
           title={`${userName}'s Career Blueprint`}
           description='Check out my career blueprint on Bridge!'
-          url={`${window.location.href}?userId=${userId}`}
+          // url={`${window.location.href}?userId=${userId}`}
+          url={`https://bridge.ayoks.com/blueprint-share?id=${userId}`}
           onClose={() => setIsShareModalOpen(false)}
         />
       )}

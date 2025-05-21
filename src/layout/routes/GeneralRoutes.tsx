@@ -35,6 +35,7 @@ import WorkBasedLearning from '@/pages/WorkBasedLearning';
 import WorkforceDevelopment from '@/pages/WorkforceDevelopment';
 import { ReactElement } from 'react';
 import ForMentors from '@/pages/ForMentors';
+import BluePrintShare from '@/pages/BluePrintShare';
 
 interface Route {
   path: string;
@@ -43,6 +44,7 @@ interface Route {
 
 const generalRoutes: Route[] = [
   { path: '/', element: <Home /> },
+  { path: '/blueprint-share', element: <BluePrintShare /> },
   { path: '/how-it-works', element: <HowItWorks /> },
   { path: '/solutions', element: <Solutions /> },
   { path: '/about', element: <About /> },
