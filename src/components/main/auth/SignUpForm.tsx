@@ -1,9 +1,9 @@
+// SignUpForm.tsx
 import * as API from '@/services/auth';
 import Button from '@/components/ui/Button';
-import type { CreateAccountDto } from '@/types/auth';
+import type { CreateAccountDto, UserRole } from '@/types/auth';
 import { ROLES } from '@/utils/constants';
 import { Eye, EyeOff, Lock, Mail, User } from 'lucide-react';
-
 import ErrorMessage from '@/components/ui/ErrorMessage';
 import { useNavigate } from 'react-router-dom';
 import { useAuthContext } from '@/contexts/AuthContext';
@@ -11,9 +11,13 @@ import { useGlobalHooks } from '@/hooks/globalHooks';
 import { useState } from 'react';
 import { handleError, handleSuccess } from '@/utils/helper';
 
-const SignUpForm = () => {
+interface SignUpFormProps {
+  initialRole?: string; // Prop to receive the role
+}
+
+const SignUpForm: React.FC<SignUpFormProps> = ({ initialRole }) => {
   const navigate = useNavigate();
-  const { setUserData } = useAuthContext();
+  const { setUserData, userData } = useAuthContext();
   const { loading, setLoading } = useGlobalHooks();
   const [showPassword, setShowPassword] = useState(false);
 
@@ -22,7 +26,7 @@ const SignUpForm = () => {
     lastName: '',
     email: '',
     password: '',
-    role: 'STUDENT',
+    role: (initialRole || userData?.role || 'TALENT') as UserRole, // Use initialRole or context or default
   });
 
   const [validationErrors, setValidationErrors] = useState<
@@ -42,7 +46,7 @@ const SignUpForm = () => {
 
     setValidationErrors((prev) => {
       const newErrors = { ...prev, ...errors };
-      if (!errors[name]) delete newErrors[name]; // Remove error if valid
+      if (!errors[name]) delete newErrors[name];
       return newErrors;
     });
 
@@ -63,27 +67,24 @@ const SignUpForm = () => {
     e.preventDefault();
 
     setLoading({ ['login']: true });
-    console.log(validationErrors);
     if (Object.keys(validationErrors).length > 0) {
       setLoading({ ['login']: false });
       return;
     }
 
-    API.authService
-      .signup(formData)
-      .then((res) => {
-        const { firstName, lastName, email, _id } = res?.data?.user;
-        setUserData({ firstName, lastName, email, _id });
+    try {
+      const res = await API.authService.signup(formData);
+      const { firstName, lastName, email, _id, role } = res?.data?.user;
+      setUserData({ firstName, lastName, email, _id, role });
 
-        handleSuccess('User created successfully', navigate, '/verify-email');
-        setLoading({ ['login']: false });
-      })
-      .catch((err) => {
-        setLoading({ ['login']: false });
-
-        handleError(err?.response?.data?.message || 'An error occurred');
-      });
+      handleSuccess('User created successfully', navigate, '/verify-email');
+      setLoading({ ['login']: false });
+    } catch (err) {
+      setLoading({ ['login']: false });
+      handleError(err?.response?.data?.message || 'An error occurred');
+    }
   };
+
   return (
     <form onSubmit={handleSubmit} className='mx-auto w-full max-w-xl space-y-6'>
       <article className='grid grid-cols-1 gap-6 md:grid-cols-2'>
@@ -197,28 +198,6 @@ const SignUpForm = () => {
           <ErrorMessage message={validationErrors.password} />
         )}
       </article>
-
-      {/* <article>
-        <label
-          htmlFor='role'
-          className='block text-sm font-medium text-gray-700'
-        >
-          Role
-        </label>
-        <select
-          id='role'
-          name='role'
-          value={formData.role}
-          onChange={handleChange}
-          className='mt-1 block w-full pl-3 pr-10 py-2 text-base border border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 rounded-md'
-        >
-          {ROLES.map((role) => (
-            <option key={role} value={role}>
-              {role}
-            </option>
-          ))}
-        </select>
-      </article> */}
 
       <Button
         className='pry-btn w-full'

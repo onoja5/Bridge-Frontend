@@ -2,6 +2,7 @@ import Career from '@/pages/dashboards/career/Career';
 import Dashboard from '@/pages/dashboards/home/Dashboard';
 import Jobs from '@/pages/dashboards/jobs/Jobs';
 import Mentorship from '@/pages/dashboards/mentorship/Mentorship';
+import MentorDetail from '@/pages/dashboards/mentorship/MentorDetail';
 import Projects from '@/pages/dashboards/projects/Projects';
 import Recomendations from '@/pages/dashboards/recommendations/Recomendations';
 import { ReactElement } from 'react';
@@ -25,6 +26,7 @@ const dashboardRoutes: Route[] = [
     path: '/mentorships',
     element: <Mentorship />,
   },
+  { name: 'Mentor Detail', path: '/mentorships/:userId', element: <MentorDetail/> },
   {
     name: 'Career',
     path: '/career',

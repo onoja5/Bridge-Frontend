@@ -69,6 +69,7 @@ const Mentorship: React.FC = () => {
                   name={`${mentor.firstName} ${mentor.lastName}`}
                   email={mentor.email}
                   specialty={mentor.specialty}
+                  _id={mentor._id}
                 />
               </li>
             ))
