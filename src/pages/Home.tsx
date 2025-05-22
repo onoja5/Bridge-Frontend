@@ -266,9 +266,9 @@ export default function Home() {
       >
         <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full'>
           <div className='max-w-2xl'>
-            <h1 className='text-4xl md:text-7xl font-bold mb-6 text-white leading-tight'>
-              Step into your dream career
-            </h1>
+            <h2 className='text-4xl md:text-7xl font-bold mb-6 text-white leading-tight'>
+              Step into your future with Confidence
+            </h2>
             <p className='text-xl md:text-2xl mb-8 text-gray-200 leading-relaxed'>
               Bridge the gap to your future - Get an AI-powered personalized
               Career Blueprint.
