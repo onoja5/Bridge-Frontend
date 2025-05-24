@@ -214,3 +214,7 @@ export const fetchMentors = async (
     return { mentors: [], totalPages: 1 };
   }
 };
+
+export const copyToClipboard = (text: string) => {
+  navigator.clipboard.writeText(text);
+};

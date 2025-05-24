@@ -6,6 +6,7 @@ interface BookSessionRequest {
   date: string;
   time: string;
   reason: string;
+  plan: string;
 }
 
 interface BookSessionResponse {
