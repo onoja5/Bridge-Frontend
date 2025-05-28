@@ -1,11 +1,29 @@
+// src/components/main/sidebar/Sidebar.tsx
 import { Link, NavLink } from 'react-router-dom';
-import { SidebarData } from './SidebarData';
+import { TalentSidebarData } from './TalentSidebarData';
+import { MentorSidebarData } from './MentorSidebarData';
+import { PartnerSidebarData } from './PartnerSidebarData';
+import { useAuthContext } from '@/contexts/AuthContext';
 
 interface SidebarProps {
-  isCollapsed: boolean; // Prop to determine if the sidebar is collapsed
+  isCollapsed: boolean;
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ isCollapsed }) => {
+  const { userData } = useAuthContext();
+  const getSidebarData = () => {
+    switch (userData?.role) {
+      case 'MENTOR':
+        return MentorSidebarData;
+      case 'PARTNER':
+        return PartnerSidebarData;
+      case 'TALENT':
+      default:
+        return TalentSidebarData;
+    }
+  };
+  const navigationData = getSidebarData();
+
   return (
     <main className='flex flex-col h-full p-5 gap-5 w-auto'>
       <section className='mt-3 mb-5 flex flex-col gap-3'>
@@ -15,13 +33,13 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed }) => {
               isCollapsed ? 'hidden' : ''
             }`}
           >
-            <Link to='/'>Bridge AI</Link>
+            <Link to={getSidebarData()[0].path}>Bridge AI</Link>
           </h1>
         </div>
       </section>
       <section className='mx-auto flex w-full flex-col'>
         <ul className='flex flex-col gap-2'>
-          {SidebarData.map(({ name, path, icon }, idx) => (
+          {navigationData.map(({ name, path, icon }, idx) => (
             <NavLink
               key={idx}
               to={path}
@@ -32,8 +50,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed }) => {
               }
             >
               <span className='text-xl'>{icon}</span>
-              {!isCollapsed && <span>{name}</span>}{' '}
-              {/* Hide text if collapsed */}
+              {!isCollapsed && <span>{name}</span>}
             </NavLink>
           ))}
         </ul>

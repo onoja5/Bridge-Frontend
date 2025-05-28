@@ -30,8 +30,8 @@ const MentorCard: React.FC<MentorCardProps> = ({ profileImage, firstName, lastNa
   };
 
   const handleCardClick = () => {
-    console.log('Navigating to:', `/mentorships/${_id}`);
-    navigate(`/mentorships/${_id}`);
+    console.log('Navigating to:', `/talent/mentorships/${_id}`);
+    navigate(`/talent/mentorships/${_id}`);
   };
 
   return (

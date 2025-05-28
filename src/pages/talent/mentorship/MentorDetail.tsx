@@ -223,7 +223,7 @@ const MentorDetail: React.FC = () => {
       <div className="max-w-4xl mx-auto">
         <div className="mb-6">
           <button
-            onClick={() => navigate('/mentorships')}
+            onClick={() => navigate('/talent/mentorship')}
             className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200 transition-colors"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
