@@ -1,4 +1,3 @@
-// src/App.tsx
 import { useEffect } from "react";
 import { Routes, Route, useLocation, Navigate } from "react-router-dom";
 import { useAuthContext } from "./contexts/AuthContext";
@@ -18,6 +17,7 @@ import UserTypeSelection from "./pages/auth/UserTypeSelection";
 import VerifyEmail from "./pages/auth/VerifyEmail";
 import Profile from "./pages/Profile";
 import ProtectedRoute from "./components/ProtectedRoute";
+import Home from "./pages/Home";
 
 // Scroll restoration component
 const ScrollToTopWrapper = () => {
@@ -45,9 +45,8 @@ function App() {
     return () => revealElements.forEach(observer.unobserve);
   }, []);
 
-  // Redirect logic based on user role
+  // Redirect logic for authenticated users based on role
   const getDefaultDashboardPath = () => {
-    if (!isAuthenticated) return "/login";
     switch (userData?.role) {
       case "MENTOR":
         return "/mentor/dashboard";
@@ -65,16 +64,31 @@ function App() {
       <Toaster />
       <ScrollToTopWrapper />
       <Routes>
-        {/* Redirect to appropriate dashboard based on role */}
+        {/* Route for the landing page (/) - render for all users */}
         <Route
           path="/"
-          element={<Navigate to={getDefaultDashboardPath()} replace />}
+          element={
+            <>
+              <Navbar />
+              <Home />
+              <Footer />
+            </>
+          }
         />
+
+        {/* Redirect /dashboard to the appropriate dashboard */}
         <Route
           path="/dashboard"
-          element={<Navigate to={getDefaultDashboardPath()} replace />}
+          element={
+            isAuthenticated ? (
+              <Navigate to={getDefaultDashboardPath()} replace />
+            ) : (
+              <Navigate to="/login" replace />
+            )
+          }
         />
-        {/* Add redirects before main routes */}
+
+        {/* Add redirects for legacy paths */}
         <Route
           path="/for-educators"
           element={<Navigate to="/for-mentors" replace />}
@@ -83,19 +97,24 @@ function App() {
           path="/for-employers"
           element={<Navigate to="/for-partners" replace />}
         />
-        {generalRoutes.map((route, idx: number) => (
-          <Route
-            key={idx}
-            path={route.path}
-            element={
-              <>
-                <Navbar />
-                {route.element}
-                <Footer />
-              </>
-            }
-          />
-        ))}
+
+        {/* Render other general routes (excluding the "/" route to avoid conflict) */}
+        {generalRoutes
+          .filter((route) => route.path !== "/")
+          .map((route, idx: number) => (
+            <Route
+              key={idx}
+              path={route.path}
+              element={
+                <>
+                  <Navbar />
+                  {route.element}
+                  <Footer />
+                </>
+              }
+            />
+          ))}
+
         <Route
           path="/select-user-type"
           element={
@@ -106,8 +125,8 @@ function App() {
             </>
           }
         />
+
         {/* Talent Dashboard Routes */}
-        // In App.tsx
         {talentRoutes.map(({ path, element, name }) => (
           <Route
             key={name}
@@ -119,6 +138,7 @@ function App() {
             }
           />
         ))}
+
         {/* Mentor Dashboard Routes */}
         {mentorRoutes.map(({ path, element, name }) => (
           <Route
@@ -131,6 +151,7 @@ function App() {
             }
           />
         ))}
+
         {/* Partner Dashboard Routes */}
         {partnerRoutes.map(({ path, element, name }) => (
           <Route
@@ -143,6 +164,7 @@ function App() {
             }
           />
         ))}
+
         {/* Profile Route */}
         <Route
           path="/profile"
@@ -152,6 +174,7 @@ function App() {
             </ProtectedRoute>
           }
         />
+
         <Route
           path="/digital-apprenticeship-program"
           element={

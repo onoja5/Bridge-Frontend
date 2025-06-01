@@ -1,11 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import "@/global.css";
 
-interface Question {
-  id: number;
+export interface Question {
+  id: number | string; // Allow string IDs for flexibility
   question: string;
-  type: 'text' | 'dropdown' | 'multi-select';
-  options?: string[]; // For dropdown and multi-select
+  type: "text" | "dropdown" | "multi-select" | "radio"; // Add radio type
+  options?: string[]; // For dropdown, multi-select, and radio
+  optional?: boolean;
+  maxLength?: number;
+  conditional?: string;
+  showIf?: string;
+  action?: string;
 }
 
 interface SurveyQuestionModalProps {
@@ -16,9 +21,9 @@ interface SurveyQuestionModalProps {
   currentQuestion: number;
   onNextQuestion: () => void;
   onPreviousQuestion: () => void;
-  onAnswerChange: (id: number, value: string | string[]) => void;
-  answers: Record<number, string | string[]>;
-  onSubmit: (answers: Record<number, string | string[]>) => void;
+  onAnswerChange: (id: number | string, value: string | string[]) => void;
+  answers: Record<number | string, string | string[]>;
+  onSubmit: (answers: Record<number | string, string | string[]>) => void;
   isLastPhase: boolean;
 }
 
@@ -38,15 +43,62 @@ const SurveyQuestionModal: React.FC<SurveyQuestionModalProps> = ({
   const question = questions[currentQuestion];
 
   // State to track "Others" input for multi-select questions
-  const [othersInput, setOthersInput] = useState<Record<number, string>>({});
+  const [othersInput, setOthersInput] = useState<
+    Record<number | string, string>
+  >({});
 
   if (!isOpen) return null;
+
+  // Handle answer change for multi-select with "Other"
+  const handleMultiSelectChange = (
+    questionId: number | string,
+    option: string,
+    checked: boolean
+  ) => {
+    const selectedOptions = (answers[questionId] as string[]) || [];
+    let updatedOptions: string[];
+
+    if (checked) {
+      updatedOptions = [...selectedOptions, option];
+    } else {
+      updatedOptions = selectedOptions.filter((o) => o !== option);
+    }
+
+    // If "Other" is deselected, clear the custom input
+    if (!checked && option === "Other") {
+      setOthersInput((prev) => {
+        const newState = { ...prev };
+        delete newState[questionId];
+        return newState;
+      });
+    }
+
+    onAnswerChange(questionId, updatedOptions);
+
+    // If "Other" is selected, append custom input if it exists
+    if (checked && option === "Other" && othersInput[questionId]) {
+      onAnswerChange(questionId, [...updatedOptions, othersInput[questionId]]);
+    }
+  };
+
+  // Handle "Other" text input change
+  const handleOthersInputChange = (
+    questionId: number | string,
+    value: string
+  ) => {
+    setOthersInput((prev) => ({ ...prev, [questionId]: value }));
+    const selectedOptions = (answers[questionId] as string[]) || [];
+    onAnswerChange(questionId, [
+      ...selectedOptions.filter((o) => o !== "Other"),
+      value,
+    ]);
+  };
 
   return (
     <div
       className="modal-overlay fixed inset-0 flex items-center justify-center z-50"
       onClick={(e) => {
-        if ((e.target as HTMLElement).classList.contains('modal-overlay')) {
+        if ((e.target as HTMLElement).classList.contains("modal-overlay")) {
           onClose();
         }
       }}
@@ -54,7 +106,9 @@ const SurveyQuestionModal: React.FC<SurveyQuestionModalProps> = ({
       <div className="modal-content bg-white rounded-lg md:w-[55%] w-[80%] h-auto flex flex-col items-start relative">
         {/* Phase Title */}
         <div className="mb-4">
-          <span className="text-sm font-medium text-blue-600">{phaseTitle}</span>
+          <span className="text-sm font-medium text-blue-600">
+            {phaseTitle}
+          </span>
           <span className="text-sm text-gray-400"> • </span>
           <span className="text-sm text-gray-600">
             {currentQuestion + 1}/{questions.length} questions
@@ -65,20 +119,20 @@ const SurveyQuestionModal: React.FC<SurveyQuestionModalProps> = ({
         <h2 className="text-lg font-semibold mb-4">{question.question}</h2>
 
         {/* Question Format */}
-        {question.type === 'text' && (
+        {question.type === "text" && (
           <input
             type="text"
             placeholder="Enter Text"
             className="w-full border-0 border-b-2 border-[#2563EB] outline-none px-2 py-4 text-sm"
-            value={answers[question.id] as string || ''}
+            value={(answers[question.id] as string) || ""}
             onChange={(e) => onAnswerChange(question.id, e.target.value)}
           />
         )}
 
-        {question.type === 'dropdown' && (
+        {question.type === "dropdown" && (
           <select
             className="w-full border border-gray-300 rounded-md px-3 py-4 outline-none text-sm custom-dropdown"
-            value={answers[question.id] as string || ''}
+            value={(answers[question.id] as string) || ""}
             onChange={(e) => onAnswerChange(question.id, e.target.value)}
           >
             <option value="" disabled>
@@ -92,58 +146,94 @@ const SurveyQuestionModal: React.FC<SurveyQuestionModalProps> = ({
           </select>
         )}
 
-        {question.type === 'multi-select' && (
+        {question.type === "multi-select" && (
           <div className="flex flex-col md:grid md:grid-cols-2 gap-2 mt-4 overflow-y-auto w-full max-h-[30vh]">
-            {question.options?.map((option, index) => (
-              <label
-                key={index}
-                className="flex items-center gap-2 p-2 cursor-pointer custom-checkbox"
-              >
-                <input
-                  className="hidden"
-                  type="checkbox"
-                  value={option}
-                  checked={(answers[question.id] as string[] || []).includes(option)}
-                  onChange={(e) => {
-                    const selectedOptions = answers[question.id] as string[] || [];
-                    if (e.target.checked) {
-                      onAnswerChange(question.id, [...selectedOptions, option]);
-                    } else {
-                      onAnswerChange(question.id, selectedOptions.filter((o) => o !== option));
-                    }
-                  }}
-                />
-                <span className="w-5 h-5 flex items-center justify-center border border-gray-300 rounded-sm">
-                  <svg
-                    className="hidden w-4 h-4 text-white"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 16 16"
-                    fill="currentColor"
+            {question.options
+              ? [
+                  ...question.options,
+                  "Other", // Always include "Other" as an option
+                ].map((option, index) => (
+                  <label
+                    key={index}
+                    className="flex items-center gap-2 p-2 cursor-pointer custom-checkbox"
                   >
-                    <path d="M6.00039 10.8002L3.20039 8.0002L2.26606 8.93453L6.00039 12.6689L14.0004 4.66887L13.0661 3.73453L6.00039 10.8002Z" />
-                  </svg>
-                </span>
-                <span className="text-sm">{option}</span>
-              </label>
-            ))}
-
-            {/* Render "Others" input field if "Others" is selected */}
-            {(answers[question.id] as string[] || []).includes('Others') && (
+                    <input
+                      className="hidden"
+                      type="checkbox"
+                      value={option}
+                      checked={(
+                        (answers[question.id] as string[]) || []
+                      ).includes(option)}
+                      onChange={(e) =>
+                        handleMultiSelectChange(
+                          question.id,
+                          option,
+                          e.target.checked
+                        )
+                      }
+                    />
+                    <span className="w-5 h-5 flex items-center justify-center border border-gray-300 rounded-sm">
+                      <svg
+                        className="hidden w-4 h-4 text-white"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 16 16"
+                        fill="currentColor"
+                      >
+                        <path d="M6.00039 10.8002L3.20039 8.0002L2.26606 8.93453L6.00039 12.6689L14.0004 4.66887L13.0661 3.73453L6.00039 10.8002Z" />
+                      </svg>
+                    </span>
+                    <span className="text-sm">{option}</span>
+                  </label>
+                ))
+              : null}
+            {/* Render "Others" input field if "Other" is selected */}
+            {((answers[question.id] as string[]) || []).includes("Other") && (
               <div className="mt-2">
                 <input
                   type="text"
                   placeholder="Please specify"
-                  value={othersInput[question.id] || ''}
-                  onChange={(e) => {
-                    setOthersInput((prev: Record<number, string>) => ({
-                      ...prev,
-                      [question.id]: e.target.value,
-                    }));
-                  }}
+                  value={othersInput[question.id] || ""}
+                  onChange={(e) =>
+                    handleOthersInputChange(question.id, e.target.value)
+                  }
                   className="w-full border-b-[1.5px] border-[#2563EB] p-2 mt-2 text-sm outline-none"
                 />
               </div>
             )}
+          </div>
+        )}
+
+        {question.type === "radio" && (
+          <div className="flex flex-col gap-2 mt-4">
+            {question.options?.map((option, index) => (
+              <label
+                key={index}
+                className="flex items-center gap-2 p-2 cursor-pointer custom-radio"
+              >
+                <input
+                  className="hidden"
+                  type="radio"
+                  name={`radio-${question.id}`} // Group radio buttons by question ID
+                  value={option}
+                  checked={answers[question.id] === option}
+                  onChange={(e) => {
+                    console.log(`Radio selected: ${e.target.value}`); // Debug log
+                    onAnswerChange(question.id, e.target.value);
+                  }}
+                />
+                <span className="w-5 h-5 flex items-center justify-center border-gray-300 rounded-full">
+                  <svg
+                    className="hidden w-3 h-3 text-blue-600" // Changed color for visibility
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 16 16"
+                    fill="currentColor"
+                  >
+                    <circle cx="8" cy="8" r="4" />
+                  </svg>
+                </span>
+                <p className="text-sm">{option}</p>
+              </label>
+            ))}
           </div>
         )}
 
@@ -169,7 +259,7 @@ const SurveyQuestionModal: React.FC<SurveyQuestionModalProps> = ({
               onClick={() => onSubmit(answers)}
               className="px-4 py-2 bg-blue-600 text-white rounded-md text-sm"
             >
-              {isLastPhase ? 'Submit Survey' : 'Next Phase'}
+              {isLastPhase ? "Submit" : "Next Phase"}
             </button>
           )}
         </div>

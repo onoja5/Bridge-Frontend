@@ -78,6 +78,38 @@ body {
   }
 }
 
+/* Custom radio styling */
+/* Ensure the input itself is hidden but still interactable */
+.custom-radio input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* Style the span (visual radio button) */
+.custom-radio span {
+  border-radius: 50%;
+  border: 2px solid #d1d5db; /* gray-300 */
+  transition: all 0.2s ease;
+}
+
+/* Show the SVG when the radio is checked */
+.custom-radio input[type="radio"]:checked + span svg {
+  display: block;
+}
+
+/* Optional: Add a background color to the span when checked */
+.custom-radio input[type="radio"]:checked + span {
+  border-color: #2563EB; /* blue-600 */
+  background-color: #2563EB; /* Optional: background for better visibility */
+}
+
+/* Ensure the SVG is hidden by default */
+.custom-radio svg {
+  display: none;
+}
+
 /* Custom Animation Classes */
 .animate-fade-in {
   animation: fadeIn 0.6s ease-out forwards;

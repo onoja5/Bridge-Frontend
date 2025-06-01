@@ -33,7 +33,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed }) => {
               isCollapsed ? 'hidden' : ''
             }`}
           >
-            <Link to={getSidebarData()[0].path}>Bridge AI</Link>
+            <Link to="/">Bridge AI</Link>
           </h1>
         </div>
       </section>
