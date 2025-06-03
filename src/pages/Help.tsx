@@ -1,7 +1,16 @@
 import React from 'react';
+import SEO from '@/components/SEO/SEO'; // Import the SEO component
 
 const Help = () => (
   <div className="min-h-screen">
+    {/* SEO Component for rich link previews */}
+    <SEO
+      title="Help Center – BridgeAI Support and FAQ"
+      description="Get the support you need with answers to common questions and easy ways to contact BridgeAI's support team."
+      url="https://bridge.ayoks.com/help"
+      image="https://bridge.ayoks.com/images/help-og.png" // Replace with actual image URL
+    />
+
     {/* Hero Section */}
     <div className="bg-gradient-to-r from-blue-900 to-blue-800 py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

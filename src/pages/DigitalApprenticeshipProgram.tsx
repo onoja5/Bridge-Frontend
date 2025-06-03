@@ -1,7 +1,15 @@
 import React from 'react';
+import SEO from '@/components/SEO/SEO'; // Import the SEO component
 
 const DigitalApprenticeshipProgram = () => (
   <div className='min-h-screen'>
+    {/* SEO Component for rich link previews */}
+    <SEO 
+      title="Digital Apprenticeship & Mentorship Program - Bridge AI"
+      description="Join our 3-6 month industry-aligned apprenticeship to gain real-world experience with expert mentorship and AI-powered skill tracking."
+      url="https://bridge.ayoks.com/digital-apprenticeship"
+    />
+    
     {/* Hero Section */}
     <div className='bg-gradient-to-r from-blue-900 to-blue-800 py-24'>
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>

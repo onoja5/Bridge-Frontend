@@ -8,6 +8,7 @@ import {
   Star,
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import SEO from '@/components/SEO/SEO'; // Import the SEO component
 
 export default function HowItWorks() {
   const steps = [
@@ -96,25 +97,33 @@ export default function HowItWorks() {
   ];
 
   return (
-    <div className='min-h-screen'>
+    <div className="min-h-screen">
+      {/* SEO Component for rich link previews */}
+      <SEO
+        title="How Bridge AI Works – Revolutionizing Career Development"
+        description="Discover how BridgeAI bridges the gap between education and the job market using AI to guide career development, learning, and opportunities."
+        url="https://bridge.ayoks.com/how-it-works"
+        image="https://bridge.ayoks.com/images/how-it-works-og.png" // Replace with actual image URL
+      />
+
       {/* Hero Section */}
-      <div className='bg-gradient-to-r from-blue-900 to-blue-800 py-24'>
-        <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
-          <div className='text-center'>
-            <h1 className='text-4xl md:text-6xl font-bold text-white mb-6'>
+      <div className="bg-gradient-to-r from-blue-900 to-blue-800 py-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
               How Bridge AI Works
             </h1>
-            <p className='text-xl text-blue-100 max-w-3xl mx-auto mb-8'>
+            <p className="text-xl text-blue-100 max-w-3xl mx-auto mb-8">
               BridgeAI is your personalized career companion, designed to bridge
               the gap between education and the evolving job market. Using
               AI-driven insights, we help students and professionals discover,
               develop, and deploy their skills for real-world opportunities.
             </p>
             <Link
-              to='/dashboard'
-              className='inline-flex items-center bg-white text-blue-900 px-8 py-3 rounded-md text-lg font-semibold hover:bg-blue-50 transition duration-300'
+              to="/dashboard"
+              className="inline-flex items-center bg-white text-blue-900 px-8 py-3 rounded-md text-lg font-semibold hover:bg-blue-50 transition duration-300"
             >
-              Get Started <ArrowRight className='ml-2' />
+              Get Started <ArrowRight className="ml-2" />
             </Link>
           </div>
         </div>
@@ -123,23 +132,23 @@ export default function HowItWorks() {
       {/* Steps Section */}
       {steps.map((step, index) => (
         <div key={index} className={`${step.bgClass} py-16`}>
-          <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
-            <div className='grid md:grid-cols-2 gap-8 items-center shadow-lg hover:shadow-xl transition duration-300'>
-              <div className='flex justify-center'>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid md:grid-cols-2 gap-8 items-center shadow-lg hover:shadow-xl transition duration-300">
+              <div className="flex justify-center">
                 <img
                   src={step.image}
                   alt={step.title}
-                  className='rounded-lg shadow-lg hover:scale-105 transition-transform duration-300'
+                  className="rounded-lg shadow-lg hover:scale-105 transition-transform duration-300"
                 />
               </div>
               <div>
-                <h2 className='text-3xl font-bold mb-4'>{step.title}</h2>
-                <p className='text-lg text-gray-700 mb-6'>{step.description}</p>
-                <div className='space-y-4'>
+                <h2 className="text-3xl font-bold mb-4">{step.title}</h2>
+                <p className="text-lg text-gray-700 mb-6">{step.description}</p>
+                <div className="space-y-4">
                   {step.bullets.map((bullet, idx) => (
-                    <div key={idx} className='flex items-start gap-3'>
-                      <CheckCircle className='h-6 w-6 text-blue-500' />
-                      <span className='text-base text-gray-700'>{bullet}</span>
+                    <div key={idx} className="flex items-start gap-3">
+                      <CheckCircle className="h-6 w-6 text-blue-500" />
+                      <span className="text-base text-gray-700">{bullet}</span>
                     </div>
                   ))}
                 </div>
@@ -150,67 +159,67 @@ export default function HowItWorks() {
       ))}
 
       {/* Why BridgeAI Section */}
-      <div className='bg-gradient-to-r from-blue-900 to-blue-800 py-24 text-white'>
-        <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-8'>
+      <div className="bg-gradient-to-r from-blue-900 to-blue-800 py-24 text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-8">
           <div>
-            <h2 className='text-4xl font-bold mb-6'>Why BridgeAI?</h2>
-            <p className='text-lg mb-6'>
+            <h2 className="text-4xl font-bold mb-6">Why BridgeAI?</h2>
+            <p className="text-lg mb-6">
               BridgeAI offers a unique blend of AI-powered career planning,
               hands-on learning, and mentorship to help you achieve your goals.
             </p>
-            <div className='space-y-4'>
+            <div className="space-y-4">
               {[
                 'AI-powered career planning tailored to you',
                 'Hands-on learning through real-world projects',
                 'Mentorship & networking with industry professionals',
                 'Job-ready training to secure high-impact opportunities',
               ].map((benefit, idx) => (
-                <div key={idx} className='flex items-start gap-3'>
-                  <Star className='h-6 w-6 text-yellow-500' />
-                  <span className='text-base'>{benefit}</span>
+                <div key={idx} className="flex items-start gap-3">
+                  <Star className="h-6 w-6 text-yellow-500" />
+                  <span className="text-base">{benefit}</span>
                 </div>
               ))}
             </div>
           </div>
-          <div className='grid grid-cols-2 gap-4'>
-            <div className='bg-white/10 backdrop-blur-lg p-6 rounded-lg shadow-lg'>
-              <p className='text-lg'>1. AI-Powered Career Personalization</p>
+          <div className="grid grid-cols-2 gap-4">
+            <div className="bg-white/10 backdrop-blur-lg p-6 rounded-lg shadow-lg">
+              <p className="text-lg">1. AI-Powered Career Personalization</p>
             </div>
-            <div className='bg-white/10 backdrop-blur-lg p-6 rounded-lg shadow-lg'>
-              <p className='text-lg'>2. VIP Access to Mentors</p>
+            <div className="bg-white/10 backdrop-blur-lg p-6 rounded-lg shadow-lg">
+              <p className="text-lg">2. VIP Access to Mentors</p>
             </div>
-            <div className='bg-white/10 backdrop-blur-lg p-6 rounded-lg shadow-lg'>
-              <p className='text-lg'>3. Job Matching Engine</p>
+            <div className="bg-white/10 backdrop-blur-lg p-6 rounded-lg shadow-lg">
+              <p className="text-lg">3. Job Matching Engine</p>
             </div>
-            <div className='bg-white/10 backdrop-blur-lg p-6 rounded-lg shadow-lg'>
-              <p className='text-lg'>4. Resume-Building Automation</p>
+            <div className="bg-white/10 backdrop-blur-lg p-6 rounded-lg shadow-lg">
+              <p className="text-lg">4. Resume-Building Automation</p>
             </div>
           </div>
         </div>
       </div>
 
       {/* CTA Section */}
-      <div className='bg-blue-900 py-24'>
-        <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center'>
-          <h2 className='text-4xl font-bold text-white mb-6'>
+      <div className="bg-blue-900 py-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-4xl font-bold text-white mb-6">
             Ready to Get Started?
           </h2>
-          <p className='text-xl text-blue-100 max-w-3xl mx-auto mb-8'>
+          <p className="text-xl text-blue-100 max-w-3xl mx-auto mb-8">
             Join thousands of students, educators, and employers who are already
             benefiting from Bridge AI platform.
           </p>
-          <div className='flex flex-col sm:flex-row gap-4 justify-center'>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
-              to='/signup'
-              className='inline-flex items-center bg-white text-blue-900 px-8 py-3 rounded-md text-lg font-semibold hover:bg-blue-50 transition duration-300'
+              to="/signup"
+              className="inline-flex items-center bg-white text-blue-900 px-8 py-3 rounded-md text-lg font-semibold hover:bg-blue-50 transition duration-300"
             >
-              Sign Up Now <ArrowRight className='ml-2' />
+              Sign Up Now <ArrowRight className="ml-2" />
             </Link>
             <Link
-              to='/contact'
-              className='inline-flex items-center border-2 border-white text-white px-8 py-3 rounded-md text-lg font-semibold hover:bg-white/10 transition duration-300'
+              to="/contact"
+              className="inline-flex items-center border-2 border-white text-white px-8 py-3 rounded-md text-lg font-semibold hover:bg-white/10 transition duration-300"
             >
-              Contact Us <ArrowRight className='ml-2' />
+              Contact Us <ArrowRight className="ml-2" />
             </Link>
           </div>
         </div>

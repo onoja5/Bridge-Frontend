@@ -1,6 +1,7 @@
 import React from 'react';
 import { ArrowRight, Users, Target, Briefcase, CheckCircle, Star, Building, Info, TrendingUp, ClipboardList, UserCheck } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import SEO from '@/components/SEO/SEO'; // Import the SEO component
 
 export default function ForEmployers() {
   const benefits = [
@@ -40,6 +41,13 @@ export default function ForEmployers() {
 
   return (
     <div className="min-h-screen">
+      {/* SEO Component for rich link previews */}
+      <SEO 
+        title="For Employers - Bridge AI Talent Solutions"
+        description="Connect with top students and graduates through Bridge AI. Access skilled talent, drive innovation, and build your talent pipeline at no cost."
+        url="https://bridge.ayoks.com/for-employers"
+      />
+      
       {/* Hero Section */}
       <div className="bg-gradient-to-r from-blue-900 to-blue-800 py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -180,7 +188,7 @@ export default function ForEmployers() {
             <div>
               <h2 className="text-3xl font-bold mb-4">Hear from Real BridgeAI Users</h2>
               <p className="text-lg mb-8">
-                "One of my biggest concerns has to do with our online classes being able to provide students with real-life, hands-on learning experiences. So, when I looked at BridgeAI, it was very exciting for me, because it’s a way for our classes and students to connect with thousands of businesses, nonprofits, and government agencies."
+                "One of my biggest concerns has to do with our online classes being able to provide students with real-life, hands-on learning experiences. So, when I looked at BridgeAI, it was very exciting for me, because it's a way for our classes and students to connect with thousands of businesses, nonprofits, and government agencies."
               </p>
               <p className="font-semibold">Jeff Holm</p>
               <p className="text-sm text-gray-300">Vice Provost for Strategic Programming & Special Initiatives</p>

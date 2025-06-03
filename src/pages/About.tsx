@@ -1,6 +1,7 @@
 import React from 'react';
 import { Users, Target, Heart, Globe, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import SEO from '@/components/SEO/SEO'; // Import the SEO component
 
 export default function About() {
   const team = [
@@ -51,6 +52,12 @@ export default function About() {
 
   return (
     <div className="min-h-screen">
+       {/* SEO Component for rich link previews */}
+      <SEO 
+        title="About Bridge AI - Our Mission and Values"
+        description="Learn how Bridge AI revolutionizes career development with AI-driven insights, mentorship, and personalized career roadmaps for students and professionals."
+        url="https://bridge.ayoks.com/about"
+      />
       {/* Hero Section */}
       <div className="bg-gradient-to-r from-blue-900 to-blue-800 py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

@@ -12,7 +12,7 @@ const WorkforceDevelopment = () => (
           </h1>
           <p className='text-xl text-blue-100 max-w-3xl mx-auto mb-8'>
             Target Audience: AI & Tech professionals, business leaders, and AI
-            enthusiasts Overview: A community-driven platform where
+            enthusiasts. Overview: A community-driven platform where
             professionals connect to learn, share, and lead in the age of AI.
             This initiative fosters discussions, innovation, and collaboration
             between AI technologists, entrepreneurs, and thought leaders.
