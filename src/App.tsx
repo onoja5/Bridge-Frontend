@@ -1,27 +1,23 @@
-import { useEffect } from 'react';
-import {
-  Routes,
-  Route,
-  useLocation,
-  Navigate // Add this import
-} from 'react-router-dom';
-import { AuthProvider } from './contexts/AuthContext';
-import generalRoutes from './layout/routes/GeneralRoutes';
-import dashboardRoutes from './layout/routes/DashboardRoutes';
-import DashboardLayout from './layout/DashboardLayout';
-import NotFound from './pages/404/NotFound';
-import Navbar from './components/Navbar';
-import Footer from './components/Footer';
-import { Toaster } from './components/ui/toaster';
-import DigitalApprenticeshipProgram from './pages/DigitalApprenticeshipProgram';
-import DigitalAfricaBootcamp from './pages/DigitalAfricaBootcamp';
-import CorporateTalentPipeline from './pages/CorporateTalentPipeline';
-import UserTypeSelection from './pages/auth/UserTypeSelection';
-import VerifyEmail from './pages/auth/VerifyEmail';
-import Profile from './pages/Profile';
-import ProtectedRoute from './components/ProtectedRoute';
-import Blog from './pages/Blog';
-import BlogPost from './pages/BlogPost';
+import { useEffect } from "react";
+import { Routes, Route, useLocation, Navigate } from "react-router-dom";
+import { useAuthContext } from "./contexts/AuthContext";
+import generalRoutes from "./layout/routes/GeneralRoutes";
+import talentRoutes from "./layout/routes/TalentRoutes";
+import mentorRoutes from "./layout/routes/MentorRoutes";
+import partnerRoutes from "./layout/routes/PartnerRoutes";
+import DashboardLayout from "./layout/DashboardLayout";
+import NotFound from "./pages/404/NotFound";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import { Toaster } from "./components/ui/toaster";
+import DigitalApprenticeshipProgram from "./pages/DigitalApprenticeshipProgram";
+import DigitalAfricaBootcamp from "./pages/DigitalAfricaBootcamp";
+import CorporateTalentPipeline from "./pages/CorporateTalentPipeline";
+import UserTypeSelection from "./pages/auth/UserTypeSelection";
+import VerifyEmail from "./pages/auth/VerifyEmail";
+import Profile from "./pages/Profile";
+import ProtectedRoute from "./components/ProtectedRoute";
+import Home from "./pages/Home";
 
 // Scroll restoration component
 const ScrollToTopWrapper = () => {
@@ -31,33 +27,81 @@ const ScrollToTopWrapper = () => {
 };
 
 function App() {
+  const { userData, isAuthenticated } = useAuthContext();
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach(
           (entry) =>
-            entry.isIntersecting && entry.target.classList.add('is-visible'),
+            entry.isIntersecting && entry.target.classList.add("is-visible")
         );
       },
-      { root: null, rootMargin: '0px', threshold: 0.1 },
+      { root: null, rootMargin: "0px", threshold: 0.1 }
     );
 
-    const revealElements = document.querySelectorAll('.reveal-on-scroll');
+    const revealElements = document.querySelectorAll(".reveal-on-scroll");
     revealElements.forEach(observer.observe);
     return () => revealElements.forEach(observer.unobserve);
   }, []);
 
-  return (
-    <AuthProvider>
-      <main className='App'>
-        <Toaster />
-        <ScrollToTopWrapper />
-        <Routes>
-          {/* Add redirects before main routes */}
-          <Route path="/for-educators" element={<Navigate to="/for-mentors" replace />} />
-          <Route path="/for-employers" element={<Navigate to="/for-partners" replace />} />
+  // Redirect logic for authenticated users based on role
+  const getDefaultDashboardPath = () => {
+    switch (userData?.role) {
+      case "MENTOR":
+        return "/mentor/dashboard";
+      case "PARTNER":
+        return "/partner/dashboard";
+      case "TALENT":
+        return "/talent/dashboard";
+      default:
+        return "/select-user-type";
+    }
+  };
 
-          {generalRoutes.map((route, idx: number) => (
+  return (
+    <main className="App">
+      <Toaster />
+      <ScrollToTopWrapper />
+      <Routes>
+        {/* Route for the landing page (/) - render for all users */}
+        <Route
+          path="/"
+          element={
+            <>
+              <Navbar />
+              <Home />
+              <Footer />
+            </>
+          }
+        />
+
+        {/* Redirect /dashboard to the appropriate dashboard */}
+        <Route
+          path="/dashboard"
+          element={
+            isAuthenticated ? (
+              <Navigate to={getDefaultDashboardPath()} replace />
+            ) : (
+              <Navigate to="/login" replace />
+            )
+          }
+        />
+
+        {/* Add redirects for legacy paths */}
+        <Route
+          path="/for-educators"
+          element={<Navigate to="/for-mentors" replace />}
+        />
+        <Route
+          path="/for-employers"
+          element={<Navigate to="/for-partners" replace />}
+        />
+
+        {/* Render other general routes (excluding the "/" route to avoid conflict) */}
+        {generalRoutes
+          .filter((route) => route.path !== "/")
+          .map((route, idx: number) => (
             <Route
               key={idx}
               path={route.path}
@@ -70,81 +114,101 @@ function App() {
               }
             />
           ))}
+
+        <Route
+          path="/select-user-type"
+          element={
+            <>
+              <Navbar />
+              <UserTypeSelection />
+              <Footer />
+            </>
+          }
+        />
+
+        {/* Talent Dashboard Routes */}
+        {talentRoutes.map(({ path, element, name }) => (
           <Route
-            path="/blog"
+            key={name}
+            path={path}
             element={
-              <>
-                <Navbar />
-                <Blog />
-                <Footer />
-              </>
+              <ProtectedRoute allowedRoles={["TALENT"]}>
+                <DashboardLayout>{element}</DashboardLayout>
+              </ProtectedRoute>
             }
           />
+        ))}
+
+        {/* Mentor Dashboard Routes */}
+        {mentorRoutes.map(({ path, element, name }) => (
           <Route
-            path="/blog/:slug"
+            key={name}
+            path={path}
             element={
-              <>
-                <Navbar />
-                <BlogPost />
-                <Footer />
-              </>
+              <ProtectedRoute allowedRoles={["MENTOR"]}>
+                <DashboardLayout>{element}</DashboardLayout>
+              </ProtectedRoute>
             }
           />
+        ))}
+
+        {/* Partner Dashboard Routes */}
+        {partnerRoutes.map(({ path, element, name }) => (
           <Route
-            path='/select-user-type'
+            key={name}
+            path={path}
             element={
-              <>
-                <Navbar />
-                <UserTypeSelection />
-                <Footer />
-              </>
+              <ProtectedRoute allowedRoles={["PARTNER"]}>
+                <DashboardLayout>{element}</DashboardLayout>
+              </ProtectedRoute>
             }
           />
-          {dashboardRoutes.map(({ path, element, name }) => (
-            <Route
-              key={name}
-              path={path}
-              element={<DashboardLayout>{element}</DashboardLayout>}
-            />
-          ))}
-          <Route element={<ProtectedRoute />}>
-            <Route path='/profile' element={<Profile />} />
-          </Route>
-          <Route
-            path='/digital-apprenticeship-program'
-            element={
-              <>
-                <Navbar />
-                <DigitalApprenticeshipProgram />
-                <Footer />
-              </>
-            }
-          />
-          <Route
-            path='/digital-africa-bootcamp'
-            element={
-              <>
-                <Navbar />
-                <DigitalAfricaBootcamp />
-                <Footer />
-              </>
-            }
-          />
-          <Route
-            path='/corporate-talent-pipeline'
-            element={
-              <>
-                <Navbar />
-                <CorporateTalentPipeline />
-                <Footer />
-              </>
-            }
-          />
-          <Route path='/verify-email' element={<VerifyEmail />} />
-          <Route path='*' element={<NotFound />} />
-        </Routes>
-      </main>
-    </AuthProvider>
+        ))}
+
+        {/* Profile Route */}
+        <Route
+          path="/profile"
+          element={
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/digital-apprenticeship-program"
+          element={
+            <>
+              <Navbar />
+              <DigitalApprenticeshipProgram />
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          path="/digital-africa-bootcamp"
+          element={
+            <>
+              <Navbar />
+              <DigitalAfricaBootcamp />
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          path="/corporate-talent-pipeline"
+          element={
+            <>
+              <Navbar />
+              <CorporateTalentPipeline />
+              <Footer />
+            </>
+          }
+        />
+        <Route path="/verify-email" element={<VerifyEmail />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </main>
   );
 }
 

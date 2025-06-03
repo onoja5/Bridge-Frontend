@@ -1,3 +1,4 @@
+// src/main.tsx
 import './global.css';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
@@ -7,6 +8,7 @@ import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { AuthProvider } from './contexts/AuthContext.tsx';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
 import { createBrowserHistory } from 'history';
 import { unstable_HistoryRouter as HistoryRouter } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async'; // Add this import
@@ -34,12 +36,14 @@ createRoot(document.getElementById('root')!).render(
               console.log('Redux state rehydrated');
             }}
           >
+
             <HistoryRouter history={history}>
               {/* Wrap App with HelmetProvider */}
               <HelmetProvider>
                 <App />
               </HelmetProvider>
             </HistoryRouter>
+
           </PersistGate>
         </Provider>
       </AuthProvider>

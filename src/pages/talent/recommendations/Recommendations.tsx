@@ -1,4 +1,4 @@
-const Recomendations = () => {
+const Recommendations = () => {
   return (
     <main>
       <h2>Recomendations</h2>
@@ -6,4 +6,4 @@ const Recomendations = () => {
   );
 };
 
-export default Recomendations;
+export default Recommendations;

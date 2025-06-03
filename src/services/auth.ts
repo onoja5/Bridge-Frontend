@@ -20,6 +20,7 @@ export const authService = {
     return response.data;
   },
 
+
   async verifyOTP(data: VerifyOTPBodyData): Promise<ApiRsp> {
     const response = await baseAPI.post<ApiRsp>(
       '/users/verification/verify-signup-or-login-code',

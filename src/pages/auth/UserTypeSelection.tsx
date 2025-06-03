@@ -6,16 +6,27 @@ import {
   BadgeIcon,
   BriefcaseIcon,
 } from '@/assets/svgs/ExportSvgs';
+import { AuthUserDataDTO } from '@/types/auth';
 
 const UserTypeSelection = () => {
   const navigate = useNavigate();
   const { setUserData } = useAuthContext();
   const [selectedRole, setSelectedRole] = useState<string | null>(null);
 
+  const normalizeRole = (role: string): string => {
+    const roleMap: Record<string, string> = {
+      Talents: 'TALENT',
+      Mentors: 'MENTOR',
+      Partners: 'PARTNER',
+    };
+    return roleMap[role] || 'TALENT';
+  };
+
   const handleUserTypeSelect = (role: string) => {
+    const normalizedRole = normalizeRole(role);
     setSelectedRole(role);
-    setUserData((prev: { role?: string }) => ({ ...prev, role })); // Save selected role in context
-    navigate('/signup'); // Redirect to the actual signup page
+    setUserData({  role: normalizedRole  } as AuthUserDataDTO);
+    navigate('/signup', { state: { role: normalizedRole } });
   };
 
   const userTypes = [
@@ -35,13 +46,13 @@ const UserTypeSelection = () => {
       role: 'Partners',
       icon: BriefcaseIcon,
       description:
-        "Access future-ready talent, tap into on-demand expertise, and collaborate on upskilling initiatives through project-based training. Institutions offering skilling and training opportunities can join to empower tomorrow’s workforce.",
+        "Access future-ready talent, tap into on-demand expertise, and collaborate on upskilling initiatives through project-based training. Institutions offering skilling and training opportunities can join to empower tomorrow’s workforce.",
     },
   ];
 
   return (
     <main className='min-h-screen flex flex-col items-center justify-center bg-gray-100 px-4'>
-      <h2 className='text-3xl font-bold mb-4 mt-28'>Tailor your experience</h2>
+      <h2 className='text-3xl font-bold mb-4 mt-28'>Tailor your experience</h2>
       <p className='text-center mb-8 text-gray-600'>Tell us what type of user you are, this will help us craft a great experience for you.</p>
       <div className='grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl mb-20'>
         {userTypes.map(({ role, icon: Icon, description }) => (

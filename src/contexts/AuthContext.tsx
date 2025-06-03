@@ -1,73 +1,55 @@
-import React, {
-  createContext,
-  useContext,
-  useState,
-  useEffect,
-  Dispatch,
-  SetStateAction,
-} from 'react';
-import type { AuthUserDataDTO } from '../types/auth';
+// AuthContext.tsx (assumed, please share if different)
+import React, { createContext, useContext, useState, useEffect } from 'react';
+import { AuthUserDataDTO } from '@/types/auth';
 
 interface AuthContextType {
-  userData: { role?: string; [key: string]: any };
-  setUserData: Dispatch<SetStateAction<any>>;
-  setIsAuthenticated: Dispatch<SetStateAction<boolean>>;
+  userData: AuthUserDataDTO | null;
+  setUserData: (data: Partial<AuthUserDataDTO>) => void;
   isAuthenticated: boolean;
+  setIsAuthenticated: (value: boolean) => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
-  children,
-}) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(() => {
-    try {
-      const isLoggedIn =
-        typeof window !== 'undefined'
-          ? localStorage.getItem('isLoggedIn')
-          : false;
-      return isLoggedIn ? JSON.parse(isLoggedIn) : false;
-    } catch (error) {
-      console.error('Error accessing localStorage:', error);
-      return false;
-    }
-  });
+export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [userData, setUserDataState] = useState<AuthUserDataDTO | null>(null);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
 
-  const [userData, setUserData] = useState<AuthUserDataDTO | null>(() => {
-    try {
-      const storedUserData =
-        typeof window !== 'undefined' ? localStorage.getItem('userData') : null;
-      return storedUserData ? JSON.parse(storedUserData) : null;
-    } catch (error) {
-      console.error('Error accessing localStorage:', error);
-      return null;
+  // Persist and restore userData from localStorage
+  useEffect(() => {
+    const storedUserData = localStorage.getItem('userData');
+    const storedAuthStatus = localStorage.getItem('isAuthenticated');
+    if (storedUserData) {
+      setUserDataState(JSON.parse(storedUserData));
     }
-  });
+    if (storedAuthStatus) {
+      setIsAuthenticated(JSON.parse(storedAuthStatus));
+    }
+  }, []);
+
+  const setUserData = (data: Partial<AuthUserDataDTO>) => {
+    setUserDataState((prev) => {
+      const updatedData = { ...prev, ...data } as AuthUserDataDTO;
+      localStorage.setItem('userData', JSON.stringify(updatedData));
+      return updatedData;
+    });
+  };
 
   useEffect(() => {
-    // Save user data to localStorage whenever it changes
-    localStorage.setItem('userData', JSON.stringify(userData));
-    localStorage.setItem('isLoggedIn', JSON.stringify(isAuthenticated));
-  }, [userData, isAuthenticated]);
+    localStorage.setItem('isAuthenticated', JSON.stringify(isAuthenticated));
+  }, [isAuthenticated]);
 
   return (
-    <AuthContext.Provider
-      value={{
-        userData,
-        setUserData,
-        isAuthenticated,
-        setIsAuthenticated,
-      }}
-    >
+    <AuthContext.Provider value={{ userData, setUserData, isAuthenticated, setIsAuthenticated }}>
       {children}
     </AuthContext.Provider>
   );
 };
 
-export const useAuthContext = (): AuthContextType => {
+export const useAuthContext = () => {
   const context = useContext(AuthContext);
   if (!context) {
-    throw new Error('useAuthContext must be used within a AuthProvider');
+    throw new Error('useAuthContext must be used within an AuthProvider');
   }
   return context;
 };

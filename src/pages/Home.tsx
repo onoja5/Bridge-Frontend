@@ -55,32 +55,6 @@ export default function Home() {
   // Double the partners array for seamless loop
   const displayPartners = [...partners, ...partners];
 
-  const testimonials = [
-    {
-      name: 'Sarah Johnson',
-      role: 'Computer Science Student',
-      image:
-        'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=crop&w=128&h=128&q=80',
-      quote:
-        'Bridge AI helped me land my dream internship at a tech startup. The real-world experience was invaluable!',
-    },
-    {
-      name: 'Prof. Michael Chen',
-      role: 'University Educator',
-      image:
-        'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=crop&w=128&h=128&q=80',
-      quote:
-        'This platform has transformed how we connect our students with industry projects. The results are outstanding!',
-    },
-    {
-      name: 'David Smith',
-      role: 'Tech Company CEO',
-      image:
-        'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=128&h=128&q=80',
-      quote:
-        "We've found amazing talent through Bridge AI. It's our go-to platform for student collaboration.",
-    },
-  ];
 
   const faqs = [
     {
@@ -275,25 +249,30 @@ export default function Home() {
       >
         <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full'>
           <div className='max-w-2xl'>
+
             <h1 className='text-4xl md:text-7xl font-bold mb-6 text-white leading-tight'>
               Step into your future with confidence.
             </h1>
+
             <p className='text-xl md:text-2xl mb-8 text-gray-200 leading-relaxed'>
-              Bridge the gap to your future - Get an AI-powered personalized
-              Career Blueprint.
+              Unlock your potential with AI-powered career blueprint, project-based learning and mentorship
+              - designed to help you excel in tomorrow's workplace.
             </p>
             <div className='flex flex-col sm:flex-row gap-4'>
               <Link
                 to='/dashboard'
                 className='bg-blue-600 text-white px-8 py-4 rounded-md text-lg font-semibold hover:bg-blue-700 transition duration-300 inline-flex items-center justify-center sm:justify-start shadow-lg hover:shadow-xl'
               >
-                Get Personalized Blueprint <ArrowRight className='ml-2' />
+                Start Here <ArrowRight className='ml-2' />
               </Link>
               <Link
                 to='/dashboard'
                 className='bg-white text-blue-600 px-8 py-4 rounded-md text-lg font-semibold hover:bg-gray-100 transition duration-300 shadow-lg hover:shadow-xl text-center sm:text-left'
               >
+
+
                 Connect With A Mentor
+
               </Link>
             </div>
           </div>

@@ -1,9 +1,10 @@
-import Career from '@/pages/dashboards/career/Career';
-import Dashboard from '@/pages/dashboards/home/Dashboard';
-import Jobs from '@/pages/dashboards/jobs/Jobs';
-import Mentorship from '@/pages/dashboards/mentorship/Mentorship';
-import Projects from '@/pages/dashboards/projects/Projects';
-import Recomendations from '@/pages/dashboards/recommendations/Recomendations';
+import Career from '@/pages/talent/career/Career';
+import Dashboard from '@/pages/talent/home/Dashboard';
+import Jobs from '@/pages/talent/jobs/Jobs';
+import Mentorship from '@/pages/talent/mentorship/Mentorship';
+import MentorDetail from '@/pages/talent/mentorship/MentorDetail';
+import Projects from '@/pages/talent/projects/Projects';
+import Recomendations from '@/pages/talent/recommendations/Recommendations';
 import { ReactElement } from 'react';
 
 interface Route {
@@ -25,6 +26,7 @@ const dashboardRoutes: Route[] = [
     path: '/mentorships',
     element: <Mentorship />,
   },
+  { name: 'Mentor Detail', path: '/mentorships/:userId', element: <MentorDetail/> },
   {
     name: 'Career',
     path: '/career',

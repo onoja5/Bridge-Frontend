@@ -13,9 +13,9 @@ interface Layout {
 }
 
 const DashboardLayout: React.FC<Layout> = ({ children }) => {
-  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false); // State for sidebar collapse
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const { isAuthenticated } = useAuthContext();
-  const [activeTooltip, setActiveTooltip] = useState<number | null>(null); // Track active tooltip
+  const [activeTooltip, setActiveTooltip] = useState<number | null>(null);
 
   if (!isAuthenticated) {
     return <Navigate to='/login' replace />;
@@ -23,7 +23,6 @@ const DashboardLayout: React.FC<Layout> = ({ children }) => {
 
   return (
     <main className='flex flex-col md:flex-row min-h-screen'>
-      {/* Sidebar */}
       <section
         className={`hidden md:block fixed top-0 left-0 transition-all duration-300 z-20 ${
           isSidebarCollapsed ? 'w-auto' : 'w-60'
@@ -38,25 +37,25 @@ const DashboardLayout: React.FC<Layout> = ({ children }) => {
         </button>
       </section>
 
-      {/* Main Content */}
       <aside
         className={`flex-1 transition-all duration-300 ${
           isSidebarCollapsed ? 'md:ml-16' : 'md:ml-60'
         } mt-16 md:mt-0 overflow-y-auto bg-Grey1`}
       >
         <DashboardNavbar isSidebarCollapsed={isSidebarCollapsed} />
-        <div className='container py-10 px-4 md:px-8 mt-16 md:mt-20'>{children}</div>
+        <div className='container py-10 px-4 md:px-8 mt-16 md:mt-20'>
+          {children || <div>Dashboard content not available</div>}
+        </div>
       </aside>
 
-      {/* Bottom Navigation for mobile */}
       <nav className='fixed bottom-0 left-0 w-full bg-white shadow-md md:hidden flex justify-around items-center py-5'>
         {SidebarData.map(({ name, path, icon }, idx) => (
           <div
             key={idx}
             className='relative flex flex-col items-center'
-            onMouseEnter={() => setActiveTooltip(idx)} // Show tooltip on hover
-            onMouseLeave={() => setActiveTooltip(null)} // Hide tooltip on mouse leave
-            onClick={() => setActiveTooltip(idx)} // Show tooltip on click
+            onMouseEnter={() => setActiveTooltip(idx)}
+            onMouseLeave={() => setActiveTooltip(null)}
+            onClick={() => setActiveTooltip(idx)}
           >
             <NavLink
               to={path}
@@ -68,7 +67,6 @@ const DashboardLayout: React.FC<Layout> = ({ children }) => {
             >
               <span className='text-icon sm:text-icon-lg'>{icon}</span>
             </NavLink>
-            {/* Tooltip */}
             {activeTooltip === idx && (
               <div className='absolute bottom-12 bg-gray-800 text-white text-center text-xs rounded-md px-2 py-1'>
                 {name}
