@@ -1,8 +1,16 @@
 import React from 'react';
+import SEO from '@/components/SEO/SEO'; // Import the SEO component
 
 export default function DigitalAfricaBootcamp() {
   return (
     <div className='min-h-screen'>
+      {/* SEO Component for rich link previews */}
+      <SEO 
+        title="Digital Africa Bootcamp - Bridge AI"
+        description="Join our 6-12 week immersive bootcamp to gain AI-driven career roadmaps, real-world projects, and technical skills for the digital economy."
+        url="https://bridge.ayoks.com/digital-africa-bootcamp"
+      />
+      
       {/* Hero Section */}
       <div className='bg-gradient-to-r from-blue-900 to-blue-800 py-24'>
         <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>

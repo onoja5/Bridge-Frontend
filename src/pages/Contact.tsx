@@ -1,5 +1,6 @@
 import React from 'react';
 import { Mail, Phone, MapPin, Clock, Send } from 'lucide-react';
+import SEO from '@/components/SEO/SEO'; // Import the SEO component
 
 export default function Contact() {
   const offices = [
@@ -21,6 +22,13 @@ export default function Contact() {
 
   return (
     <div className="min-h-screen">
+      {/* SEO Component for rich link previews */}
+      <SEO 
+        title="Contact Bridge AI - Get in Touch"
+        description="Connect with our team for support, partnerships, or inquiries. We're here to help you navigate your career journey."
+        url="https://bridge.ayoks.com/contact"
+      />
+      
       {/* Hero Section */}
       <div className="bg-gradient-to-r from-blue-900 to-blue-800 py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -107,6 +115,14 @@ export default function Contact() {
                   <div key={index} className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
                     <h3 className="text-xl font-bold mb-4">{office.city}</h3>
                     <div className="space-y-4">
+                      <div className="flex items-start">
+                        <MapPin className="h-6 w-6 text-blue-600 mr-3 flex-shrink-0" />
+                        <span className="text-gray-600">{office.address}</span>
+                      </div>
+                      <div className="flex items-start">
+                        <Phone className="h-6 w-6 text-blue-600 mr-3 flex-shrink-0" />
+                        <span className="text-gray-600">{office.phone}</span>
+                      </div>
                       <div className="flex items-start">
                         <Mail className="h-6 w-6 text-blue-600 mr-3 flex-shrink-0" />
                         <span className="text-gray-600">{office.email}</span>

@@ -2,10 +2,18 @@ import React from 'react';
 import { Calendar, User, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { posts, featuredPost } from '../data/posts';
+import SEO from '@/components/SEO/SEO'; // Import the SEO component
 
 export default function Blog() {
   return (
     <div className="min-h-screen">
+      {/* SEO Component for rich link previews */}
+      <SEO 
+        title="Blog - Insights & Updates | Bridge AI"
+        description="Stay up to date with the latest trends in experiential learning, industry insights, and success stories from our community."
+        url="https://bridge.ayoks.com/blog"
+      />
+      
       {/* Hero Section */}
       <div className="bg-gradient-to-r from-blue-900 to-blue-800 py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

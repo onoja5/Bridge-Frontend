@@ -1,7 +1,7 @@
-// src/pages/Privacy.tsx
 import React from 'react';
 import { Shield, Lock, Database, UserCheck, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import SEO from '@/components/SEO/SEO'; // Import the SEO component
 
 export default function Privacy() {
   const principles = [
@@ -29,6 +29,14 @@ export default function Privacy() {
 
   return (
     <div className="min-h-screen">
+      {/* SEO Component for rich link previews */}
+      <SEO
+        title="Privacy Policy - Bridge AI"
+        description="Learn how Bridge AI ensures the protection and privacy of your data. Understand the measures we take to safeguard your personal information."
+        url="https://bridge.ayoks.com/privacy"
+        image="https://bridge.ayoks.com/images/privacy-policy-og.png" // Replace with actual image URL
+      />
+
       {/* Hero Section */}
       <div className="bg-gradient-to-r from-blue-900 to-blue-800 py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -47,7 +55,7 @@ export default function Privacy() {
       <div className="py-12 bg-blue-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <p className="text-lg text-blue-900">
-            Last Updated: Febraury 2025.
+            Last Updated: February 2025.
           </p>
         </div>
       </div>

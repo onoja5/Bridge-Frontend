@@ -11,6 +11,7 @@ import {
   ChevronDown,
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import SEO from '@/components/SEO/SEO'; // Import the SEO component
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState('colleges');
@@ -253,6 +254,14 @@ export default function Home() {
 
   return (
     <div className='min-h-screen'>
+        {/* SEO Component for rich link previews */}
+              {/* SEO Component for rich link previews */}
+      <SEO
+        title="Bridge AI – Revolutionizing Career Development with AI"
+        description="Step into your future with Bridge AI. Get personalized career blueprints, project-based learning, and mentorship. Empowering the workforce of tomorrow."
+        url="https://bridge.ayoks.com/"
+        image="https://bridge.ayoks.com/images/home-og.png" // Replace with actual image URL
+      />
       {/* Hero Section */}
       <div
         className='relative h-screen flex items-center'
@@ -267,7 +276,7 @@ export default function Home() {
         <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full'>
           <div className='max-w-2xl'>
             <h1 className='text-4xl md:text-7xl font-bold mb-6 text-white leading-tight'>
-              Step into your dream career
+              Step into your future with confidence.
             </h1>
             <p className='text-xl md:text-2xl mb-8 text-gray-200 leading-relaxed'>
               Bridge the gap to your future - Get an AI-powered personalized
@@ -284,7 +293,7 @@ export default function Home() {
                 to='/dashboard'
                 className='bg-white text-blue-600 px-8 py-4 rounded-md text-lg font-semibold hover:bg-gray-100 transition duration-300 shadow-lg hover:shadow-xl text-center sm:text-left'
               >
-                Explore Opportunities
+                Connect With A Mentor
               </Link>
             </div>
           </div>

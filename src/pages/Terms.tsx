@@ -2,6 +2,7 @@
 import React from 'react';
 import { Scale, AlertOctagon, BookOpen, Shield, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import SEO from '@/components/SEO/SEO'; // Import the SEO component
 
 export default function Terms() {
   const clauses = [
@@ -29,6 +30,14 @@ export default function Terms() {
 
   return (
     <div className="min-h-screen">
+      {/* SEO Component for rich link previews */}
+      <SEO
+        title="Terms of Service - Bridge AI"
+        description="Read the terms and conditions for using Bridge AI's platform. Learn about our policies on data usage, content ownership, liability, and more."
+        url="https://bridge.ayoks.com/terms"
+        image="https://bridge.ayoks.com/images/terms-og.png" // Replace with actual image URL
+      />
+
       {/* Hero Section */}
       <div className="bg-gradient-to-r from-blue-900 to-blue-800 py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

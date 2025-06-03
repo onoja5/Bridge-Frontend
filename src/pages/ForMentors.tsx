@@ -1,6 +1,7 @@
 import React from 'react';
 import { ArrowRight, BookOpen, CheckCircle, Users, School, GraduationCap, Info } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import SEO from '@/components/SEO/SEO'; // Import the SEO component
 
 export default function ForMentors() {
   const benefits = [
@@ -32,6 +33,14 @@ export default function ForMentors() {
 
   return (
     <div className="min-h-screen">
+      {/* SEO Component for rich link previews */}
+      <SEO
+        title="For Mentors – Transform Teaching with Real-World Projects"
+        description="BridgeAI empowers educators by integrating real-world projects into curricula, providing students with practical learning experiences and industry connections."
+        url="https://bridge.ayoks.com/for-mentors"
+        image="https://bridge.ayoks.com/images/for-mentors-og.png" // Replace with actual image URL
+      />
+      
       {/* Hero Section */}
       <div className="bg-gradient-to-r from-blue-900 to-blue-800 py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

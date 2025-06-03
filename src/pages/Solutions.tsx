@@ -1,6 +1,7 @@
 import React from 'react';
 import { ArrowRight, Users, Building, GraduationCap, CheckCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import SEO from '@/components/SEO/SEO'; // Import the SEO component
 
 export default function Solutions() {
   const solutions = [
@@ -47,6 +48,14 @@ export default function Solutions() {
 
   return (
     <div className="min-h-screen">
+      {/* SEO Component for rich link previews */}
+      <SEO
+        title="Solutions - Bridge AI"
+        description="Discover the solutions Bridge AI offers for students, educators, and employers. Access real industry projects, enhance your curriculum, and connect with fresh talent."
+        url="https://bridge.ayoks.com/solutions"
+        image="https://bridge.ayoks.com/images/solutions-og.png" // Replace with actual image URL
+      />
+
       {/* Hero Section */}
       <div className="bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900 py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
