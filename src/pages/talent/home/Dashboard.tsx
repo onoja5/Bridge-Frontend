@@ -193,7 +193,7 @@ const Dashboard: React.FC = () => {
   };
 
   const handleViewBlueprint = () => {
-    navigate("/career"); // Navigate to Career page
+    navigate("/talent/career"); // Navigate to Career page
   };
 
   return (
