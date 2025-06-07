@@ -3,13 +3,25 @@ import { motion } from "framer-motion";
 import AddSkillsImg from "@/assets/images/Add_skills_img.svg";
 import { CloseCircleIcon, FeatherIcon } from "@/assets/svgs/ExportSvgs";
 import SurveyQuestionModal from "@/components/main/SurveyQuestionModal/SurveyQuestionModal";
-import { Question } from "@/components/main/SurveyQuestionModal/SurveyQuestionModal";
 import FirstPhaseImg from "@/assets/images/Survey_Phase_1.svg";
 import SecondPhaseImg from "@/assets/images/Survey_Phase_2.svg";
 import ThirdPhaseImg from "@/assets/images/Survey_Phase_3.svg";
 import CongratulatoryImg from "@/assets/images/Survey_Phase_Final.svg";
 import { useAuthContext } from "@/contexts/AuthContext";
 import LoaderModal from "@/components/main/SurveyModal/LoaderModal";
+
+// Define the Question type to match the structure used in MentorDashboard
+interface Question {
+  id: string;
+  type: "text" | "radio" | "multi-select" | "dropdown" | "button";
+  question: string;
+  optional?: boolean;
+  maxLength?: number;
+  options?: string[];
+  conditional?: string;
+  showIf?: string;
+  action?: string;
+}
 
 const modalVariants = {
   hidden: { opacity: 0, y: 0 },
@@ -170,7 +182,7 @@ const OnboardingModal: React.FC<SurveyModalProps> = ({
       mentorshipStyle:
         (answers["q9"] as string)
           ?.toLowerCase()
-          .replace("1:1 sessions", "1:1")
+          .replace("1:1 sessions", "1-on-1")
           .replace("asynchronous chat q&a", "async") || "",
       availabilityPerWeek: (answers["q10"] as string) || "",
       bestDaysAndTimes: bestDaysAndTimes.length > 0 ? bestDaysAndTimes : [],
