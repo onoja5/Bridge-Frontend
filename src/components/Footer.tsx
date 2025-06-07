@@ -35,12 +35,12 @@ export default function Footer() {
             <h4 className="text-lg font-semibold mb-4">Product</h4>
             <ul className="space-y-2">
               <li>
-                <Link to="/for-students" className="text-gray-400 hover:text-white transition-colors duration-300">
-                For Students & Graduates
+                <Link to="/for-talents" className="text-gray-400 hover:text-white transition-colors duration-300">
+                For Talents
                 </Link>
               </li>
               <li>
-                <Link to="/for-educators" className="text-gray-400 hover:text-white transition-colors duration-300">
+                <Link to="/for-mentors" className="text-gray-400 hover:text-white transition-colors duration-300">
                 For Professionals & Mentors
                 </Link>
               </li>

@@ -270,7 +270,6 @@ export default function Home() {
                 className='bg-white text-blue-600 px-8 py-4 rounded-md text-lg font-semibold hover:bg-gray-100 transition duration-300 shadow-lg hover:shadow-xl text-center sm:text-left'
               >
 
-
                 Connect With A Mentor
 
               </Link>

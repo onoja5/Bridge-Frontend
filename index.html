@@ -26,11 +26,19 @@
     <meta name="twitter:image" content="https://bridge.ayoks.com/images/og-default.jpg">
     
     <!-- ======== Favicon Configuration ======== -->
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <!-- Prioritize SVG for crisp scaling -->
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <!-- Explicit 32x32 reference for browser tabs -->
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+    <!-- Standard 16x16 as fallback -->
+    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+    <!-- Apple touch icon -->
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <!-- Web manifest -->
     <link rel="manifest" href="/site.webmanifest">
+    <!-- Legacy .ico fallback -->
     <link rel="shortcut icon" href="/favicon.ico">
+    
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="theme-color" content="#ffffff">
 
